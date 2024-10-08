@@ -5,5 +5,11 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>Rhino 7</ActiveDebugProfile>
+    <ActiveDebugFramework>net48</ActiveDebugFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
