@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace BarkBeetle.CompsModelRefine
+namespace BarkBeetle.CompsVisualization
 {
-    public class ExtractRefinedGeometry : GH_Component
+    public class ShowSkeletonCurve : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Extract_RefinedGeometry class.
+        /// Initializes a new instance of the ShowSkeletonCurve class.
         /// </summary>
-        public ExtractRefinedGeometry()
-          : base("Extract RefinedGeometry", "Extract RG",
-              "Extract all model/values stored in RefinedGeometry",
-              "BarkBeetle", "Model Refine")
+        public ShowSkeletonCurve()
+          : base("Show Skeleton", "Show Skeleton",
+              "Connect the skeleton points with sequence",
+              "BarkBeetle", "Visualization")
         {
         }
 
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
         }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
         }
 
@@ -58,7 +57,7 @@ namespace BarkBeetle.CompsModelRefine
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("036C8B79-A6E2-41C2-925C-E56FE1A268DE"); }
+            get { return new Guid("08867F3B-D8B7-44B7-AFF2-8B8C8F692F1A"); }
         }
     }
 }

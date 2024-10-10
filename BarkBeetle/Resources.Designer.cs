@@ -69,5 +69,14 @@ namespace BarkBeetle {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找类似 SpiralSkeleton 的本地化字符串。
+        /// </summary>
+        internal static string SpiralSkeletonString {
+            get {
+                return ResourceManager.GetString("SpiralSkeletonString", resourceCulture);
+            }
+        }
     }
 }

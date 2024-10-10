@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarkBeetle.RefinedGeometry
+namespace BarkBeetle.GeometriesPackage
 {
-    internal class RefinedGeometryGoo : GH_Goo<RefinedGeometry>
+    internal class GeometryPackageGoo : GH_Goo<GeometryPackage>
     {
         // Construct geometry
-        public RefinedGeometryGoo() : this(null) { }
+        public GeometryPackageGoo() : this(null) { }
 
-        public RefinedGeometryGoo(RefinedGeometry geometry)
+        public GeometryPackageGoo(GeometryPackage geometry)
         {
             Value = geometry;
         }
@@ -28,7 +28,7 @@ namespace BarkBeetle.RefinedGeometry
         public override IGH_Goo Duplicate()
         {
             // TODO: How to deep copy here?
-            return new RefinedGeometryGoo(Value);  
+            return new GeometryPackageGoo(Value);  
         }
 
         public override string ToString()
@@ -54,7 +54,7 @@ namespace BarkBeetle.RefinedGeometry
 
         public override bool CastFrom(object source)
         {
-            if (source is RefinedGeometry geometry)
+            if (source is GeometryPackage geometry)
             {
                 Value = geometry;
                 return true;

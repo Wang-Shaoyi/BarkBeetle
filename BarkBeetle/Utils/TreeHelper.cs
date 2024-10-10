@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Rhino.Runtime.ViewCaptureWriter;
+using Rhino.Geometry;
 
 namespace BarkBeetle.Utils
 {
@@ -55,10 +56,10 @@ namespace BarkBeetle.Utils
                 layerLengths.Add(branchLength);
             }
 
-            int row = layerLengths[0];
-            int col = layerLengths.Count;
+            int uNum = layerLengths[0];
+            int vNum = layerLengths.Count;
 
-            return new List<int> { row, col };
+            return new List<int> { uNum, vNum };
         }
 
         // Flip tree
@@ -73,24 +74,130 @@ namespace BarkBeetle.Utils
             }
 
             GH_Structure<T> flippedTree = new GH_Structure<T>();
-            int rowCount = tree.Paths.Count;
-            int maxColCount = tree.get_Branch(tree.Paths[0]).Count;
+            int uCount = tree.Paths.Count;
+            int maxVCount = tree.get_Branch(tree.Paths[0]).Count;
 
-            for (int col = 0; col < maxColCount; col++)
+            for (int v= 0; v < maxVCount; v++)
             {
-                GH_Path newPath = new GH_Path(col);
+                GH_Path newPath = new GH_Path(v);
 
-                for (int row = 0; row < rowCount; row++)
+                for (int u = 0; u < uCount; u++)
                 {
-                    IList branch = tree.get_Branch(tree.Paths[row]);
-                    if (branch.Count > col)
+                    IList branch = tree.get_Branch(tree.Paths[u]);
+                    if (branch.Count > v)
                     {
-                        T item = (T)branch[col];
+                        T item = (T)branch[v];
                         flippedTree.Append(item, newPath);
                     }
                 }
             }
             return flippedTree;
+        }
+
+        // Flip tree no comp
+        public static GH_Structure<T> FlipMatrixNoComp<T>(GH_Structure<T> tree) where T : IGH_Goo
+        {
+            tree.Simplify(GH_SimplificationMode.CollapseLeadingOverlaps);
+
+            if (!CheckTreeFormat2D(tree))
+            {
+                return null;
+            }
+
+            GH_Structure<T> flippedTree = new GH_Structure<T>();
+            int uCount = tree.Paths.Count;
+            int maxVCount = tree.get_Branch(tree.Paths[0]).Count;
+
+            for (int v = 0; v < maxVCount; v++)
+            {
+                GH_Path newPath = new GH_Path(v);
+
+                for (int u = 0; u < uCount; u++)
+                {
+                    IList branch = tree.get_Branch(tree.Paths[u]);
+                    if (branch.Count > v)
+                    {
+                        T item = (T)branch[v];
+                        flippedTree.Append(item, newPath);
+                    }
+                }
+            }
+            return flippedTree;
+        }
+
+
+
+        // Convert List<List<T>> to GH_Structure
+        public static GH_Structure<T> ConvertToGHStructure<T>(List<List<T>> dataList) where T : IGH_Goo
+        {
+            GH_Structure<T> ghStructure = new GH_Structure<T>();
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                List<T> innerList = dataList[i];
+                GH_Path path = new GH_Path(i);
+
+                for (int j = 0; j < innerList.Count; j++)
+                {
+                    T item = innerList[j];
+                    ghStructure.Append(item, path);
+                }
+            }
+            return ghStructure;
+        }
+
+        // Convert GH_Structure to 2D array
+        public static T[,] ConvertGHStructureToArray<T>(GH_Structure<T> ghStructure) where T : IGH_Goo
+        {
+            ghStructure.Simplify(GH_SimplificationMode.CollapseLeadingOverlaps);
+
+            int uCount = ghStructure.PathCount;
+            int vCount = ghStructure.Branches.Max(b => b.Count);
+
+            T[,] array = new T[uCount, vCount];
+
+            // Iterate through each u direction (branch) of the GH_Structure
+            for (int u = 0; u < uCount; u++)
+            {
+                IList branch = ghStructure.get_Branch(ghStructure.Paths[u]);
+
+                // Iterate through each element in the branch and add it to the 2D array
+                for (int v = 0; v < branch.Count; v++)
+                {
+                    array[u,v] = (T)branch[v]; 
+                }
+
+                // Fill the remaining columns with default values (e.g., null for reference types)
+                for (int v = branch.Count; v < vCount; v++)
+                {
+                    array[u, v] = default;
+                }
+            }
+            return array;
+        }
+
+        // Convert 3D array to multi-layer tree
+        public static GH_Structure<T> Convert3DArrayToGHStructure<T>(T[,,] array) where T : IGH_Goo
+        {
+            GH_Structure<T> structure = new GH_Structure<T>();
+            int dim1 = array.GetLength(0);
+            int dim2 = array.GetLength(1);
+            int dim3 = array.GetLength(2);
+
+            for (int i = 0; i < dim1; i++)
+            {
+                for (int j = 0; j < dim2; j++)
+                {
+                    for (int k = 0; k < dim3; k++)
+                    {
+                        T item = array[i, j, k];
+                        GH_Path path = new GH_Path(i, j);
+                        structure.Append(item, path);
+                    }
+                }
+            }
+
+            return structure;
         }
     }
 }

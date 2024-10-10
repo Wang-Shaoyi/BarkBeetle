@@ -30,7 +30,6 @@
   
   <ItemGroup>
     <Folder Include="CompsOutput\" />
-    <Folder Include="CompsVisualization\" />
   </ItemGroup>
   
   <ItemGroup>
