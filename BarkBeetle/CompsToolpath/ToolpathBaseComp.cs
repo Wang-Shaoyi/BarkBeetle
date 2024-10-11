@@ -9,15 +9,17 @@ using Rhino.Geometry;
 using BarkBeetle.GeometriesPackage;
 using BarkBeetle.Utils;
 using Rhino.Display;
+using BarkBeetle.Toolpath;
+using System.Security.Cryptography;
 
 namespace BarkBeetle.CompsToolpath
 {
-    public class ToolpathBase : GH_Component
+    public class ToolpathBaseComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Toolpath class.
         /// </summary>
-        public ToolpathBase()
+        public ToolpathBaseComp()
           : base("Toolpath base", "Toolpath base",
               "The first layer of a toolpath ",
               "BarkBeetle", "Toolpath")
@@ -39,8 +41,9 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath", "Toolpath", "BarkBeetle Toolpath object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath base curve", "Base Crv", "Toolpath curve for the first layer", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath base curve", "C", "Toolpath curve for the first layer", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath base curves", "Curves", "Toolpath curve for the first layer", GH_ParamAccess.list);
+            pManager.AddPointParameter("Pts", "P", "Pts", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -55,10 +58,10 @@ namespace BarkBeetle.CompsToolpath
             double pathWidth = 0;
 
             //Set inputs
-            if (DA.GetData(0, ref goo)) return;
+            if (!DA.GetData(0, ref goo)) return;
             GeometryPackage refinedGeometry = goo.Value;
-            if (DA.GetData(1, ref ghpt)) return;
-            if (DA.GetData(2, ref pathWidth)) return;
+            if (!DA.GetData(1, ref ghpt)) return;
+            if (!DA.GetData(2, ref pathWidth)) return;
 
 
             // Error message.
@@ -74,10 +77,25 @@ namespace BarkBeetle.CompsToolpath
             }
 
             // Run Function
+            ToolpathBase toolpath = new ToolpathBase(refinedGeometry,ghpt.Value,pathWidth);
+            GH_Curve crv = new GH_Curve(toolpath.Curve);
+            List<Curve> curves = toolpath.Curves;
+            GH_Structure<GH_Point> corners = TreeHelper.ConvertToGHStructure(toolpath.CornerPts);
+
+            List<GH_Curve> ghCurves = new List<GH_Curve>();
+
+            // 遍历每个 Curve 并将其转换为 GH_Curve
+            foreach (Curve curve in curves)
+            {
+                GH_Curve ghCurve = new GH_Curve(curve);  // 将 Curve 包装为 GH_Curve
+                ghCurves.Add(ghCurve);                   // 添加到 GH_Curve 列表中
+            }
 
             // Finally assign the spiral to the output parameter.
             //DA.SetData(0, toolpathGoo);
-            //DA.SetDataList(1, crv);
+            DA.SetData(0, crv);
+            DA.SetDataList(1, ghCurves);
+            DA.SetDataTree(2, corners);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.primary;

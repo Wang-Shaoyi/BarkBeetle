@@ -199,5 +199,38 @@ namespace BarkBeetle.Utils
 
             return structure;
         }
+
+        public static GH_Structure<GH_Point> ConvertToGHStructure(Point3d[,,] cornerPts)
+        {
+            GH_Structure<GH_Point> ghPoints = new GH_Structure<GH_Point>();
+
+            int dim1 = cornerPts.GetLength(0);  // 第一个维度
+            int dim2 = cornerPts.GetLength(1);  // 第二个维度
+            int dim3 = cornerPts.GetLength(2);  // 第三个维度
+
+            // 遍历三维数组
+            for (int i = 0; i < dim1; i++)
+            {
+                for (int j = 0; j < dim2; j++)
+                {
+                    for (int k = 0; k < dim3; k++)
+                    {
+                        // 获取当前 Point3d
+                        Point3d point = cornerPts[i, j, k];
+
+                        // 将 Point3d 转换为 GH_Point
+                        GH_Point ghPoint = new GH_Point(point);
+
+                        // 创建对应的 GH_Path
+                        GH_Path path = new GH_Path(i, j, k);
+
+                        // 将 GH_Point 添加到 GH_Structure
+                        ghPoints.Append(ghPoint, path);
+                    }
+                }
+            }
+
+            return ghPoints;  // 返回 GH_Structure<GH_Point>
+        }
     }
 }

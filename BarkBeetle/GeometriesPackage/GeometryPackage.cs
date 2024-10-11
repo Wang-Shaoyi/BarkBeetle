@@ -16,47 +16,40 @@ namespace BarkBeetle.GeometriesPackage
 {
     internal class GeometryPackage
     {
+        // 1 strip width
         private double stripWidth;
         public double StripWidth
         {
             get { return stripWidth; }
         }
 
-        // 1 organized points
+        // 2 organized points
         private GH_Structure<GH_Point> organizedPtsTree;
         public GH_Structure<GH_Point> OrganizedPtsTree
         {
             get { return organizedPtsTree; }
         }
 
-        // 2 extended surface
+        // 3 extended surface
         private Surface extendedSurface;
         public Surface ExtendedSurface
         {
             get { return extendedSurface; }
         }
 
-        // 3 Skeleton (OrganizedPtsArray, SkeletonStructure, SkeletonPoints)
+        // 4 Skeleton (OrganizedPtsArray, SkeletonStructure, SkeletonPoints)
         private Skeleton skeleton;
         public Skeleton Skeleton
         {
             get { return skeleton; }
         }
 
-        // 4 Curve Geometry: uv curves that interpolates the points (optional for GeometryPackage constructor)
+        // 5 Curve Geometry: uv curves that interpolates the points (optional for GeometryPackage constructor)
         private List<List<GH_Curve>> uvCurves;
         public List<List<GH_Curve>> UVCurves
         {
             get { return uvCurves; }
             set { uvCurves = value; }
-        }
-
-        // 5 uv vector for each point on surface (optional for GeometryPackage constructor)
-        private GH_Vector[,,] uvVectors;
-        public GH_Vector[,,] UVVectors
-        {
-            get { return uvVectors; }
-            set { uvVectors = value; }
         }
 
         // Constructor

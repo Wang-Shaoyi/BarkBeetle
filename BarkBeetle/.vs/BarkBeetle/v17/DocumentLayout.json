@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\geometriespackage\\geometrypackagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:geometriespackage\\geometrypackagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\compstoolpath\\toolpathbasecomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:compstoolpath\\toolpathbasecomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\pointdatautils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\pointdatautils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\toolpathsetting\\toolpathbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:toolpathsetting\\toolpathbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\skeletons\\skeleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:skeletons\\skeleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\compsmodelrefine\\unpackgeometrypackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:compsmodelrefine\\unpackgeometrypackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\geometriespackage\\geometrypackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:geometriespackage\\geometrypackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\compsmodelrefine\\spiralskeletoncomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:compsmodelrefine\\spiralskeletoncomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,28 +47,87 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GeometryPackageManager.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\GeometriesPackage\\GeometryPackageManager.cs",
-              "RelativeDocumentMoniker": "GeometriesPackage\\GeometryPackageManager.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\GeometriesPackage\\GeometryPackageManager.cs",
-              "RelativeToolTip": "GeometriesPackage\\GeometryPackageManager.cs",
-              "ViewState": "AQIAAPgAAAAAAAAAAAAcwAMBAABaAAAA",
+              "Title": "ToolpathBaseComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsToolpath\\ToolpathBaseComp.cs",
+              "RelativeDocumentMoniker": "CompsToolpath\\ToolpathBaseComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsToolpath\\ToolpathBaseComp.cs",
+              "RelativeToolTip": "CompsToolpath\\ToolpathBaseComp.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAIwBMAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T06:54:21.171Z",
+              "WhenOpened": "2024-10-11T04:06:10.537Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Skeleton.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Skeletons\\Skeleton.cs",
+              "RelativeDocumentMoniker": "Skeletons\\Skeleton.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Skeletons\\Skeleton.cs",
+              "RelativeToolTip": "Skeletons\\Skeleton.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAkwEcAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T00:53:08.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ToolpathBase.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\ToolpathSetting\\ToolpathBase.cs",
+              "RelativeDocumentMoniker": "ToolpathSetting\\ToolpathBase.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\ToolpathSetting\\ToolpathBase.cs",
+              "RelativeToolTip": "ToolpathSetting\\ToolpathBase.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAA2wGwAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T21:47:27.7Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "PointDataUtils.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\PointDataUtils.cs",
+              "RelativeDocumentMoniker": "Utils\\PointDataUtils.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\PointDataUtils.cs",
+              "RelativeToolTip": "Utils\\PointDataUtils.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAuwCMAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T23:01:25.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UnpackGeometryPackage.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsModelRefine\\UnpackGeometryPackage.cs",
+              "RelativeDocumentMoniker": "CompsModelRefine\\UnpackGeometryPackage.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsModelRefine\\UnpackGeometryPackage.cs",
+              "RelativeToolTip": "CompsModelRefine\\UnpackGeometryPackage.cs",
+              "ViewState": "AQIAAFMAAAAAAAAAAAAgwEIAAABoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T00:19:42.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "GeometryPackage.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\GeometriesPackage\\GeometryPackage.cs",
               "RelativeDocumentMoniker": "GeometriesPackage\\GeometryPackage.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\GeometriesPackage\\GeometryPackage.cs",
               "RelativeToolTip": "GeometriesPackage\\GeometryPackage.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAcwAAAAAAAAAAA",
+              "ViewState": "AQIAACYAAAAAAAAAAAAUwC8AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T06:52:21.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T06:52:21.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SpiralSkeletonComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsModelRefine\\SpiralSkeletonComp.cs",
+              "RelativeDocumentMoniker": "CompsModelRefine\\SpiralSkeletonComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\CompsModelRefine\\SpiralSkeletonComp.cs",
+              "RelativeToolTip": "CompsModelRefine\\SpiralSkeletonComp.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAWwGIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T22:18:15.851Z"
             }
           ]
         }

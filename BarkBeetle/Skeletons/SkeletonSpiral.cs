@@ -35,7 +35,7 @@ namespace BarkBeetle.Skeletons
 
             for (int i = 0; i < uCnt * vCnt; i++)
             {
-                skS.Add((r, c, turn));
+                
                 visited[r, c] = true;
                 turn = 0;
 
@@ -50,6 +50,7 @@ namespace BarkBeetle.Skeletons
                     nextR = r + dr[direction];
                     nextC = c + dc[direction];
                 }
+                skS.Add((r, c, turn));
                 r = nextR;
                 c = nextC;
             }

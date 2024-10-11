@@ -94,6 +94,7 @@ namespace BarkBeetle.CompsModelRefine
             GeometryPackageManager rgManager = new GeometryPackageManager();
             rgManager.SetComponent(this);
             rgManager.SetGeometryPackage(stripWidth, surface, pointsTree,Resources.SpiralSkeletonString);
+
             List<GH_Point> skeleton = rgManager.GeometryPackage.Skeleton.SkeletonPoints;
 
             GeometryPackageGoo geometryGoo = new GeometryPackageGoo(rgManager.GeometryPackage);

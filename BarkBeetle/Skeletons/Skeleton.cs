@@ -39,6 +39,22 @@ namespace BarkBeetle.Skeletons
             get { return skeletonPoints; }
         }
 
+        // 4 skeleton curve
+        private GH_Curve skeletonCurve { get; set; }
+        public GH_Curve SkeletonCurve
+        {
+            get { return skeletonCurve; }
+            set { skeletonCurve = value; }
+        }
+
+        // 5 uv vector for each point along the skeleton direction (optional for GeometryPackage constructor)
+        private GH_Vector[,,] uvVectors;
+        public GH_Vector[,,] UVVectors
+        {
+            get { return uvVectors; }
+            set { uvVectors = value; }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
