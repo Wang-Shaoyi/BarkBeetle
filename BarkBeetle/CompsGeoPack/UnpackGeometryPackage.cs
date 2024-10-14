@@ -9,7 +9,7 @@ using BarkBeetle.GeometriesPackage;
 using BarkBeetle.Utils;
 using Grasshopper.Kernel.Data;
 
-namespace BarkBeetle.CompsModelRefine
+namespace BarkBeetle.CompsGeoPack
 {
     public class UnpackGeometryPackage : GH_Component
     {

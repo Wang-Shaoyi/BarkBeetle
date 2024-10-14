@@ -13,7 +13,7 @@ using System.Collections;
 
 using BarkBeetle.GeometriesPackage;
 
-namespace BarkBeetle.CompsModelRefine
+namespace BarkBeetle.CompsGeoPack
 {
     public class SpiralSkeletonComp : GH_Component
     {

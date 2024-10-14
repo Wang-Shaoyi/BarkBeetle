@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
 namespace BarkBeetle.CompsVisualization
 {
-    public class ShowSkeletonCurve : GH_Component
+    public class ToolpathVisualization : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the ShowSkeletonCurve class.
+        /// Initializes a new instance of the ToolpathVisualization class.
         /// </summary>
-        public ShowSkeletonCurve()
-          : base("Show Skeleton", "Show Skeleton",
-              "Connect the skeleton points with sequence",
-              "BarkBeetle", "Visualization")
+        public ToolpathVisualization()
+          : base("ToolpathVisualization", "Nickname",
+              "Description",
+              "Category", "Subcategory")
         {
         }
 
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
         }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
         }
 
@@ -57,7 +58,7 @@ namespace BarkBeetle.CompsVisualization
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("08867F3B-D8B7-44B7-AFF2-8B8C8F692F1A"); }
+            get { return new Guid("D8B011FC-1BFF-412A-97DC-CF614F5352DA"); }
         }
     }
 }

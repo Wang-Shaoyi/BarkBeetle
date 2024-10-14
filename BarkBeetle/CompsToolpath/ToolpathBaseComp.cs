@@ -11,6 +11,7 @@ using BarkBeetle.Utils;
 using Rhino.Display;
 using BarkBeetle.Toolpath;
 using System.Security.Cryptography;
+using BarkBeetle.ToolpathSetting;
 
 namespace BarkBeetle.CompsToolpath
 {
@@ -77,18 +78,17 @@ namespace BarkBeetle.CompsToolpath
             }
 
             // Run Function
-            ToolpathBase toolpath = new ToolpathBase(refinedGeometry,ghpt.Value,pathWidth);
+            ToolpathBase toolpath = new ToolpathBaseSpiral(refinedGeometry,ghpt.Value,pathWidth);
             GH_Curve crv = new GH_Curve(toolpath.Curve);
             List<Curve> curves = toolpath.Curves;
             GH_Structure<GH_Point> corners = TreeHelper.ConvertToGHStructure(toolpath.CornerPts);
 
             List<GH_Curve> ghCurves = new List<GH_Curve>();
 
-            // 遍历每个 Curve 并将其转换为 GH_Curve
             foreach (Curve curve in curves)
             {
-                GH_Curve ghCurve = new GH_Curve(curve);  // 将 Curve 包装为 GH_Curve
-                ghCurves.Add(ghCurve);                   // 添加到 GH_Curve 列表中
+                GH_Curve ghCurve = new GH_Curve(curve); 
+                ghCurves.Add(ghCurve);                   
             }
 
             // Finally assign the spiral to the output parameter.

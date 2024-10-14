@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static GH_IO.VersionNumber;
 
-using BarkBeetle.Utils;
 
 namespace BarkBeetle.GeometriesPackage
 {
