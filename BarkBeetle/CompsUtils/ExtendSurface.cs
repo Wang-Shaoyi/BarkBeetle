@@ -65,7 +65,7 @@ namespace BarkBeetle.CompsUtils
                 return;
             }
 
-            GeometryPackageManager rgManager = new GeometryPackageManager();
+            SkeletonPackageManager rgManager = new SkeletonPackageManager();
             rgManager.SetComponent(this);
             Surface extendedSurface = rgManager.ProcessExtendedSurface(uD, vD, surface);
 
@@ -81,7 +81,7 @@ namespace BarkBeetle.CompsUtils
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.ExtendSurface;
             }
         }
 

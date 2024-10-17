@@ -118,10 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SkeletonFromSAndPT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\SkeletonFromSAndPT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExtendSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExtendSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FilletToolpath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\FilletToolpath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HorizontalStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\HorizontalStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrganizePointTreeformSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OrganizePointTreeformSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SimpleSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SimpleSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SnakeSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SnakeSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SnakeToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SnakeToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpiralSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SpiralSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SpiralSkeletonString" xml:space="preserve">
     <value>SpiralSkeleton</value>
+  </data>
+  <data name="SpiralToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SpiralToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SurfaceBetweenStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SurfaceBetweenStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToolpathToMesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ToolpathToMesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriangularToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TriangularToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnpackSkeletonPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnpackSkeletonPackage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnpackToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnpackToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnpackToolpathStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnpackToolpathStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VerticalStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\VerticalStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VisualizeStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\VisualizeStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

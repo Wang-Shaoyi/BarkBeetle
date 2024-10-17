@@ -77,7 +77,7 @@ namespace BarkBeetle.CompsUtils
                 return;
             }
 
-            GeometryPackageManager rgManager = new GeometryPackageManager();
+            SkeletonPackageManager rgManager = new SkeletonPackageManager();
             rgManager.SetComponent(this);
             GH_Structure<GH_Point> organizedPT = rgManager.OrganizePtSequence(surface, pointsTree);
 
@@ -93,7 +93,7 @@ namespace BarkBeetle.CompsUtils
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.OrganizePointTreeformSurface;
             }
         }
 

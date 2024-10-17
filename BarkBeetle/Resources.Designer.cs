@@ -63,9 +63,79 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap SkeletonFromSAndPT {
+        internal static System.Drawing.Bitmap ExtendSurface {
             get {
-                object obj = ResourceManager.GetObject("SkeletonFromSAndPT", resourceCulture);
+                object obj = ResourceManager.GetObject("ExtendSurface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap FilletToolpath {
+            get {
+                object obj = ResourceManager.GetObject("FilletToolpath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap HorizontalStack {
+            get {
+                object obj = ResourceManager.GetObject("HorizontalStack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap OrganizePointTreeformSurface {
+            get {
+                object obj = ResourceManager.GetObject("OrganizePointTreeformSurface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SimpleSkeleton {
+            get {
+                object obj = ResourceManager.GetObject("SimpleSkeleton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SnakeSkeleton {
+            get {
+                object obj = ResourceManager.GetObject("SnakeSkeleton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SnakeToolpathBase {
+            get {
+                object obj = ResourceManager.GetObject("SnakeToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SpiralSkeleton {
+            get {
+                object obj = ResourceManager.GetObject("SpiralSkeleton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -76,6 +146,96 @@ namespace BarkBeetle {
         internal static string SpiralSkeletonString {
             get {
                 return ResourceManager.GetString("SpiralSkeletonString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SpiralToolpathBase {
+            get {
+                object obj = ResourceManager.GetObject("SpiralToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SurfaceBetweenStack {
+            get {
+                object obj = ResourceManager.GetObject("SurfaceBetweenStack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ToolpathToMesh {
+            get {
+                object obj = ResourceManager.GetObject("ToolpathToMesh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap TriangularToolpathBase {
+            get {
+                object obj = ResourceManager.GetObject("TriangularToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UnpackSkeletonPackage {
+            get {
+                object obj = ResourceManager.GetObject("UnpackSkeletonPackage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UnpackToolpathBase {
+            get {
+                object obj = ResourceManager.GetObject("UnpackToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UnpackToolpathStack {
+            get {
+                object obj = ResourceManager.GetObject("UnpackToolpathStack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap VerticalStack {
+            get {
+                object obj = ResourceManager.GetObject("VerticalStack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap VisualizeStrip {
+            get {
+                object obj = ResourceManager.GetObject("VisualizeStrip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

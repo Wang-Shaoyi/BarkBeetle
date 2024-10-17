@@ -14,7 +14,7 @@ namespace BarkBeetle.CompsVisualization
         public StripVisualization()
           : base("StripVisualization", "Nickname",
               "Description",
-              "Category", "Subcategory")
+              "BarkBeetle", "Visualization")
         {
         }
 
@@ -49,7 +49,7 @@ namespace BarkBeetle.CompsVisualization
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.VisualizeStrip;
             }
         }
 
