@@ -40,6 +40,7 @@ namespace BarkBeetle.CompsToolpath
         {
             pManager.AddGenericParameter("Toolpath Base", "TB", "BarkBeetle ToolpathBase object", GH_ParamAccess.item);
             pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath Curves", "Crvs", "Toolpath curve from layers", GH_ParamAccess.list);
             pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.tree);
             pManager.AddSurfaceParameter("Surface Series", "S", "Each layer has one reference surface", GH_ParamAccess.list);
             pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.tree);
@@ -58,12 +59,21 @@ namespace BarkBeetle.CompsToolpath
             if (!DA.GetData(0, ref goo)) return;
             ToolpathStack toolpathStack = goo.Value;
 
+
+            if (toolpathStack == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "no ToolpathStack");
+                return;
+            }
+
             //Run
 
             ToolpathBase toolpathBase = toolpathStack._ToolpathBase;
             ToolpathBaseGoo tbGoo = new ToolpathBaseGoo(toolpathBase);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;
+
+            List<GH_Curve> gH_Curves = toolpathStack.LayerCurves;
 
             List<List<GH_Plane>> frames = toolpathStack.OrientPlanes;
             GH_Structure<GH_Plane> frameTree = TreeHelper.ConvertToGHStructure(frames);
@@ -76,9 +86,10 @@ namespace BarkBeetle.CompsToolpath
             // Output
             DA.SetData(0, tbGoo);
             DA.SetData(1, gH_Curve);
-            DA.SetDataTree(2, frameTree);
-            DA.SetDataList(3, gH_Surfaces);
-            DA.SetDataTree(4, speedFactorTree);
+            DA.SetDataList(2, gH_Curves);
+            DA.SetDataTree(3, frameTree);
+            DA.SetDataList(4, gH_Surfaces);
+            DA.SetDataTree(5, speedFactorTree);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.tertiary;

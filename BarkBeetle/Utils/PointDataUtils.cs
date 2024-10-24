@@ -52,7 +52,7 @@ namespace BarkBeetle.Utils
         public static List<Point3d> GetExplodedCurveVertices(Curve curve)
         {
             List<Point3d> vertices = new List<Point3d>();
-
+            vertices.Add(curve.PointAtStart);
             // 检查曲线是否是 PolyCurve 类型
             if (curve is PolyCurve polyCurve)
             {
@@ -60,14 +60,21 @@ namespace BarkBeetle.Utils
                 for (int i = 0; i < polyCurve.SegmentCount; i++)
                 {
                     Curve segment = polyCurve.SegmentCurve(i);
-                    vertices.Add(segment.PointAtStart);
+
+                    double halfLength = segment.GetLength() / 2.0;
+                    double midParameter;
+                    segment.LengthParameter(halfLength, out midParameter);
+                    vertices.Add(segment.PointAt(midParameter));
+
                     vertices.Add(segment.PointAtEnd);
                 }
             }
             else
             {
-                // 如果不是 PolyCurve，处理为单独的曲线
-                vertices.Add(curve.PointAtStart);
+                double halfLength = curve.GetLength() / 2.0;
+                double midParameter;
+                curve.LengthParameter(halfLength, out midParameter);
+                vertices.Add(curve.PointAt(midParameter));
                 vertices.Add(curve.PointAtEnd);
             }
 

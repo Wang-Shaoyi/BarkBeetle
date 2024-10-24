@@ -146,7 +146,34 @@ namespace BarkBeetle.Utils
             return ghStructure;
         }
 
-        // Convert GH_Structure to 2D array
+        // Convert GH_Structure to List<List<T>> 
+        public static List<List<T>> ConvertGHStructureToList<T>(GH_Structure<T> ghStructure) where T : IGH_Goo
+        {
+            ghStructure.Simplify(GH_SimplificationMode.CollapseLeadingOverlaps);
+
+            int uCount = ghStructure.PathCount;
+            List<List<T>> list = new List<List<T>>(uCount);
+
+            // Iterate through each branch (u direction) of the GH_Structure
+            for (int u = 0; u < uCount; u++)
+            {
+                IList branch = ghStructure.get_Branch(ghStructure.Paths[u]);
+                List<T> innerList = new List<T>(branch.Count);
+
+                // Add each element in the branch to the inner list
+                for (int v = 0; v < branch.Count; v++)
+                {
+                    innerList.Add((T)branch[v]);
+                }
+
+                // Add the inner list to the outer list
+                list.Add(innerList);
+            }
+
+            return list;
+        }
+
+            // Convert GH_Structure to 2D array
         public static T[,] ConvertGHStructureToArray<T>(GH_Structure<T> ghStructure) where T : IGH_Goo
         {
             ghStructure.Simplify(GH_SimplificationMode.CollapseLeadingOverlaps);

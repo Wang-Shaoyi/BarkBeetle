@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
+using BarkBeetle.ToolpathStackSetting;
+using BarkBeetle.Utils;
+
 namespace BarkBeetle.CompsVisualization
 {
     public class ToolpathVisualization : GH_Component
@@ -12,8 +15,8 @@ namespace BarkBeetle.CompsVisualization
         /// Initializes a new instance of the ToolpathVisualization class.
         /// </summary>
         public ToolpathVisualization()
-          : base("ToolpathVisualization", "Nickname",
-              "Description",
+          : base("Toolpath Mesh", "Toolpath Mesh",
+              "Create toolpath mesh from ToolpathStack",
               "BarkBeetle", "Visualization")
         {
         }
@@ -23,6 +26,8 @@ namespace BarkBeetle.CompsVisualization
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Parameter", "p", "Part of the toolpath to display", GH_ParamAccess.item, 1);
         }
 
         /// <summary>
@@ -30,6 +35,7 @@ namespace BarkBeetle.CompsVisualization
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddMeshParameter("Toolpath Mesh", "M", "Toolpath Mesh", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -38,6 +44,32 @@ namespace BarkBeetle.CompsVisualization
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            // Initialize
+            ToolpathStackGoo goo = null;
+            double p = 0.0;
+
+            //Set inputs
+            if (!DA.GetData(0, ref goo)) return;
+            ToolpathStack toolpathStack = goo.Value;
+
+            if (!DA.GetData(1, ref p)) return;
+
+            if (p > 1 || p <0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "parameter should be between 0 and 1");
+                return;
+            }
+
+            if (toolpathStack == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "no ToolpathStack");
+                return;
+            }
+
+            Mesh mesh = MeshUtils.MeshFromToolpathStack(toolpathStack, p);
+
+            DA.SetData(0, mesh);
+
         }
 
         /// <summary>

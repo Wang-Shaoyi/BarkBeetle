@@ -61,6 +61,7 @@ namespace BarkBeetle.ToolpathStackSetting
             List<List<GH_Number>> speedFactors = new List<List<GH_Number>>();
 
             newToolpathStack.OrientPlanes = newToolpathStack.CreateStackOrientPlanes(ref speedFactors);
+            newToolpathStack.SpeedFactors = speedFactors;
 
             return newToolpathStack.FinalCurve;
         }
