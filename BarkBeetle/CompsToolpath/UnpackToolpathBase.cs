@@ -51,11 +51,11 @@ namespace BarkBeetle.CompsToolpath
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // Initialize
-            ToolpathBaseGoo goo = null;
+            ToolpathPatternGoo goo = null;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
-            ToolpathBase toolpathBase = goo.Value;
+            ToolpathPattern toolpathBase = goo.Value;
 
             //Run
 

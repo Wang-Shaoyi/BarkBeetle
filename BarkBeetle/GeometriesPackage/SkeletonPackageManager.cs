@@ -53,7 +53,52 @@ namespace BarkBeetle.GeometriesPackage
         }
 
         // Extend the surface outside edges smoothly
-        public Surface ProcessExtendedSurface(double uWidth, double vWidth, Surface surface) 
+        //public Surface ProcessExtendedSurface(double uWidth, double vWidth, Surface surface) 
+        //{
+        //    // Setup for U direction
+        //    List<Curve> extendedUCurves = new List<Curve>();
+        //    Interval uDomain = surface.Domain(0);
+
+        //    // Extend U direction curves
+        //    int numUDivs = 20;
+        //    for (int i = 0; i <= numUDivs; i++)
+        //    {
+        //        double uParam = uDomain.ParameterAt(i / (double)numUDivs);
+        //        Curve uIsoCurve = surface.IsoCurve(1, uParam);
+        //        // Extend
+        //        Curve extendedUIsoCurve = uIsoCurve.Extend(CurveEnd.Both, vWidth, CurveExtensionStyle.Smooth);
+        //        extendedUCurves.Add(extendedUIsoCurve);
+        //    }
+
+        //    // Rebuild for u direction
+        //    Brep[] loftedBrepsU = Brep.CreateFromLoft(extendedUCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+        //    Surface loftedSurfaceU = loftedBrepsU[0].Faces[0].ToNurbsSurface();
+
+        //    /////////////////////////////////////////
+        //    // Setup for V direction
+        //    List<Curve> extendedVCurves = new List<Curve>();
+
+        //    Interval vDomain = loftedSurfaceU.Domain(1);
+
+        //    // Extend V direction curves
+        //    int numVDivs = 20;
+        //    for (int i = 0; i <= numVDivs; i++)
+        //    {
+        //        double vParam = vDomain.ParameterAt(i / (double)numVDivs);
+        //        Curve vIsoCurve = loftedSurfaceU.IsoCurve(0, vParam);
+        //        // Extend
+        //        Curve extendedVIsoCurve = vIsoCurve.Extend(CurveEnd.Both, uWidth, CurveExtensionStyle.Smooth);
+        //        extendedVCurves.Add(extendedVIsoCurve);
+        //    }
+
+        //    Brep[] loftedBrepsV = Brep.CreateFromLoft(extendedVCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+        //    Surface loftedSurfaceV = loftedBrepsV[0].Faces[0].ToNurbsSurface();
+        //    loftedSurfaceV.Transpose(true);
+
+        //    return loftedSurfaceV;
+        //}
+
+        public Surface ProcessExtendedSurface(double uWidth, double vWidth, Surface surface)
         {
             // Setup for U direction
             List<Curve> extendedUCurves = new List<Curve>();
@@ -65,19 +110,35 @@ namespace BarkBeetle.GeometriesPackage
             {
                 double uParam = uDomain.ParameterAt(i / (double)numUDivs);
                 Curve uIsoCurve = surface.IsoCurve(1, uParam);
-                // Extend
-                Curve extendedUIsoCurve = uIsoCurve.Extend(CurveEnd.Both, vWidth, CurveExtensionStyle.Smooth);
-                extendedUCurves.Add(extendedUIsoCurve);
+
+                // Check if the curve is closed; if so, add without extending
+                if (uIsoCurve.IsClosed)
+                {
+                    extendedUCurves.Add(uIsoCurve);
+                }
+                else
+                {
+                    // Extend
+                    Curve extendedUIsoCurve = uIsoCurve.Extend(CurveEnd.Both, vWidth, CurveExtensionStyle.Smooth);
+                    extendedUCurves.Add(extendedUIsoCurve);
+                }
             }
 
-            // Rebuild for u direction
-            Brep[] loftedBrepsU = Brep.CreateFromLoft(extendedUCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
-            Surface loftedSurfaceU = loftedBrepsU[0].Faces[0].ToNurbsSurface();
+            // Attempt to create lofted surface for U direction
+            Brep[] loftedBrepsU = null;
+            while (extendedUCurves.Count > 1)
+            {
+                loftedBrepsU = Brep.CreateFromLoft(extendedUCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+                if (loftedBrepsU.Length != 0) break;
+                extendedUCurves.RemoveAt(extendedUCurves.Count - 1); // Remove last curve and retry
+            }
+
+            Surface loftedSurfaceU = loftedBrepsU?[0].Faces[0].ToNurbsSurface();
+            if (loftedSurfaceU == null) throw new Exception("Failed to create lofted surface in U direction.");
 
             /////////////////////////////////////////
             // Setup for V direction
             List<Curve> extendedVCurves = new List<Curve>();
-
             Interval vDomain = loftedSurfaceU.Domain(1);
 
             // Extend V direction curves
@@ -86,17 +147,36 @@ namespace BarkBeetle.GeometriesPackage
             {
                 double vParam = vDomain.ParameterAt(i / (double)numVDivs);
                 Curve vIsoCurve = loftedSurfaceU.IsoCurve(0, vParam);
-                // Extend
-                Curve extendedVIsoCurve = vIsoCurve.Extend(CurveEnd.Both, uWidth, CurveExtensionStyle.Smooth);
-                extendedVCurves.Add(extendedVIsoCurve);
+
+                // Check if the curve is closed; if so, add without extending
+                if (vIsoCurve.IsClosed)
+                {
+                    extendedVCurves.Add(vIsoCurve);
+                }
+                else
+                {
+                    // Extend
+                    Curve extendedVIsoCurve = vIsoCurve.Extend(CurveEnd.Both, uWidth, CurveExtensionStyle.Smooth);
+                    extendedVCurves.Add(extendedVIsoCurve);
+                }
             }
 
-            Brep[] loftedBrepsV = Brep.CreateFromLoft(extendedVCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
-            Surface loftedSurfaceV = loftedBrepsV[0].Faces[0].ToNurbsSurface();
-            loftedSurfaceV.Transpose(true);
+            // Attempt to create lofted surface for V direction
+            Brep[] loftedBrepsV = null;
+            while (extendedVCurves.Count > 1)
+            {
+                loftedBrepsV = Brep.CreateFromLoft(extendedVCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+                if (loftedBrepsV.Length != 0) break;
+                extendedVCurves.RemoveAt(extendedVCurves.Count - 1); // Remove last curve and retry
+            }
 
+            Surface loftedSurfaceV = loftedBrepsV?[0].Faces[0].ToNurbsSurface();
+            if (loftedSurfaceV == null) throw new Exception("Failed to create lofted surface in V direction.");
+
+            loftedSurfaceV.Transpose(true);
             return loftedSurfaceV;
         }
+
 
         // Pull points on the surface
         public GH_Structure<GH_Point> SurfaceClosestPtTree(Surface surface, GH_Structure<GH_Point> pointsTree)

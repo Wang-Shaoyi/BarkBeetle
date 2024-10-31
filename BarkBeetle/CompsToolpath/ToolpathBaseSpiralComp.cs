@@ -77,10 +77,10 @@ namespace BarkBeetle.CompsToolpath
             }
 
             // Run Function
-            ToolpathBase toolpath = new ToolpathBaseSpiral(refinedGeometry,ghpt.Value,pathWidth);
+            ToolpathPattern toolpath = new ToolpathPatterhSpiral(refinedGeometry,ghpt.Value,pathWidth);
             GH_Curve crv = new GH_Curve(toolpath.Curve);
 
-            ToolpathBaseGoo baseGoo = new ToolpathBaseGoo(toolpath);
+            ToolpathPatternGoo baseGoo = new ToolpathPatternGoo(toolpath);
 
             // Finally assign the spiral to the output parameter.
             DA.SetData(0, baseGoo);

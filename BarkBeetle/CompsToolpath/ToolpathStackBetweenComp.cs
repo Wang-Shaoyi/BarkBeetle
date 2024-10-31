@@ -12,14 +12,14 @@ using Grasshopper.Kernel.Data;
 
 namespace BarkBeetle.CompsToolpath
 {
-    public class ToolpathStackVerticalComp : GH_Component
+    public class ToolpathStackBetweenComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
-        public ToolpathStackVerticalComp()
-          : base("Toolpath Stack Vertical", "Vertical Toolpath",
-              "Stack toolpath layers vertically",
+        public ToolpathStackBetweenComp()
+          : base("Toolpath Stack Between Surfaces", "Between Surface Toolpath",
+              "Stack toolpath layers between two surfaces",
               "BarkBeetle", "Toolpath")
         {
         }
@@ -31,7 +31,7 @@ namespace BarkBeetle.CompsToolpath
         {
             pManager.AddGenericParameter("Toolpath Base", "TB", "BarkBeetle ToolpathBase object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
+            pManager.AddSurfaceParameter("Top Surface", "S", "Top Surface", GH_ParamAccess.item);
             pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, true);
             pManager.AddPointParameter("Reference Point", "Pt", "Reference point for frame orientation", GH_ParamAccess.item, Point3d.Origin);
         }
@@ -55,7 +55,7 @@ namespace BarkBeetle.CompsToolpath
             // Initialize
             ToolpathPatternGoo goo = null;
             double layerH = 0;
-            double totalH = 0;
+            Surface topSrf = null;
             bool angleGlobal = true;
             Point3d refPt = new Point3d();
 
@@ -64,25 +64,15 @@ namespace BarkBeetle.CompsToolpath
             ToolpathPattern toolpathBase = goo.Value;
 
             if (!DA.GetData(1, ref layerH)) return;
-            if (!DA.GetData(2, ref totalH)) return;
+            if (!DA.GetData(2, ref topSrf)) return;
             if (!DA.GetData(3, ref angleGlobal)) return;
             if (!DA.GetData(4, ref refPt)) return;
 
 
             // Error message.
-            if (totalH <= 0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Total height must be larger than 0");
-                return;
-            }
-            if (layerH <= 0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Layer height must be larger than 0");
-                return;
-            }
 
             // Run Function
-            ToolpathStackVertical toolpathStack = new ToolpathStackVertical(toolpathBase,layerH,angleGlobal,totalH, refPt);
+            ToolpathStackBetween toolpathStack = new ToolpathStackBetween(toolpathBase,layerH,angleGlobal, topSrf, refPt);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;
@@ -112,7 +102,7 @@ namespace BarkBeetle.CompsToolpath
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.VerticalStack;
+                return Resources.SurfaceBetweenStack;
             }
         }
 
@@ -121,7 +111,7 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("325070F8-F91D-4788-861B-A9DBC64B3C2F"); }
+            get { return new Guid("7020EC81-B6B0-44DF-ADB5-4ACC5AB584EB"); }
         }
     }
 }

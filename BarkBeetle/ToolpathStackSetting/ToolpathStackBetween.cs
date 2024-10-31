@@ -13,43 +13,26 @@ using System.Security.Cryptography;
 
 namespace BarkBeetle.ToolpathStackSetting
 {
-    internal class ToolpathStackVertical:ToolpathStack
+    internal class ToolpathStackBetween : ToolpathStack
     {
         public override string ToolpathStackName { get; set; } = "Vertical";
 
-        double totalHeight = 0;
+        Surface topSrf = null;
 
-        public ToolpathStackVertical(ToolpathPattern tb,  double h, bool ag, double totalH, Point3d refPt) : base(tb,h,ag, refPt) 
+        public ToolpathStackBetween(ToolpathPattern tb,  double h, bool ag, Surface topS, Point3d refPt) : base(tb,h,ag, refPt) 
         {
-            totalHeight = totalH;
+            topSrf = topS;
             PerformCustomLogic(tb, h, ag, refPt);
         }
 
-
         public override List<GH_Surface> CreateStackSurfaces()
         {
-            LayerNum = (int)(totalHeight / LayerHeight);
-
+            
             Surface baseSurface = _ToolpathBase.SkeletonPackage.ExtendedSurface;
+            LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) +1;
 
-            List<GH_Surface> stackSurfaces = new List<GH_Surface>();
-
-            for (int i = 0; i < LayerNum; i++)
-            {
-                Surface dupSurface = baseSurface.Duplicate() as Surface;
-                double offsetDistance = i * LayerHeight;
-
-                // Check normal direction
-                Vector3d normal = dupSurface.NormalAt(0.5, 0.5); 
-                if (normal.Z < 0)
-                {
-                    offsetDistance = -offsetDistance; // if normal is negative, flip offset direction
-                }
-                
-                Surface offsetSurface = dupSurface.Offset(offsetDistance, 0.01);
-                stackSurfaces.Add(new GH_Surface(offsetSurface));
-            }
-
+            List<GH_Surface> stackSurfaces = BrepUtils.TweenBetweenSurfaces(baseSurface, topSrf, LayerNum);
+            
             return stackSurfaces;
         }
 
@@ -59,19 +42,34 @@ namespace BarkBeetle.ToolpathStackSetting
             List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
 
             List<GH_Curve> stackCurves = new List<GH_Curve>();
-            
+            Surface baseSrf = Surfaces[0].Value.Surfaces[0];
+            Interval uDomainBase = baseSrf.Domain(0);
+            Interval vDomainBase = baseSrf.Domain(1);
+
             for (int i = 0; i < LayerNum; i++)
             {
                 // Get current surface
                 Surface srf = Surfaces[i].Value.Surfaces[0];
 
+                Interval uDomainSrf = srf.Domain(0);
+                Interval vDomainSrf = srf.Domain(1);
+
                 // Pull points on surface
                 List<Point3d> pointsOnSurface = new List<Point3d>();
                 foreach(Point3d pt in points)
                 {
-                    double u, v;
-                    srf.ClosestPoint(pt, out u, out v);
-                    Point3d pt3dOnSurf = srf.PointAt(u, v);
+                    double uBase, vBase;
+                    baseSrf.ClosestPoint(pt, out uBase, out vBase);
+
+                    // 计算相对位置
+                    double uNormalized = uDomainBase.NormalizedParameterAt(uBase);
+                    double vNormalized = vDomainBase.NormalizedParameterAt(vBase);
+
+                    // 将相对位置映射到第二个曲面的 UV 范围
+                    double uSrf = uDomainSrf.ParameterAt(uNormalized);
+                    double vSrf = vDomainSrf.ParameterAt(vNormalized);
+
+                    Point3d pt3dOnSurf = srf.PointAt(uSrf, vSrf);
                     pointsOnSurface.Add(pt3dOnSurf);
                 }
 
@@ -94,10 +92,6 @@ namespace BarkBeetle.ToolpathStackSetting
             List<GH_Curve> gH_Curves = LayerCurves;
             List<GH_Surface> gH_Surfaces = Surfaces;
 
-
-            //Vector3d refX = GlobalReferencePlane.XAxis;
-            //Vector3d refY = GlobalReferencePlane.YAxis;
-
             List<List<GH_Plane>> planesStructure = new List<List<GH_Plane>>();
             
 
@@ -107,11 +101,16 @@ namespace BarkBeetle.ToolpathStackSetting
                 List<GH_Number> doublesThis = new List<GH_Number>();
                 List<Point3d> toolpathExplodedPts = PointDataUtils.GetExplodedCurveVertices(gH_Curves[i].Value);
                 Surface surface = gH_Surfaces[i].Value.Surfaces[0];
+                Surface preSurface = null;
+                if (i != 0)
+                {
+                    preSurface = gH_Surfaces[i - 1].Value.Surfaces[0];
+                }
 
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
                     Vector3d xDir =  pt -  PlaneRefPt;
-                    xDir.Z = 0; // 投影到 XY 平面（即忽略 Z 分量）
+                    xDir.Z = 0; // project the vector on the global xy plane
 
                     Plane newPlane = new Plane();
                     if (AngleGlobal)
@@ -140,7 +139,18 @@ namespace BarkBeetle.ToolpathStackSetting
                         newPlane.Transform(rotation);
                     }
                     planesThis.Add(new GH_Plane(newPlane));
-                    doublesThis.Add(new GH_Number(1));
+
+                    // Calculate speed
+                    if (i==0) doublesThis.Add(new GH_Number(1));
+                    else
+                    {
+                        // Calculate distance between this point and previous layer
+                        preSurface.ClosestPoint(pt, out double u, out double v);
+                        Point3d closestPointOnSurface = surface.PointAt(u, v);
+                        double distance = pt.DistanceTo(closestPointOnSurface);
+
+                        doublesThis.Add(new GH_Number(distance/LayerHeight)); // TODO: should be rounded?
+                    }
                 }
 
                 speedFactor.Add(doublesThis);

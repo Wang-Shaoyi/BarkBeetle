@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace BarkBeetle.ToolpathBaseSetting
 {
-    internal class ToolpathBaseGoo : GH_Goo<ToolpathBase>
+    internal class ToolpathPatternGoo : GH_Goo<ToolpathPattern>
     {
         // Construct geometry
-        public ToolpathBaseGoo() : this(null) { }
+        public ToolpathPatternGoo() : this(null) { }
 
-        public ToolpathBaseGoo(ToolpathBase geometry)
+        public ToolpathPatternGoo(ToolpathPattern geometry)
         {
             Value = geometry;
         }
@@ -30,7 +30,7 @@ namespace BarkBeetle.ToolpathBaseSetting
         public override IGH_Goo Duplicate()
         {
             // TODO: How to deep copy here?
-            return new ToolpathBaseGoo(Value);
+            return new ToolpathPatternGoo(Value);
         }
 
         public override string ToString()
@@ -56,7 +56,7 @@ namespace BarkBeetle.ToolpathBaseSetting
 
         public override bool CastFrom(object source)
         {
-            if (source is ToolpathBase geometry)
+            if (source is ToolpathPattern geometry)
             {
                 Value = geometry;
                 return true;

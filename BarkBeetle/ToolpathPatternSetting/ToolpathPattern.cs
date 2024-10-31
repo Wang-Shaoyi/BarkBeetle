@@ -13,7 +13,7 @@ using Rhino.Collections;
 
 namespace BarkBeetle.ToolpathBaseSetting
 {
-    internal abstract class ToolpathBase
+    internal abstract class ToolpathPattern
     {
         public virtual string ToolpathBaseName { get; set; } = "toolpath";
         private Curve curve { get; set; }
@@ -55,7 +55,7 @@ namespace BarkBeetle.ToolpathBaseSetting
             get { return pathWidth; }
         }
 
-        public ToolpathBase(SkeletonPackage gP, Point3d seam, double pw) 
+        public ToolpathPattern(SkeletonPackage gP, Point3d seam, double pw) 
         {
             pathWidth = pw;
             seamPt = seam;

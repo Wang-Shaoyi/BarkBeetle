@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace BarkBeetle.ToolpathBaseSetting
 {
-    internal class ToolpathBaseSpiral : ToolpathBase
+    internal class ToolpathPatterhSpiral : ToolpathPattern
     {
         public override string ToolpathBaseName { get; set; } = "Spiral";
-        public ToolpathBaseSpiral(SkeletonPackage gP, Point3d seam, double pw) : base(gP, seam, pw) { }
+        public ToolpathPatterhSpiral(SkeletonPackage gP, Point3d seam, double pw) : base(gP, seam, pw) { }
 
         public override void ConstructToolpathBase()
         {
@@ -102,6 +102,7 @@ namespace BarkBeetle.ToolpathBaseSetting
                 Vector3d neighSideVec;
 
                 // find neighbor point
+                // TODO: don't need to find neighbour
                 if (turn == 0)
                 {
                     Point3d neighbour = organizedPtsArray[u + du[direction], v + dv[direction]].Value;
@@ -177,7 +178,7 @@ namespace BarkBeetle.ToolpathBaseSetting
             List<Curve> toolpathList = new List<Curve>();
 
             int count = ptArray3D.GetLength(0);
-            int countLastLine = Math.Abs(organizedPtsArray.GetLength(0) - organizedPtsArray.GetLength(1));
+            int countLastLine = Math.Abs(organizedPtsArray.GetLength(0) - organizedPtsArray.GetLength(1)) + 1;
             int depthNum = ptArray3D.GetLength(1);
 
             // For each toolpath circle

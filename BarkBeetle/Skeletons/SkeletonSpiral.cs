@@ -19,6 +19,8 @@ namespace BarkBeetle.Skeletons
         public override List<(int, int, int)> OrganizeSkeletonStructure()
         {
             // Skeleton Structure is List<(u, v, turn(-1 clockwise, 0 no turn, 1 counter-clockwise)>
+
+            // TODO: make this List<(u, v, u_neigh, v_neigh)>; if no neighbour, u_neigh = v_neigh = -1
             List<(int, int, int)> skS = new List<(int, int, int)>();
 
             int uCnt = OrganizedPtsArray.GetLength(0);

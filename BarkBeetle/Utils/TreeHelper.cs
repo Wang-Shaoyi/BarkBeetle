@@ -259,5 +259,10 @@ namespace BarkBeetle.Utils
 
             return ghPoints;  // 返回 GH_Structure<GH_Point>
         }
+
+        public static List<T> FlattenList<T>(List<List<T>> nestedList)
+        {
+            return nestedList.SelectMany(subList => subList).ToList();
+        }
     }
 }

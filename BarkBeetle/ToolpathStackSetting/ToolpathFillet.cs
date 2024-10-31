@@ -30,10 +30,10 @@ namespace BarkBeetle.ToolpathStackSetting
             {
                 newToolpathStack = new ToolpathStackVertical(
                     toolpathStack._ToolpathBase, 
-                    toolpathStack.GlobalReferencePlane, 
                     toolpathStack.LayerHeight, 
                     toolpathStack.AngleGlobal,
-                    toolpathStack.LayerHeight * layerCount);
+                    toolpathStack.LayerHeight * layerCount,
+                    toolpathStack.PlaneRefPt);
             }
             
             // Go through each layer

@@ -38,16 +38,23 @@ namespace BarkBeetle.ToolpathStackSetting
             get { return surfaces; }
         }
 
-        private ToolpathBase toolpathBase { get; set; }
-        public ToolpathBase _ToolpathBase
+        private ToolpathPattern toolpathBase { get; set; }
+        public ToolpathPattern _ToolpathBase
         {
             get { return toolpathBase; }
         }
 
-        private Plane globalReferencePlane { get; set; }
-        public Plane GlobalReferencePlane
+        //private Plane globalReferencePlane { get; set; }
+        //public Plane GlobalReferencePlane
+        //{
+        //    get { return globalReferencePlane; }
+        //}
+
+        private Point3d planeRefPt { get; set; }
+        public Point3d PlaneRefPt
         {
-            get { return globalReferencePlane; }
+            get { return planeRefPt; }
+            set { planeRefPt = value; }
         }
 
         private List<List<GH_Plane>> orientPlanes { get; set; } // final planes for orientation
@@ -84,18 +91,17 @@ namespace BarkBeetle.ToolpathStackSetting
         }
 
 
-        public ToolpathStack(ToolpathBase tb, Plane plane, double h, bool ag)
+        public ToolpathStack(ToolpathPattern tb,  double h, bool ag, Point3d refPt)
         {
             
         }
 
-        public void PerformCustomLogic(ToolpathBase tb, Plane plane, double h, bool ag)
+        public void PerformCustomLogic(ToolpathPattern tb,  double h, bool ag, Point3d refPt)
         {
             toolpathBase = tb;
-            globalReferencePlane = plane;
             layerHeight = h;
             angleGlobal = ag;
-
+            planeRefPt = refPt;
             surfaces = CreateStackSurfaces();
 
             layerCurves = CreateStackLayerCurves();
@@ -128,7 +134,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
             return new GH_Curve(polyCurve);
         }
-        public abstract List<List<GH_Plane>> CreateStackOrientPlanes(ref List<List<GH_Number>> speedFactor);
+        public abstract List<List<GH_Plane>> CreateStackOrientPlanes( ref List<List<GH_Number>> speedFactor);
 
 
         //public GH_Curve CreateStackFinalCurve()

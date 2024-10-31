@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
@@ -11,17 +12,17 @@ using Grasshopper.Kernel.Data;
 using BarkBeetle.ToolpathBaseSetting;
 using BarkBeetle.ToolpathStackSetting;
 
-namespace BarkBeetle.CompsToolpath
+namespace BarkBeetle.CompsToolpathOutput
 {
-    public class UnpackToolpathStack : GH_Component
+    public class ToKukaMovement : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Extract_RefinedGeometry class.
         /// </summary>
-        public UnpackToolpathStack()
-          : base("Unpack Toolpath Stack", "Unpack Stack",
-              "Unpack all geometries in the Toolpath Stack",
-              "BarkBeetle", "Toolpath")
+        public ToKukaMovement()
+          : base("To Kuka Movement", "To Kuka",
+              "Transfrom Toolpath Stack to Kuka movement (e.g., LINear Movement)",
+              "BarkBeetle", "Output")
         {
         }
 
@@ -31,6 +32,7 @@ namespace BarkBeetle.CompsToolpath
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Vel Max", "Vel", "Maximum velocity", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -38,12 +40,8 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Base", "TB", "BarkBeetle ToolpathBase object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath Curves", "Crvs", "Toolpath curve from layers", GH_ParamAccess.list);
-            pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.tree);
-            pManager.AddSurfaceParameter("Surface Series", "S", "Each layer has one reference surface", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.tree);
+            pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -54,11 +52,12 @@ namespace BarkBeetle.CompsToolpath
         {
             // Initialize
             ToolpathStackGoo goo = null;
+            double maxSpeed = 0;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
             ToolpathStack toolpathStack = goo.Value;
-
+            if (!DA.GetData(1, ref maxSpeed)) return;
 
             if (toolpathStack == null)
             {
@@ -67,29 +66,19 @@ namespace BarkBeetle.CompsToolpath
             }
 
             //Run
-
-            ToolpathPattern toolpathBase = toolpathStack._ToolpathBase;
-            ToolpathPatternGoo tbGoo = new ToolpathPatternGoo(toolpathBase);
-
-            GH_Curve gH_Curve = toolpathStack.FinalCurve;
-
-            List<GH_Curve> gH_Curves = toolpathStack.LayerCurves;
-
             List<List<GH_Plane>> frames = toolpathStack.OrientPlanes;
-            GH_Structure<GH_Plane> frameTree = TreeHelper.ConvertToGHStructure(frames);
-
-            List<GH_Surface> gH_Surfaces = toolpathStack.Surfaces;
+            List<GH_Plane> flattenFrames = TreeHelper.FlattenList(frames);
 
             List<List<GH_Number>> speedFactor = toolpathStack.SpeedFactors;
-            GH_Structure<GH_Number> speedFactorTree = TreeHelper.ConvertToGHStructure(speedFactor);
+            List<GH_Number> flattenSpeed = TreeHelper.FlattenList(speedFactor);
+            for (int i = 0; i < flattenFrames.Count; i++)
+            {
+                flattenSpeed[i] = new GH_Number(flattenSpeed[i].Value * maxSpeed);
+            }
 
             // Output
-            DA.SetData(0, tbGoo);
-            DA.SetData(1, gH_Curve);
-            DA.SetDataList(2, gH_Curves);
-            DA.SetDataTree(3, frameTree);
-            DA.SetDataList(4, gH_Surfaces);
-            DA.SetDataTree(5, speedFactorTree);
+            DA.SetDataList(0, flattenFrames);
+            DA.SetDataList(1, flattenSpeed);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.tertiary;
@@ -112,7 +101,7 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("150B92CA-57D8-4283-ABED-9FBC492F7C47"); }
+            get { return new Guid("41FCD185-5E81-4593-BFC9-BB3ED92A4887"); }
         }
     }
 }
