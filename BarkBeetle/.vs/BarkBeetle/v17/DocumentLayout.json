@@ -124,7 +124,7 @@
               "RelativeDocumentMoniker": "Utils\\BrepUtils.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\BrepUtils.cs",
               "RelativeToolTip": "Utils\\BrepUtils.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAAALYAAABhAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAALYAAABhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-31T05:47:37.527Z",
               "EditorCaption": ""
@@ -139,8 +139,7 @@
               "RelativeToolTip": "CompsToolpath\\ToolpathStackBetweenComp.cs",
               "ViewState": "AQIAAEAAAAAAAAAAAAAYwHEAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T04:15:49.398Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-31T04:15:49.398Z"
             },
             {
               "$type": "Document",
@@ -152,8 +151,7 @@
               "RelativeToolTip": "ToolpathStackSetting\\ToolpathStackBetween.cs",
               "ViewState": "AQIAADUAAAAAAAAAAAAAADoAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T04:14:15.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-31T04:14:15.215Z"
             },
             {
               "$type": "Document",
@@ -165,8 +163,7 @@
               "RelativeToolTip": "Skeletons\\SkeletonSpiral.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAuwBYAAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T02:53:27.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T02:53:27.416Z"
             },
             {
               "$type": "Document",
@@ -178,8 +175,7 @@
               "RelativeToolTip": "ToolpathStackSetting\\ToolpathStack.cs",
               "ViewState": "AQIAAF0AAAAAAAAAAAAuwGoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T02:21:49.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T02:21:49.595Z"
             },
             {
               "$type": "Document",
@@ -190,8 +186,7 @@
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Resources.resx",
               "RelativeToolTip": "Resources.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-10-16T04:29:16.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T04:29:16.877Z"
             },
             {
               "$type": "Document",
@@ -203,8 +198,7 @@
               "RelativeToolTip": "Skeletons\\Skeleton.cs",
               "ViewState": "AQIAACsAAAAAAAAAAAAgwCEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T00:53:08.283Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T00:53:08.283Z"
             },
             {
               "$type": "Document",
@@ -216,8 +210,7 @@
               "RelativeToolTip": "GeometriesPackage\\SkeletonPackageManager.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAASwIIAAAB4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T23:47:20.7Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-30T23:47:20.7Z"
             },
             {
               "$type": "Document",
@@ -229,8 +222,7 @@
               "RelativeToolTip": "ToolpathStackSetting\\ToolpathStackVertical.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAABoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T17:17:58.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T17:17:58.798Z"
             },
             {
               "$type": "Document",
@@ -242,8 +234,7 @@
               "RelativeToolTip": "ToolpathStackSetting\\ToolpathFillet.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAxwBcAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T05:00:29.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T05:00:29.103Z"
             },
             {
               "$type": "Document",
@@ -255,8 +246,7 @@
               "RelativeToolTip": "ToolpathPatternSetting\\ToolpathPatternGoo.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAADwvwEAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T16:52:31.868Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T16:52:31.868Z"
             },
             {
               "$type": "Document",
@@ -268,8 +258,7 @@
               "RelativeToolTip": "CompsToolpath\\ToolpathBaseSpiralComp.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T04:06:10.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T04:06:10.537Z"
             },
             {
               "$type": "Document",
@@ -281,8 +270,7 @@
               "RelativeToolTip": "ToolpathPatternSetting\\ToolpathPattern.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T02:27:30.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T02:27:30.623Z"
             },
             {
               "$type": "Document",
