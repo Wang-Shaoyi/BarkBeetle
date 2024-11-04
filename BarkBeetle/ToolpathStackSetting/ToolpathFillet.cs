@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Rhino.Geometry;
 using System.Security.Cryptography;
 using Grasshopper.Kernel.Types;
-using BarkBeetle.ToolpathBaseSetting;
 using BarkBeetle.Utils;
 
 namespace BarkBeetle.ToolpathStackSetting
@@ -29,7 +28,7 @@ namespace BarkBeetle.ToolpathStackSetting
             if(toolpathStack.ToolpathStackName == "Vertical")
             {
                 newToolpathStack = new ToolpathStackVertical(
-                    toolpathStack._ToolpathBase, 
+                    toolpathStack.Pattern, 
                     toolpathStack.LayerHeight, 
                     toolpathStack.AngleGlobal,
                     toolpathStack.LayerHeight * layerCount,

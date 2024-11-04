@@ -1,12 +1,12 @@
-﻿using BarkBeetle.GeometriesPackage;
+﻿
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BarkBeetle.ToolpathBaseSetting;
 using Grasshopper.Kernel.Types;
+using BarkBeetle.Pattern;
 
 namespace BarkBeetle.ToolpathStackSetting
 {
@@ -38,17 +38,11 @@ namespace BarkBeetle.ToolpathStackSetting
             get { return surfaces; }
         }
 
-        private ToolpathPattern toolpathBase { get; set; }
-        public ToolpathPattern _ToolpathBase
+        private ToolpathPattern pattern { get; set; }
+        public ToolpathPattern Pattern
         {
-            get { return toolpathBase; }
+            get { return pattern; }
         }
-
-        //private Plane globalReferencePlane { get; set; }
-        //public Plane GlobalReferencePlane
-        //{
-        //    get { return globalReferencePlane; }
-        //}
 
         private Point3d planeRefPt { get; set; }
         public Point3d PlaneRefPt
@@ -96,9 +90,9 @@ namespace BarkBeetle.ToolpathStackSetting
             
         }
 
-        public void PerformCustomLogic(ToolpathPattern tb,  double h, bool ag, Point3d refPt)
+        public void PerformCustomLogic(ToolpathPattern pt,  double h, bool ag, Point3d refPt)
         {
-            toolpathBase = tb;
+            pattern = pt;
             layerHeight = h;
             angleGlobal = ag;
             planeRefPt = refPt;

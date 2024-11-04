@@ -126,7 +126,6 @@ namespace BarkBeetle.Utils
         }
 
 
-
         // Convert List<List<T>> to GH_Structure
         public static GH_Structure<T> ConvertToGHStructure<T>(List<List<T>> dataList) where T : IGH_Goo
         {

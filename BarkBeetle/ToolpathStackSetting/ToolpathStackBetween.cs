@@ -1,5 +1,4 @@
-﻿using BarkBeetle.ToolpathBaseSetting;
-using Grasshopper.Kernel.Data;
+﻿using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using Rhino.Geometry;
 
 using BarkBeetle.Utils;
+using BarkBeetle.Pattern;
 using System.Security.Cryptography;
 
 namespace BarkBeetle.ToolpathStackSetting
@@ -28,7 +28,7 @@ namespace BarkBeetle.ToolpathStackSetting
         public override List<GH_Surface> CreateStackSurfaces()
         {
             
-            Surface baseSurface = _ToolpathBase.SkeletonPackage.ExtendedSurface;
+            Surface baseSurface = Pattern.Skeleton.UVNetwork.ExtendedSurface;
             LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) +1;
 
             List<GH_Surface> stackSurfaces = BrepUtils.TweenBetweenSurfaces(baseSurface, topSrf, LayerNum);
@@ -38,7 +38,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override List<GH_Curve> CreateStackLayerCurves() 
         {
-            Curve baseCurve = _ToolpathBase.Curve;
+            Curve baseCurve = Pattern.CoutinuousCurve;
             List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
 
             List<GH_Curve> stackCurves = new List<GH_Curve>();

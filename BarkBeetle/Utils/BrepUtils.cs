@@ -7,12 +7,91 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grasshopper.Kernel.Types;
-using BarkBeetle.GeometriesPackage;
 
 namespace BarkBeetle.Utils
 {
     internal class BrepUtils
     {
+
+        public static Surface ProcessExtendedSurface(double uWidth, double vWidth, Surface surface)
+        {
+            // Setup for U direction
+            List<Curve> extendedUCurves = new List<Curve>();
+            Interval uDomain = surface.Domain(0);
+
+            // Extend U direction curves
+            int numUDivs = 20;
+            for (int i = 0; i <= numUDivs; i++)
+            {
+                double uParam = uDomain.ParameterAt(i / (double)numUDivs);
+                Curve uIsoCurve = surface.IsoCurve(1, uParam);
+
+                // Check if the curve is closed; if so, add without extending
+                if (uIsoCurve.IsClosed)
+                {
+                    extendedUCurves.Add(uIsoCurve);
+                }
+                else
+                {
+                    // Extend
+                    Curve extendedUIsoCurve = uIsoCurve.Extend(CurveEnd.Both, vWidth, CurveExtensionStyle.Smooth);
+                    extendedUCurves.Add(extendedUIsoCurve);
+                }
+            }
+
+            // Attempt to create lofted surface for U direction
+            Brep[] loftedBrepsU = null;
+            while (extendedUCurves.Count > 1)
+            {
+                loftedBrepsU = Brep.CreateFromLoft(extendedUCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+                if (loftedBrepsU.Length != 0) break;
+                extendedUCurves.RemoveAt(extendedUCurves.Count - 1); // Remove last curve and retry
+            }
+
+            Surface loftedSurfaceU = loftedBrepsU?[0].Faces[0].ToNurbsSurface();
+            if (loftedSurfaceU == null) throw new Exception("Failed to create lofted surface in U direction.");
+
+            /////////////////////////////////////////
+            // Setup for V direction
+            List<Curve> extendedVCurves = new List<Curve>();
+            Interval vDomain = loftedSurfaceU.Domain(1);
+
+            // Extend V direction curves
+            int numVDivs = 20;
+            for (int i = 0; i <= numVDivs; i++)
+            {
+                double vParam = vDomain.ParameterAt(i / (double)numVDivs);
+                Curve vIsoCurve = loftedSurfaceU.IsoCurve(0, vParam);
+
+                // Check if the curve is closed; if so, add without extending
+                if (vIsoCurve.IsClosed)
+                {
+                    extendedVCurves.Add(vIsoCurve);
+                }
+                else
+                {
+                    // Extend
+                    Curve extendedVIsoCurve = vIsoCurve.Extend(CurveEnd.Both, uWidth, CurveExtensionStyle.Smooth);
+                    extendedVCurves.Add(extendedVIsoCurve);
+                }
+            }
+
+            // Attempt to create lofted surface for V direction
+            Brep[] loftedBrepsV = null;
+            while (extendedVCurves.Count > 1)
+            {
+                loftedBrepsV = Brep.CreateFromLoft(extendedVCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+                if (loftedBrepsV.Length != 0) break;
+                extendedVCurves.RemoveAt(extendedVCurves.Count - 1); // Remove last curve and retry
+            }
+
+            Surface loftedSurfaceV = loftedBrepsV?[0].Faces[0].ToNurbsSurface();
+            if (loftedSurfaceV == null) throw new Exception("Failed to create lofted surface in V direction.");
+
+            loftedSurfaceV.Transpose(true);
+            return loftedSurfaceV;
+        }
+
         public static GH_Structure<GH_Surface> StripFromCurves(GH_Structure<GH_Curve> uvCurves, Surface surface,double strip_width,double extend)
         {
             List<List<GH_Curve>> listCurves = TreeHelper.ConvertGHStructureToList(uvCurves);
@@ -69,71 +148,6 @@ namespace BarkBeetle.Utils
             return strips;
         }
 
-        public static GH_Structure<GH_Surface> StripFromSkeleton(SkeletonPackage skeletonPacakge, double extend)
-        {
-            List<List<GH_Curve>> listCurves = skeletonPacakge.UVCurves;
-            Surface surface = skeletonPacakge.ExtendedSurface;
-            double strip_width = skeletonPacakge.StripWidth;
-            List<List<GH_Surface>> brepsAll = new List<List<GH_Surface>>();
-
-            foreach (List<GH_Curve> ghCrvs in listCurves)
-            {
-                List<GH_Surface> breps = new List<GH_Surface>();
-
-                foreach (GH_Curve ghCrv in ghCrvs)
-                {
-                    Curve crv = ghCrv.Value;
-                    Curve extend_crv = null;
-
-                    if (crv.IsClosed)
-                    {
-                        extend_crv = crv;
-                    }
-                    else
-                    {
-                        extend_crv = crv.Extend(CurveEnd.Both, extend, CurveExtensionStyle.Smooth);
-                    }
-                    double[] divisionParameters = extend_crv.DivideByCount(20, true);
-
-                    // Lists to store the points, tangent vectors, and normal vectors
-                    List<Point3d> divisionPoints = new List<Point3d>();
-                    Curve[] loftLines = new Curve[divisionParameters.Count()];
-
-                    int i = 0;
-                    foreach (double t in divisionParameters)
-                    {
-                        // Get the actual point on the curve using the parameter
-                        Point3d pt = crv.PointAt(t);
-                        divisionPoints.Add(pt);
-
-                        // Compute tangent vector at the point on the curve
-                        Vector3d tangent = crv.TangentAt(t);
-
-                        // Get the UV coordinates of the point on the surface and compute the surface normal
-                        double u, v;
-                        Vector3d normal;
-                        surface.ClosestPoint(pt, out u, out v);// Find the point's (u, v) coordinates on the surface
-                        normal = surface.NormalAt(u, v);  // Get the surface normal at that (u, v)
-
-                        // Compute the cross product and line
-                        Vector3d crossVec = Vector3d.CrossProduct(normal, tangent);
-
-                        Point3d start = pt - crossVec * strip_width / 2;
-                        Point3d end = pt + crossVec * strip_width / 2;
-                        Line line = new Line(start, end);
-                        loftLines[i] = line.ToNurbsCurve();
-                        i++;
-                    }
-
-                    Brep loftBrep = Brep.CreateFromLoft(loftLines, Point3d.Unset, Point3d.Unset, LoftType.Normal, false)[0];
-                    breps.Add(new GH_Surface(loftBrep));
-                }
-                brepsAll.Add(breps);
-            }
-
-            GH_Structure<GH_Surface> strips = TreeHelper.ConvertToGHStructure(brepsAll);
-            return strips;
-        }
 
         public static double AverageSurfaceDistance(Surface surfaceBottom, Surface surfaceTop, int sampleCount)
         {
@@ -222,15 +236,6 @@ namespace BarkBeetle.Utils
             return targetSurface;
         }
 
-        // Make sure two surfaces have the same amount of control points
-        private static void EnsureMatchingControlPoints(NurbsSurface surfaceA, NurbsSurface surfaceB)
-        {
-            int uCount = Math.Max(surfaceA.Points.CountU, surfaceB.Points.CountU);
-            int vCount = Math.Max(surfaceA.Points.CountV, surfaceB.Points.CountV);
-
-            surfaceA.Rebuild( surfaceA.Degree(0), surfaceA.Degree(1), uCount, vCount);
-            surfaceB.Rebuild(surfaceB.Degree(0), surfaceB.Degree(1), uCount, vCount);
-        }
     }
 
     
