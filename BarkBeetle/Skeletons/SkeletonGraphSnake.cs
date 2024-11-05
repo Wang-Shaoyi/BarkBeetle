@@ -7,12 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BarkBeetle.Skeletons
 {
-    internal class SkeletonGraphSpiral:SkeletonGraph
+    internal class SkeletonGraphSnake:SkeletonGraph
     {
-        public SkeletonGraphSpiral(UVNetwork network): base(network) { }
+        public SkeletonGraphSnake(UVNetwork network): base(network) { }
 
         public override BBPoint[,] OrganizeSkeletonStructure()
         {
@@ -20,29 +21,23 @@ namespace BarkBeetle.Skeletons
             GH_Vector[,,] uvVectors = UVNetwork.UVVectors;
             int uCnt = organizedPtsArray.GetLength(0);
             int vCnt = organizedPtsArray.GetLength(1);
-
+            int countLastLine = Math.Abs(uCnt - vCnt) + 1;
             BBPoint[,] bbPoints = new BBPoint[uCnt,vCnt];
 
-            int countLastLine = PointDataUtils.FindSpiralLastLineCount(uCnt, vCnt);
-
-            // store if each point was visited
-            bool[,] visited = new bool[uCnt, vCnt];
             int r = 0;
             int c = 0;
-            int turn = 0;
 
             // record directions
-            int[] dr = { 1, 0, -1, 0 };
-            int[] dc = { 0, 1, 0, -1 };
+            int[] dr = { 1, 0, -1, 0};
+            int[] dc = { 0, 1, 0, 1 };
             int[] du = { 0, -1, 0, 1 };
-            int[] dv = { 1, 0, -1, 0 };
+            int[] dv = { 1, 0, 1, 0 };
+            int[] dturn = { 1, 1, -1, -1 };
             int direction = 0;
 
             for (int i = 0; i < uCnt * vCnt; i++)
             {
-                visited[r, c] = true;
-                turn = 0;
-
+                int turn = 0;
                 Vector3d vecU = uvVectors[r, c, 0].Value;
                 Vector3d vecV = uvVectors[r, c, 1].Value;
 
@@ -53,11 +48,11 @@ namespace BarkBeetle.Skeletons
                 Vector3d subVec = du[direction] * vecU + dv[direction] * vecV;
 
                 // When turning
-                if ((nextR < 0 || nextR >= uCnt || nextC < 0 || nextC >= vCnt || visited[nextR, nextC]) && i != uCnt * vCnt - 1)
+                if ((r == uCnt - 1 || r == 0) && i != uCnt * vCnt - 1 && i != 0)
                 {
-                    // Turn counter-clockwise
+                    turn = dturn[direction];
                     direction = (direction + 1) % 4;
-                    turn = 1;
+                    
                     nextR = r + dr[direction];
                     nextC = c + dc[direction];
                     mainVec = dr[direction] * vecU + dc[direction] * vecV;
@@ -71,15 +66,15 @@ namespace BarkBeetle.Skeletons
                     mainVec, subVec);
 
                 // Add next index
-                if (i < uCnt * vCnt -1)
+                if (i < uCnt * vCnt - 1)
                 {
                     bbPoints[r, c].NextIndex = (nextR, nextC);
                 }
 
                 // Add branch index
-                if (turn == 0 && i <= uCnt * vCnt - 1 - countLastLine)
+                if (dc[direction] == 0 && i <= uCnt * vCnt - 1 - uCnt)
                 {
-                    bbPoints[r, c].BranchIndex = (r + du[direction], c + dv[direction]);
+                    bbPoints[r, c].BranchIndex = (r , c + 1);
                 }
 
                 r = nextR;

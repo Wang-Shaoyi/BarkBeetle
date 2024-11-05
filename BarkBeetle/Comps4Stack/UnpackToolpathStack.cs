@@ -20,7 +20,7 @@ namespace BarkBeetle.Comps4Stack
         public UnpackToolpathStack()
           : base("Unpack Toolpath Stack", "Unpack Stack",
               "Unpack all geometries in the Toolpath Stack",
-              "BarkBeetle", "3-Pattern")
+              "BarkBeetle", "4-Stack")
         {
         }
 
@@ -37,7 +37,6 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Base", "TB", "BarkBeetle ToolpathBase object", GH_ParamAccess.item);
             pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
             pManager.AddCurveParameter("Toolpath Curves", "Crvs", "Toolpath curve from layers", GH_ParamAccess.list);
             pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.tree);
@@ -66,10 +65,6 @@ namespace BarkBeetle.Comps4Stack
             }
 
             //Run
-
-            ToolpathPattern toolpathPattern = toolpathStack.Pattern;
-            ToolpathPatternGoo tpGoo = new ToolpathPatternGoo(toolpathPattern);
-
             GH_Curve gH_Curve = toolpathStack.FinalCurve;
 
             List<GH_Curve> gH_Curves = toolpathStack.LayerCurves;
@@ -83,12 +78,11 @@ namespace BarkBeetle.Comps4Stack
             GH_Structure<GH_Number> speedFactorTree = TreeHelper.ConvertToGHStructure(speedFactor);
 
             // Output
-            DA.SetData(0, tpGoo);
-            DA.SetData(1, gH_Curve);
-            DA.SetDataList(2, gH_Curves);
-            DA.SetDataTree(3, frameTree);
-            DA.SetDataList(4, gH_Surfaces);
-            DA.SetDataTree(5, speedFactorTree);
+            DA.SetData(0, gH_Curve);
+            DA.SetDataList(1, gH_Curves);
+            DA.SetDataTree(2, frameTree);
+            DA.SetDataList(3, gH_Surfaces);
+            DA.SetDataTree(4, speedFactorTree);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.secondary;

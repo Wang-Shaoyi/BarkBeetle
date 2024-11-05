@@ -28,6 +28,48 @@ namespace BarkBeetle.Utils
             return sinValue;
         }
 
+        public static int DetermineVectorDirection(Vector3d A, Vector3d B)
+        {
+            double crossProduct = A.X * B.Y - A.Y * B.X;
+
+            if (crossProduct > 0)
+            {
+                return 1;
+            }
+            else if (crossProduct < 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0; 
+            }
+        }
+
+        public static int FindSpiralLastLineCount(int cnt1, int cnt2)
+        {
+            int countRemain = cnt1 * cnt2; // 总点数
+
+            int index1 = 1, index2 = 0;
+            cnt2 -= 1;
+
+            while (countRemain > 0)
+            {
+                countRemain -= cnt1 * index1 + cnt2 * index2;
+
+                cnt1 = cnt1 - index1;
+                cnt2 = cnt2 - index2;
+
+                int temp = index1;
+                index1 = index2;
+                index2 = temp;
+
+                if (countRemain <= 0 || cnt1 == 0 || cnt2 == 0) break;
+            }
+
+            return countRemain;
+        }
+
         public static List<Point3d> GetExplodedCurveVertices(Curve curve)
         {
             List<Point3d> vertices = new List<Point3d>();

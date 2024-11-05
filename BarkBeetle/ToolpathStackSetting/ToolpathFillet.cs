@@ -25,16 +25,14 @@ namespace BarkBeetle.ToolpathStackSetting
 
 
             // Construct new toolpathStack
-            if(toolpathStack.ToolpathStackName == "Vertical")
-            {
-                newToolpathStack = new ToolpathStackVertical(
-                    toolpathStack.Pattern, 
-                    toolpathStack.LayerHeight, 
+            newToolpathStack = new StackVertical(
+                    toolpathStack.Patterns,
+                    toolpathStack.LayerHeight,
                     toolpathStack.AngleGlobal,
                     toolpathStack.LayerHeight * layerCount,
-                    toolpathStack.PlaneRefPt);
-            }
-            
+                    toolpathStack.PlaneRefPt,
+                    toolpathStack.RotateAngle);
+
             // Go through each layer
             for (int i = 0; i < layerCount; i++)
             {
@@ -44,6 +42,7 @@ namespace BarkBeetle.ToolpathStackSetting
                 Surface srf = gH_Surfaces[i].Value.Surfaces[0];
                 Curve filletCrv = FilletSingleLayerToolpathOnSurface(crv, r, srf);
                 // Trim every layer with f * r
+                layerBetweenFactor += 0.0001;
                 Curve trimCurrent = null;
                 if (i == 0) trimCurrent = filletCrv.Trim(CurveEnd.End, layerBetweenFactor * r);
                 else if (i == layerCount - 1) trimCurrent = filletCrv.Trim(CurveEnd.Start, layerBetweenFactor * r);
@@ -59,7 +58,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
             List<List<GH_Number>> speedFactors = new List<List<GH_Number>>();
 
-            newToolpathStack.OrientPlanes = newToolpathStack.CreateStackOrientPlanes(ref speedFactors);
+            newToolpathStack.OrientPlanes = newToolpathStack.CreateStackOrientPlanes(newToolpathStack.RotateAngle,ref speedFactors);
             newToolpathStack.SpeedFactors = speedFactors;
 
             return newToolpathStack.FinalCurve;
@@ -100,7 +99,7 @@ namespace BarkBeetle.ToolpathStackSetting
             double tEnd = curve.Domain.Max;
 
             double t;
-            while (curve.GetNextDiscontinuity(Continuity.C1_locus_continuous, tStart, tEnd, out t))
+            while (curve.GetNextDiscontinuity(Continuity.C1_continuous, tStart, tEnd, out t))
             {
                 discontinuities.Add(t);
                 tStart = t;

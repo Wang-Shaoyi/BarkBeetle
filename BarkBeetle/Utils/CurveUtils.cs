@@ -73,10 +73,10 @@ namespace BarkBeetle.Utils
                             tangent.Unitize();  // Normalize the tangent vector
                             if (i == 0) 
                             { 
-                                uvVectors[u, v, 0] = new GH_Vector(tangent);
+                                uvVectors[u, v, 1] = new GH_Vector(tangent);
                                 organizedPtsArray[u, v] = new GH_Point(points[v]);
                             }
-                            else uvVectors[v, u, 1] = new GH_Vector(tangent);
+                            else uvVectors[v, u, 0] = new GH_Vector(tangent);
                         }
                     }
                 }

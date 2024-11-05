@@ -13,24 +13,24 @@ using System.Security.Cryptography;
 
 namespace BarkBeetle.ToolpathStackSetting
 {
-    internal class ToolpathStackVertical:ToolpathStack
+    internal class StackVertical:ToolpathStack
     {
-        public override string ToolpathStackName { get; set; } = "Vertical";
 
         double totalHeight = 0;
 
-        public ToolpathStackVertical(ToolpathPattern tb,  double h, bool ag, double totalH, Point3d refPt) : base(tb,h,ag, refPt) 
+        public StackVertical(StackPatterns sp,  double h, bool ag, double totalH, Point3d refPt, double angle) : base(sp, h, ag, refPt, angle) 
         {
             totalHeight = totalH;
-            PerformCustomLogic(tb, h, ag, refPt);
+            GenerateToolpathStack(sp, h, ag, refPt, angle);
         }
-
 
         public override List<GH_Surface> CreateStackSurfaces()
         {
             LayerNum = (int)(totalHeight / LayerHeight);
+            Surface baseSurface = null;
 
-            Surface baseSurface = Pattern.Skeleton.UVNetwork.ExtendedSurface;
+            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.Skeleton.UVNetwork.ExtendedSurface;
+            else baseSurface = Patterns.MainPatterns[0].Skeleton.UVNetwork.ExtendedSurface;
 
             List<GH_Surface> stackSurfaces = new List<GH_Surface>();
 
@@ -55,13 +55,41 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override List<GH_Curve> CreateStackLayerCurves() 
         {
-            Curve baseCurve = Pattern.CoutinuousCurve;
-            List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
+            /////////// Create pattern curve list/////////
+            List<Curve> allPatternCurves = new List<Curve>();
+            int repeatCount = LayerNum - (Patterns.TopCount + Patterns.BottomCount);
+
+            if (repeatCount > 0 && Patterns.MainPatterns.Count > 0)
+            {
+                List<Curve> main = new List<Curve>();
+                foreach (var pattern in Patterns.MainPatterns)
+                {
+                    main.Add(pattern.CoutinuousCurve);
+                }
+                for (int i = 0; i < repeatCount; i++)
+                {
+                    allPatternCurves.Add(main[i % Patterns.MainPatterns.Count]);
+                }
+            }
+
+            if (Patterns.BottomPattern != null && Patterns.BottomCount != 0)
+            {
+                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Add(Patterns.BottomPattern.CoutinuousCurve);
+            }
+
+            if (Patterns.TopPattern != null && Patterns.TopCount != 0)
+            {
+                for (int i = 0; i < Patterns.TopCount; i++) allPatternCurves.Add(Patterns.TopPattern.CoutinuousCurve);
+            }
+
+            /////////// Create pattern curve list/////////
 
             List<GH_Curve> stackCurves = new List<GH_Curve>();
             
             for (int i = 0; i < LayerNum; i++)
             {
+                Curve baseCurve = allPatternCurves[i];
+                List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
                 // Get current surface
                 Surface srf = Surfaces[i].Value.Surfaces[0];
 
@@ -89,14 +117,10 @@ namespace BarkBeetle.ToolpathStackSetting
             return stackCurves;
         }
 
-        public override List<List<GH_Plane>> CreateStackOrientPlanes( ref List<List<GH_Number>> speedFactor)
+        public override List<List<GH_Plane>> CreateStackOrientPlanes(double angle, ref List<List<GH_Number>> speedFactor)
         {
             List<GH_Curve> gH_Curves = LayerCurves;
             List<GH_Surface> gH_Surfaces = Surfaces;
-
-
-            //Vector3d refX = GlobalReferencePlane.XAxis;
-            //Vector3d refY = GlobalReferencePlane.YAxis;
 
             List<List<GH_Plane>> planesStructure = new List<List<GH_Plane>>();
             
@@ -111,7 +135,7 @@ namespace BarkBeetle.ToolpathStackSetting
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
                     Vector3d xDir =  pt -  PlaneRefPt;
-                    xDir.Z = 0; // 投影到 XY 平面（即忽略 Z 分量）
+                    xDir.Z = 0; // project onto xy plane
 
                     Plane newPlane = new Plane();
                     if (AngleGlobal)
@@ -134,7 +158,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
                         //////////////////////
                         // Rotate the plane around Y axis
-                        double angleInRadians = Rhino.RhinoMath.ToRadians(5); //TODO: make this an input of the component
+                        double angleInRadians = Rhino.RhinoMath.ToRadians(angle);
                         Vector3d rotationAxis = newPlane.YAxis;
                         Transform rotation = Transform.Rotation(-angleInRadians, rotationAxis, newPlane.Origin);
                         newPlane.Transform(rotation);

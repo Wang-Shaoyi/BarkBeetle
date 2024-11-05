@@ -18,7 +18,7 @@ namespace BarkBeetle.Pattern
     {
         public ToolpathPatterhSpiral(SkeletonGraph sG, Point3d seam, double pw) : base(sG, seam, pw) { }
 
-        public override void ConstructToolpathBase()
+        public override void ConstructToolpathPattern()
         {
             CornerPts = ReplicatePtsToCorners();
             BundleCurves = CreatSpiralToolpath(CornerPts);
@@ -123,16 +123,23 @@ namespace BarkBeetle.Pattern
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
             BBPoint curBBPoint = bbPointArray[0, 0];
 
+            int vectorMainDirection = PointDataUtils.DetermineVectorDirection(curBBPoint.VectorU, curBBPoint.VectorV);
+
             // Create an empty list to save all the tool paths
             List<Curve> toolpathList = new List<Curve>();
 
+            int cnt1 = bbPointArray.GetLength(0);
+            int cnt2 = bbPointArray.GetLength(1);
+
             int count = ptArray3D.GetLength(0);
-            int countLastLine = Math.Abs(bbPointArray.GetLength(0) - bbPointArray.GetLength(1)) + 1;
+
+            int countLastLine = PointDataUtils.FindSpiralLastLineCount(cnt1, cnt2);
             int depthNum = ptArray3D.GetLength(1);
 
             // For each toolpath circle
             for (int k = 0; k < depthNum; k++)
             {
+                
                 // Create an empty list to sort the points
                 List<Point3d> toolpathPointList = new List<Point3d>();
 
@@ -140,26 +147,53 @@ namespace BarkBeetle.Pattern
                 // For each point
                 for (int i = 0; i < count; i++)
                 {
-                    if (i > count - 1 - countLastLine)
+                    bool flipSeqence = (vectorMainDirection != PointDataUtils.DetermineVectorDirection(curBBPoint.VectorU, curBBPoint.VectorV));
+
+                    if (curBBPoint.TurningType == 0)
                     {
-                        toolpathPointList.Insert(0, ptArray3D[i, k, 2]);
-                        toolpathPointList.Insert(0, ptArray3D[i, k, 3]);
-                        toolpathPointList.Add(ptArray3D[i, k, 1]);
-                        toolpathPointList.Add(ptArray3D[i, k, 0]);
-                    }
-                    else
-                    {
-                        if (curBBPoint.TurningType == 0)
+                        if (flipSeqence)
+                        {
+                            // Put the points in order
+                            toolpathPointList.Add(ptArray3D[i, k, 2]);
+                            toolpathPointList.Add(ptArray3D[i, k, 3]);
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 1]);
+                            if (curBBPoint.IsBranchIndexAssigned())
+                            {
+                                toolpathPointList.Insert(0, ptArray3D[i, k, 5]);
+                                toolpathPointList.Insert(0, ptArray3D[i, k, 4]);
+                            }
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 0]);
+                        }
+                        else
                         {
                             // Put the points in order
                             toolpathPointList.Insert(0, ptArray3D[i, k, 2]);
                             toolpathPointList.Insert(0, ptArray3D[i, k, 3]);
                             toolpathPointList.Add(ptArray3D[i, k, 1]);
-                            toolpathPointList.Add(ptArray3D[i, k, 5]);
-                            toolpathPointList.Add(ptArray3D[i, k, 4]);
+                            if (curBBPoint.IsBranchIndexAssigned())
+                            {
+                                toolpathPointList.Add(ptArray3D[i, k, 5]);
+                                toolpathPointList.Add(ptArray3D[i, k, 4]);
+                            }
                             toolpathPointList.Add(ptArray3D[i, k, 0]);
                         }
-                        else if (curBBPoint.TurningType == 1)
+                    }
+                    else if (curBBPoint.TurningType == 1)
+                    {
+                        if (flipSeqence)
+                        {
+                            // Put the points in order
+                            toolpathPointList.Add(ptArray3D[i, k, 3]);
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 2]);
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 1]);
+                            if (curBBPoint.IsBranchIndexAssigned())
+                            {
+                                toolpathPointList.Insert(0, ptArray3D[i, k, 5]);
+                                toolpathPointList.Insert(0, ptArray3D[i, k, 4]);
+                            }
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 0]);
+                        }
+                        else
                         {
                             // Put the points in order
                             toolpathPointList.Insert(0, ptArray3D[i, k, 1]);
@@ -168,12 +202,35 @@ namespace BarkBeetle.Pattern
                             toolpathPointList.Add(ptArray3D[i, k, 0]);
                         }
                     }
+                    else if (curBBPoint.TurningType == -1)
+                    {
+                        if (flipSeqence)
+                        {
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 0]);
+                            toolpathPointList.Add(ptArray3D[i, k, 1]);
+                            toolpathPointList.Add(ptArray3D[i, k, 2]);
+                            toolpathPointList.Add(ptArray3D[i, k, 3]);
+                        }
+                        else
+                        {
+                            // Put the points in order
+                            toolpathPointList.Insert(0, ptArray3D[i, k, 3]);
+                            toolpathPointList.Add(ptArray3D[i, k, 2]);
+                            toolpathPointList.Add(ptArray3D[i, k, 1]);
+                            if (curBBPoint.IsBranchIndexAssigned())
+                            {
+                                toolpathPointList.Add(ptArray3D[i, k, 5]);
+                                toolpathPointList.Add(ptArray3D[i, k, 4]);
+                            }
+                            toolpathPointList.Add(ptArray3D[i, k, 0]);
+                        }
+                    }
 
                     if (curBBPoint.IsNextIndexAssigned())
                     {
                         curBBPoint = BBPoint.FindByIndex(curBBPoint.NextIndex, bbPointArray);
                     }
-                    else break;
+                    else curBBPoint = bbPointArray[0, 0];
                 }
 
                 ///////////////////////Draw Curve///////////////////

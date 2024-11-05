@@ -9,6 +9,7 @@ using BarkBeetle.ToolpathStackSetting;
 using BarkBeetle.Utils;
 using BarkBeetle.Pattern;
 using Grasshopper.Kernel.Data;
+using System.Collections;
 
 namespace BarkBeetle.Comps4Stack
 {
@@ -29,11 +30,12 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Base", "TB", "BarkBeetle ToolpathBase object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
             pManager.AddSurfaceParameter("Top Surface", "S", "Top Surface", GH_ParamAccess.item);
             pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, true);
             pManager.AddPointParameter("Reference Point", "Pt", "Reference point for frame orientation", GH_ParamAccess.item, Point3d.Origin);
+            pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Rotation towards the reference point", GH_ParamAccess.item, 0.0);
         }
 
         /// <summary>
@@ -53,26 +55,28 @@ namespace BarkBeetle.Comps4Stack
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // Initialize
-            ToolpathPatternGoo goo = null;
+            StackPatternsGoo goo = null;
             double layerH = 0;
             Surface topSrf = null;
             bool angleGlobal = true;
             Point3d refPt = new Point3d();
+            double angle = 0.0;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
-            ToolpathPattern toolpathBase = goo.Value;
+            StackPatterns stackPatterns = goo.Value;
 
             if (!DA.GetData(1, ref layerH)) return;
             if (!DA.GetData(2, ref topSrf)) return;
             if (!DA.GetData(3, ref angleGlobal)) return;
             if (!DA.GetData(4, ref refPt)) return;
+            if (!DA.GetData(5, ref angle)) return;
 
 
             // Error message.
 
             // Run Function
-            ToolpathStackBetween toolpathStack = new ToolpathStackBetween(toolpathBase, layerH, angleGlobal, topSrf, refPt);
+            StackBetween toolpathStack = new StackBetween(stackPatterns, layerH, angleGlobal, topSrf, refPt, angle);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;

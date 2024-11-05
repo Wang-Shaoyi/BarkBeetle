@@ -18,7 +18,10 @@ namespace BarkBeetle.Utils
         {
             List<List<GH_Plane>> orientPlanes = toolpathStack.OrientPlanes;
             double h = toolpathStack.LayerHeight;
-            double d = toolpathStack.Pattern.PathWidth / 2;
+            double d = 0.0;
+
+            if (toolpathStack.Patterns.BottomPattern != null) d = toolpathStack.Patterns.BottomPattern.PathWidth/2;
+            else d = toolpathStack.Patterns.MainPatterns[0].PathWidth / 2;
 
             List<Line> lines = new List<Line>();
 

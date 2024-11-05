@@ -13,22 +13,23 @@ using System.Security.Cryptography;
 
 namespace BarkBeetle.ToolpathStackSetting
 {
-    internal class ToolpathStackBetween : ToolpathStack
+    internal class StackBetween : ToolpathStack
     {
-        public override string ToolpathStackName { get; set; } = "Vertical";
-
         Surface topSrf = null;
 
-        public ToolpathStackBetween(ToolpathPattern tb,  double h, bool ag, Surface topS, Point3d refPt) : base(tb,h,ag, refPt) 
+        public StackBetween(StackPatterns tb,  double h, bool ag, Surface topS, Point3d refPt, double angle) : base(tb,h,ag, refPt, angle) 
         {
             topSrf = topS;
-            PerformCustomLogic(tb, h, ag, refPt);
+            GenerateToolpathStack(tb, h, ag, refPt, angle);
         }
 
         public override List<GH_Surface> CreateStackSurfaces()
         {
-            
-            Surface baseSurface = Pattern.Skeleton.UVNetwork.ExtendedSurface;
+
+            Surface baseSurface = null;
+            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.Skeleton.UVNetwork.ExtendedSurface;
+            else baseSurface = Patterns.MainPatterns[0].Skeleton.UVNetwork.ExtendedSurface;
+
             LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) +1;
 
             List<GH_Surface> stackSurfaces = BrepUtils.TweenBetweenSurfaces(baseSurface, topSrf, LayerNum);
@@ -38,8 +39,32 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override List<GH_Curve> CreateStackLayerCurves() 
         {
-            Curve baseCurve = Pattern.CoutinuousCurve;
-            List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
+            /////////// Create pattern curve list/////////
+            List<Curve> allPatternCurves = new List<Curve>();
+            int repeatCount = LayerNum - (Patterns.TopCount + Patterns.BottomCount);
+
+            if (repeatCount > 0 && Patterns.MainPatterns != null)
+            {
+                List<Curve> main = new List<Curve>();
+                foreach (var pattern in Patterns.MainPatterns)
+                {
+                    main.Add(pattern.CoutinuousCurve);
+                }
+                for (int i = 0; i < repeatCount; i++)
+                {
+                    allPatternCurves.Add(main[i]);
+                }
+            }
+
+            if (Patterns.BottomPattern != null && Patterns.BottomCount != 0)
+            {
+                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Add(Patterns.BottomPattern.CoutinuousCurve);
+            }
+
+            if (Patterns.TopPattern != null && Patterns.TopCount != 0)
+            {
+                for (int i = 0; i < Patterns.TopCount; i++) allPatternCurves.Add(Patterns.TopPattern.CoutinuousCurve);
+            }
 
             List<GH_Curve> stackCurves = new List<GH_Curve>();
             Surface baseSrf = Surfaces[0].Value.Surfaces[0];
@@ -48,6 +73,9 @@ namespace BarkBeetle.ToolpathStackSetting
 
             for (int i = 0; i < LayerNum; i++)
             {
+                Curve baseCurve = allPatternCurves[i];
+                List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
+
                 // Get current surface
                 Surface srf = Surfaces[i].Value.Surfaces[0];
 
@@ -87,7 +115,7 @@ namespace BarkBeetle.ToolpathStackSetting
             return stackCurves;
         }
 
-        public override List<List<GH_Plane>> CreateStackOrientPlanes( ref List<List<GH_Number>> speedFactor)
+        public override List<List<GH_Plane>> CreateStackOrientPlanes(double angle, ref List<List<GH_Number>> speedFactor)
         {
             List<GH_Curve> gH_Curves = LayerCurves;
             List<GH_Surface> gH_Surfaces = Surfaces;
@@ -133,7 +161,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
                         //////////////////////
                         // Rotate the plane around Y axis
-                        double angleInRadians = Rhino.RhinoMath.ToRadians(5); //TODO: make this an input of the component
+                        double angleInRadians = Rhino.RhinoMath.ToRadians(angle);
                         Vector3d rotationAxis = newPlane.YAxis;
                         Transform rotation = Transform.Rotation(-angleInRadians, rotationAxis, newPlane.Origin);
                         newPlane.Transform(rotation);

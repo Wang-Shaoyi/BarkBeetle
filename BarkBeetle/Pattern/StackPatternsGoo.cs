@@ -6,34 +6,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BarkBeetle.Pattern;
 
 namespace BarkBeetle.Pattern
 {
-    internal class ToolpathPatternGoo : GH_Goo<ToolpathPattern>
+    internal class StackPatternsGoo : GH_Goo<StackPatterns>
     {
         // Construct geometry
-        public ToolpathPatternGoo() : this(null) { }
+        public StackPatternsGoo() : this(null) { }
 
-        public ToolpathPatternGoo(ToolpathPattern geometry)
+        public StackPatternsGoo(StackPatterns geometry)
         {
             Value = geometry;
         }
 
         public override bool IsValid => Value != null;
 
-        public override string TypeName => "Toolpath Pattern";
+        public override string TypeName => "Stack Pattern";
 
-        public override string TypeDescription => "Contains a ToolpathPattern object";
+        public override string TypeDescription => "Contains a StackPattern object";
 
         public override IGH_Goo Duplicate()
         {
             // TODO: How to deep copy here?
-            return new ToolpathPatternGoo(Value);
+            return new StackPatternsGoo(Value);
         }
 
         public override string ToString()
         {
-            return "BarkBeetle ToolpathPattern Object";
+            return "BarkBeetle StackPattern Object";
         }
 
         //// 渲染输出对象的简化版本
@@ -54,7 +55,7 @@ namespace BarkBeetle.Pattern
 
         public override bool CastFrom(object source)
         {
-            if (source is ToolpathPattern geometry)
+            if (source is StackPatterns geometry)
             {
                 Value = geometry;
                 return true;

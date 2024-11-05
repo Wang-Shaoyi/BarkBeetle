@@ -19,7 +19,7 @@ namespace BarkBeetle.CompsUtils
         public ExtendSurface()
           : base("Extend surface", "Extend surface",
               "Extend a surface on uv",
-              "BarkBeetle", "Utils")
+              "BarkBeetle", "7-Utils")
         {
         }
 

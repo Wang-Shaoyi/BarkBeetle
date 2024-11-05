@@ -66,10 +66,12 @@ namespace BarkBeetle.Pattern
             seamPt = seam;
             skeleton = sG;
 
-            ConstructToolpathBase();
+            ConstructToolpathPattern();
         }
 
-        public abstract void ConstructToolpathBase();
+        public abstract void ConstructToolpathPattern();
+
+
 
     }
 }

@@ -17,7 +17,7 @@ namespace BarkBeetle.CompsUtils
         public CurveIntersection()
           : base("Curve Intersection", "Curve Intersect",
               "Curve Intersection with Tolerance",
-              "BarkBeetle", "Utils")
+              "BarkBeetle", "7-Utils")
         {
         }
 

@@ -20,7 +20,7 @@ namespace BarkBeetle.CompsToolpathOutput
         public ToKukaMovement()
           : base("To Kuka Movement", "To Kuka",
               "Transfrom Toolpath Stack to Kuka movement (e.g., LINear Movement)",
-              "BarkBeetle", "Output")
+              "BarkBeetle", "5-Output")
         {
         }
 
