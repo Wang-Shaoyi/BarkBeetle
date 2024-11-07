@@ -24,14 +24,29 @@ namespace BarkBeetle.ToolpathStackSetting
             int layerCount = gH_Surfaces.Count;
 
 
-            // Construct new toolpathStack
-            newToolpathStack = new StackVertical(
+            // 检查 toolpathStack 是哪个子类
+            if (toolpathStack is StackVertical)
+            {
+                // 如果是 StackVertical 类型，则创建一个新的 StackVertical 实例
+                newToolpathStack = new StackVertical(
                     toolpathStack.Patterns,
                     toolpathStack.LayerHeight,
                     toolpathStack.AngleGlobal,
                     toolpathStack.LayerHeight * layerCount,
                     toolpathStack.PlaneRefPt,
                     toolpathStack.RotateAngle);
+            }
+            else if (toolpathStack is StackBetween)
+            {
+                // 如果是 StackBetween 类型，则创建一个新的 StackBetween 实例
+                newToolpathStack = new StackBetween(
+                    toolpathStack.Patterns,
+                    toolpathStack.LayerHeight,
+                    toolpathStack.AngleGlobal,
+                    toolpathStack.Surfaces[layerCount - 1].Value.Surfaces[0],
+                    toolpathStack.PlaneRefPt,
+                    toolpathStack.RotateAngle);
+            }
 
             // Go through each layer
             for (int i = 0; i < layerCount; i++)

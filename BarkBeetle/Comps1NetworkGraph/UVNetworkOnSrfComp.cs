@@ -108,6 +108,12 @@ namespace BarkBeetle.CompsGeoPack
             DA.SetDataTree(1, organizedPtsTree);
             DA.SetDataTree(2, uvCurvesTree);
             DA.SetData(3, gH_Surface);
+
+            var param = Params.Output[3] as IGH_PreviewObject;
+            if (param != null)
+            {
+                param.Hidden = true;
+            }
         }
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
@@ -121,7 +127,7 @@ namespace BarkBeetle.CompsGeoPack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.SpiralSkeleton;
+                return Resources.UVNetworkOnSrf;
             }
         }
 

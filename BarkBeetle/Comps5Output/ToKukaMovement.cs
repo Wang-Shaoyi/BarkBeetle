@@ -38,7 +38,7 @@ namespace BarkBeetle.CompsToolpathOutput
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.list);
+            pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.list);
             pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.list);
         }
 
@@ -90,7 +90,7 @@ namespace BarkBeetle.CompsToolpathOutput
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.UnpackToolpathStack;
+                return Resources.ToKuKa;
             }
         }
 

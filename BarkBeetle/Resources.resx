@@ -127,6 +127,9 @@
   <data name="HorizontalStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\HorizontalStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Intersection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Intersection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="OrganizePointTreeformSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\OrganizePointTreeformSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,14 +145,17 @@
   <data name="SpiralSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SpiralSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SpiralSkeletonString" xml:space="preserve">
-    <value>SpiralSkeleton</value>
-  </data>
   <data name="SpiralToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SpiralToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="StackPattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\StackPattern.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SurfaceBetweenStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SurfaceBetweenStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToKuKa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ToKuKa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ToolpathToMesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ToolpathToMesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -165,6 +171,9 @@
   </data>
   <data name="UnpackToolpathStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnpackToolpathStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UVNetworkOnSrf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UVNetworkOnSrf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VerticalStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\VerticalStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

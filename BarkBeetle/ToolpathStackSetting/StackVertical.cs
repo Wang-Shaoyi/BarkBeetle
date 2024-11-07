@@ -74,7 +74,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
             if (Patterns.BottomPattern != null && Patterns.BottomCount != 0)
             {
-                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Add(Patterns.BottomPattern.CoutinuousCurve);
+                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Insert(0,Patterns.BottomPattern.CoutinuousCurve);
             }
 
             if (Patterns.TopPattern != null && Patterns.TopCount != 0)

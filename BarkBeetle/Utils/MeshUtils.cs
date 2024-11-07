@@ -17,8 +17,10 @@ namespace BarkBeetle.Utils
         public static Mesh MeshFromToolpathStack(ToolpathStack toolpathStack, double portion)
         {
             List<List<GH_Plane>> orientPlanes = toolpathStack.OrientPlanes;
+            List<List<GH_Number>> speedFactors = toolpathStack.SpeedFactors;
             double h = toolpathStack.LayerHeight;
             double d = 0.0;
+
 
             if (toolpathStack.Patterns.BottomPattern != null) d = toolpathStack.Patterns.BottomPattern.PathWidth/2;
             else d = toolpathStack.Patterns.MainPatterns[0].PathWidth / 2;
@@ -26,19 +28,22 @@ namespace BarkBeetle.Utils
             List<Line> lines = new List<Line>();
 
             int count = 0;
-            foreach (List<GH_Plane> planes in orientPlanes)
+            for (int i = 0; i < orientPlanes.Count;  i++)
             {
-                foreach (GH_Plane plane in planes)
+                List<GH_Plane> planes = orientPlanes[i];
+                List<GH_Number> speeds = speedFactors[i];
+
+                for (int j = 0; j < planes.Count; j++)
                 {
-                    Plane p = plane.Value;
-                    Vector3d z = p.ZAxis; //TODO: Will make it able to change this later!
+                    Plane p = planes[j].Value;
+                    Vector3d z = p.ZAxis; 
 
                     if(z.Z < 0)
                     {
                         z = -z;
                     }
 
-                    Line sdl = new Line(p.Origin, z, h);
+                    Line sdl = new Line(p.Origin, z, h * speeds[j].Value);
                     lines.Add(sdl);
                     count++;
                 }

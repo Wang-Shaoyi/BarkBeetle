@@ -42,6 +42,7 @@ namespace BarkBeetle.ToolpathStackSetting
             /////////// Create pattern curve list/////////
             List<Curve> allPatternCurves = new List<Curve>();
             int repeatCount = LayerNum - (Patterns.TopCount + Patterns.BottomCount);
+            int mainCount = Patterns.MainPatterns.Count;
 
             if (repeatCount > 0 && Patterns.MainPatterns != null)
             {
@@ -52,13 +53,13 @@ namespace BarkBeetle.ToolpathStackSetting
                 }
                 for (int i = 0; i < repeatCount; i++)
                 {
-                    allPatternCurves.Add(main[i]);
+                    allPatternCurves.Add(main[i % mainCount]);
                 }
             }
 
             if (Patterns.BottomPattern != null && Patterns.BottomCount != 0)
             {
-                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Add(Patterns.BottomPattern.CoutinuousCurve);
+                for (int i = 0; i < Patterns.BottomCount; i++) allPatternCurves.Insert(0, Patterns.BottomPattern.CoutinuousCurve);
             }
 
             if (Patterns.TopPattern != null && Patterns.TopCount != 0)
@@ -129,10 +130,10 @@ namespace BarkBeetle.ToolpathStackSetting
                 List<GH_Number> doublesThis = new List<GH_Number>();
                 List<Point3d> toolpathExplodedPts = PointDataUtils.GetExplodedCurveVertices(gH_Curves[i].Value);
                 Surface surface = gH_Surfaces[i].Value.Surfaces[0];
-                Surface preSurface = null;
-                if (i != 0)
+                Surface nextSurface = null;
+                if (i != gH_Curves.Count - 1)
                 {
-                    preSurface = gH_Surfaces[i - 1].Value.Surfaces[0];
+                    nextSurface = gH_Surfaces[i + 1].Value.Surfaces[0];
                 }
 
                 foreach (Point3d pt in toolpathExplodedPts)
@@ -169,12 +170,12 @@ namespace BarkBeetle.ToolpathStackSetting
                     planesThis.Add(new GH_Plane(newPlane));
 
                     // Calculate speed
-                    if (i==0) doublesThis.Add(new GH_Number(1));
+                    if (i== gH_Curves.Count - 1) doublesThis.Add(new GH_Number(1));
                     else
                     {
                         // Calculate distance between this point and previous layer
-                        preSurface.ClosestPoint(pt, out double u, out double v);
-                        Point3d closestPointOnSurface = surface.PointAt(u, v);
+                        nextSurface.ClosestPoint(pt, out double u, out double v);
+                        Point3d closestPointOnSurface = nextSurface.PointAt(u, v);
                         double distance = pt.DistanceTo(closestPointOnSurface);
 
                         doublesThis.Add(new GH_Number(distance/LayerHeight)); // TODO: should be rounded?
