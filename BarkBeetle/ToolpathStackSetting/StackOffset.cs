@@ -13,12 +13,12 @@ using System.Security.Cryptography;
 
 namespace BarkBeetle.ToolpathStackSetting
 {
-    internal class StackVertical:ToolpathStack
+    internal class StackOffset:ToolpathStack
     {
 
         double totalHeight = 0;
 
-        public StackVertical(StackPatterns sp,  double h, bool ag, double totalH, Point3d refPt, double angle) : base(sp, h, ag, refPt, angle) 
+        public StackOffset(StackPatterns sp,  double h, bool ag, double totalH, Point3d refPt, double angle) : base(sp, h, ag, refPt, angle) 
         {
             totalHeight = totalH;
             GenerateToolpathStack(sp, h, ag, refPt, angle);

@@ -13,14 +13,14 @@ using Grasshopper.Kernel.Data;
 
 namespace BarkBeetle.Comps4Stack
 {
-    public class StackVerticalComp : GH_Component
+    public class StackOffsetComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
-        public StackVerticalComp()
-          : base("Toolpath Stack Vertical", "Vertical Toolpath",
-              "Stack toolpath layers vertically",
+        public StackOffsetComp()
+          : base("Toolpath Stack Offset", "Offset Toolpath",
+              "Stack toolpath layers by offseting away from surface",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -86,7 +86,7 @@ namespace BarkBeetle.Comps4Stack
             }
 
             // Run Function
-            StackVertical toolpathStack = new StackVertical(stackPatterns, layerH, angleGlobal, totalH, refPt, angle);
+            StackOffset toolpathStack = new StackOffset(stackPatterns, layerH, angleGlobal, totalH, refPt, angle);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;
@@ -116,7 +116,7 @@ namespace BarkBeetle.Comps4Stack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.VerticalStack;
+                return Resources.OffsetStack;
             }
         }
 

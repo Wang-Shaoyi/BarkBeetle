@@ -15,7 +15,7 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// Initializes a new instance of the UnrollStripTwoWidth class.
         /// </summary>
         public UnrollStripTwoWidth()
-          : base("Unroll Strip Two Width", "UnrollStripTwoWidth",
+          : base("Unroll UV Strip (different width)", "UnrollUVStrip",
               "Description",
               "BarkBeetle", "1-Network")
         {
@@ -42,14 +42,14 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Rectangles A", "RA", "The rectangles created for curves A.", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Rectangles B", "RB", "The rectangles created for curves B.", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Strips A", "SA", "The strips created for curves A.", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Strips B", "SB", "The strips created for curves B.", GH_ParamAccess.list);
             pManager.AddPointParameter("Points A", "PA", "Intersection points on curves A.", GH_ParamAccess.list);
             pManager.AddPointParameter("Points B", "PB", "Intersection points on curves B.", GH_ParamAccess.list);
-            pManager.AddCircleParameter("Holes A", "HA", "Intersection holes on rectangles for curves A.", GH_ParamAccess.list);
-            pManager.AddCircleParameter("Holes B", "HB", "Intersection holes on rectangles for curves B.", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Labels A", "LA", "Labels for rectangles and points on curves A.", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Labels B", "LB", "Labels for rectangles and points on curves B.", GH_ParamAccess.list);
+            pManager.AddCircleParameter("Holes A", "HA", "Intersection holes on strips for curves A.", GH_ParamAccess.list);
+            pManager.AddCircleParameter("Holes B", "HB", "Intersection holes on strips for curves B.", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Labels A", "LA", "Labels for strips and points on curves A.", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Labels B", "LB", "Labels for strips and points on curves B.", GH_ParamAccess.list);
             pManager.AddCurveParameter("Original Labels", "OL", "Labels on the original curves.", GH_ParamAccess.list);
         }
 
@@ -118,7 +118,7 @@ namespace BarkBeetle.Comps1NetworkGraph
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.UnrollUVStrip;
             }
         }
 

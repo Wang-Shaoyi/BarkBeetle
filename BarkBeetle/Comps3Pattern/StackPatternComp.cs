@@ -30,11 +30,12 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Main Pattern", "TP", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.list);
-            pManager.AddGenericParameter("Bottom Pattern", "Bottom", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
             pManager.AddGenericParameter("Top Pattern", "Top", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Bottom Count", "TP", "Number of bottom layers", GH_ParamAccess.item, 0);
             pManager.AddNumberParameter("Top Count", "TC", "Number of top layers", GH_ParamAccess.item, 0);
+            pManager.AddGenericParameter("Middle Pattern(s)", "Middle", "BarkBeetle Toolpath Pattern object, may have multiple", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Bottom Pattern", "Bottom", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Bottom Count", "TP", "Number of bottom layers", GH_ParamAccess.item, 0);
+            
 
             pManager[0].Optional = true;
             pManager[1].Optional = true;
@@ -70,14 +71,14 @@ namespace BarkBeetle.CompsToolpath
             ToolpathPattern topP = null;
 
             //Set inputs
-            if (DA.GetDataList(0, mainPsgoo)) 
+            if (DA.GetDataList(2, mainPsgoo)) 
             { 
                 foreach (var pgoo in mainPsgoo) mainPs.Add(pgoo.Value);
             }
-            if (DA.GetData(1, ref bottomPgoo)) { bottomP = bottomPgoo.Value; }
-            if (DA.GetData(2, ref topPgoo)) { topP = topPgoo.Value; }
-            DA.GetData(3, ref bottomC);
-            DA.GetData(4, ref topC);
+            if (DA.GetData(3, ref bottomPgoo)) { bottomP = bottomPgoo.Value; }
+            if (DA.GetData(0, ref topPgoo)) { topP = topPgoo.Value; }
+            DA.GetData(4, ref bottomC);
+            DA.GetData(1, ref topC);
 
             int bottomCInt = (int)bottomC;
             int topCInt = (int)topC;

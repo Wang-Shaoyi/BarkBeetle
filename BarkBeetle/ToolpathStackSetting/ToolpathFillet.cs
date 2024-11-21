@@ -25,10 +25,10 @@ namespace BarkBeetle.ToolpathStackSetting
 
 
             // 检查 toolpathStack 是哪个子类
-            if (toolpathStack is StackVertical)
+            if (toolpathStack is StackOffset)
             {
                 // 如果是 StackVertical 类型，则创建一个新的 StackVertical 实例
-                newToolpathStack = new StackVertical(
+                newToolpathStack = new StackOffset(
                     toolpathStack.Patterns,
                     toolpathStack.LayerHeight,
                     toolpathStack.AngleGlobal,

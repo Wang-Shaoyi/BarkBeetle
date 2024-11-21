@@ -131,6 +131,38 @@ namespace BarkBeetle.Utils
             return closestPtTree;
         }
 
+        public static GH_Structure<GH_Point> MeshClosestPtTree(Mesh mesh, GH_Structure<GH_Point> pointsTree)
+        {
+            // Create a new structure to store the closest points
+            GH_Structure<GH_Point> closestPtTree = new GH_Structure<GH_Point>();
+
+            // Iterate through all paths in the points tree
+            foreach (GH_Path path in pointsTree.Paths)
+            {
+                // Get the points under the current path
+                IList ghPoints = pointsTree.get_Branch(path);
+                List<GH_Point> closestPoints = new List<GH_Point>();
+
+                // Iterate through each point in the branch
+                foreach (GH_Point ghPoint in ghPoints.Cast<GH_Point>())
+                {
+                    Point3d point = ghPoint.Value;
+
+                    // Find the closest point on the mesh
+                    Point3d closestPt = mesh.ClosestPoint(point);
+
+                    // Add the closest point to the list
+                    closestPoints.Add(new GH_Point(closestPt));
+                }
+
+                // Add the list of closest points to the same path in the new structure
+                closestPtTree.AppendRange(closestPoints, path);
+            }
+
+            // Return the new structure with all closest points
+            return closestPtTree;
+        }
+
         #region Not really in use
         // Organize the point tree sequence according to surface uv
         public static GH_Structure<GH_Point> OrganizePtSequence(Surface surface, GH_Structure<GH_Point> pointsTree, GH_Component component)

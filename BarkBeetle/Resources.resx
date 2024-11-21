@@ -130,11 +130,20 @@
   <data name="Intersection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Intersection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="OffsetStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OffsetStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrganizaPtsfromList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OrganizaPtsfromList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="OrganizePointTreeformSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\OrganizePointTreeformSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SimpleSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SimpleSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SnakeInfilll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SnakeInfilll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SnakeSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SnakeSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,6 +163,9 @@
   <data name="SurfaceBetweenStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SurfaceBetweenStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ToGcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ToGcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ToKuKa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ToKuKa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,6 +184,12 @@
   <data name="UnpackToolpathStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnpackToolpathStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="UnrollStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnrollStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnrollUVStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnrollUVStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="UVNetworkOnSrf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UVNetworkOnSrf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -180,5 +198,8 @@
   </data>
   <data name="VisualizeStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\VisualizeStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZigZagInfill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ZigZagInfill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

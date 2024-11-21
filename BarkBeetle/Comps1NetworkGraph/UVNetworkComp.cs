@@ -13,17 +13,18 @@ using System.Collections;
 
 using BarkBeetle.Network;
 using BarkBeetle.Skeletons;
+using static BarkBeetle.Network.UVNetwork;
 
 namespace BarkBeetle.CompsGeoPack
 {
-    public class UVNetworkOnSrfComp : GH_Component
+    public class UVNetworkComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the SkeletonFromSAndPT class.
         /// </summary>
-        public UVNetworkOnSrfComp()
-          : base("UV Network On Surface", "UVNetworkOnSrf",
-              "Create BarkBeetle UV Network, all points are on the surface",
+        public UVNetworkComp()
+          : base("UV Network", "UVNetwork",
+              "Create BarkBeetle UV Network",
               "BarkBeetle", "1-Network")
         {
         }
@@ -33,9 +34,14 @@ namespace BarkBeetle.CompsGeoPack
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddSurfaceParameter("Surface", "S", "Base surface to organize the skeleton", GH_ParamAccess.item);
             pManager.AddPointParameter("Points tree", "PT", "Input a point tree (m by n)", GH_ParamAccess.tree);
+            pManager.AddSurfaceParameter("Surface", "S", "Base surface to organize the skeleton", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Mesh", "M", "Base surface to organize the skeleton", GH_ParamAccess.item);
             pManager.AddNumberParameter("Strip width", "sw", "Input the strip width", GH_ParamAccess.item, 1);
+            pManager.AddIntegerParameter("Reference Option", "option", "Which the position is the network refering to. 0-points, 1-surface, 2-mesh", GH_ParamAccess.item, 0);
+
+            Params.Input[1].Optional = true;
+            Params.Input[2].Optional = true;
         }
 
         /// <summary>
@@ -57,20 +63,21 @@ namespace BarkBeetle.CompsGeoPack
         {
             //Initialize
             Surface surface = null;
+            Mesh mesh = null;
             GH_Structure<GH_Point> pointsTree = new GH_Structure<GH_Point>();
             double stripWidth = 0;
+            
+            int optionInt = 0;
 
             //Set inputs
-            if (!DA.GetData(0, ref surface)) return;
-            if (!DA.GetDataTree(1, out pointsTree)) return;
-            if (!DA.GetData(2, ref stripWidth)) return;
+            if (!DA.GetDataTree(0, out pointsTree)) return;
+            DA.GetData(1, ref surface);
+            DA.GetData(2, ref mesh);
+            if (!DA.GetData(3, ref stripWidth)) return;
+            if (!DA.GetData(4, ref optionInt)) return;
+
 
             #region Error message.
-            if (surface == null)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No surface");
-                return;
-            }
             if (pointsTree == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No points");
@@ -94,7 +101,11 @@ namespace BarkBeetle.CompsGeoPack
             #endregion
 
             // Run Function
-            UVNetworkOnSurface network = new UVNetworkOnSurface(surface, pointsTree, stripWidth);
+            //// Get reference option
+
+            NetworkReferenceOption option = ConvertToReferenceOption(optionInt);
+            UVNetworkFromPointTree network = new UVNetworkFromPointTree(surface, mesh, pointsTree, stripWidth, option);
+
             UVNetworkGoo networkGoo = new UVNetworkGoo(network);
 
             GH_Structure<GH_Point> organizedPtsTree = network.OrganizedPtsTree;

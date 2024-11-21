@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BarkBeetle.Utils;
+using static System.Xml.Schema.XmlSchemaInference;
 
 namespace BarkBeetle.Network
 {
@@ -18,6 +19,7 @@ namespace BarkBeetle.Network
         public double StripWidth
         {
             get { return stripWidth; }
+            set { stripWidth = value; }
         }
 
         // 1 organized points
@@ -60,10 +62,24 @@ namespace BarkBeetle.Network
         }
 
         // Constructor
-        public UVNetwork(Surface surface, GH_Structure<GH_Point> ptsTree, double w)
+        public UVNetwork()
         {
-            stripWidth = w;
-            this.extendedSurface = BrepUtils.ProcessExtendedSurface(stripWidth / 2, stripWidth / 2, surface);
+        }
+
+        public enum NetworkReferenceOption
+        {
+            Point,
+            Surface,
+            Mesh  
+        }
+        public static NetworkReferenceOption ConvertToReferenceOption(int value)
+        {
+            if (value < 0 || value > 2)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 2.");
+            }
+
+            return (NetworkReferenceOption)value;
         }
 
     }

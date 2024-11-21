@@ -14,7 +14,7 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// Initializes a new instance of the MyComponent1 class.
         /// </summary>
         public UnrollStripConsistentWidth()
-          : base("Unroll Strip Consistent Width", "UnrollStripConsistentWidth",
+          : base("Unroll Strip (consistent width)", "UnrollStrip",
               "Description",
               "BarkBeetle", "1-Network")
         {
@@ -38,11 +38,11 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Rectangles", "R", "Generated rectangles", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Strips", "S", "Generated strips", GH_ParamAccess.list);
             pManager.AddPointParameter("Points", "P", "Intersection points", GH_ParamAccess.tree);
             pManager.AddCircleParameter("Holes", "H", "Intersection holes", GH_ParamAccess.tree);
-            pManager.AddCurveParameter("Indices On Curve", "IOC", "Labels on curves", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Indices On Plane", "IOP", "Labels on plane", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Labels", "L", "Labels on strips", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Original Labels", "OL", "Labels on the original curves", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -90,8 +90,9 @@ namespace BarkBeetle.Comps1NetworkGraph
             DA.SetDataList(0, rectangles);
             DA.SetDataList(1, points);
             DA.SetDataList(2, holes);
-            DA.SetDataList(3, indicesTextOnCurve);
-            DA.SetDataList(4, indicesTextOnPlane);
+            DA.SetDataList(3, indicesTextOnPlane);
+            DA.SetDataList(4, indicesTextOnCurve);
+
         }
 
         public override GH_Exposure Exposure => GH_Exposure.secondary;
@@ -105,7 +106,7 @@ namespace BarkBeetle.Comps1NetworkGraph
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.UnrollStrip;
             }
         }
 

@@ -92,6 +92,47 @@ namespace BarkBeetle.Utils
             return loftedSurfaceV;
         }
 
+        public static Surface CreateInterpolatedSurface(GH_Structure<GH_Point> ptsTree)
+        {
+            // Step 1: 提取所有点并组织为二维列表
+            List<List<Point3d>> pointsGrid = new List<List<Point3d>>();
+            foreach (List<GH_Point> branch in ptsTree.Branches)
+            {
+                List<Point3d> pointRow = new List<Point3d>();
+                foreach (GH_Point ghPoint in branch)
+                {
+                    if (ghPoint != null)
+                    {
+                        pointRow.Add(ghPoint.Value);
+                    }
+                }
+                pointsGrid.Add(pointRow);
+            }
+
+            // Step 2: 沿一个方向插值生成曲线
+            List<Curve> interpolatedCurves = new List<Curve>();
+            foreach (var pointRow in pointsGrid)
+            {
+                if (pointRow.Count < 2) continue; // 必须至少有2个点才能生成曲线
+                Curve interpolatedCurve = Curve.CreateInterpolatedCurve(pointRow, 3); // 3表示三次插值
+                interpolatedCurves.Add(interpolatedCurve);
+            }
+
+            // Step 3: 沿另一个方向 Loft 成曲面
+            if (interpolatedCurves.Count < 2)
+            {
+                throw new InvalidOperationException("Need at least 2 interpolated curves to create a surface.");
+            }
+            Brep[] loftedBreps = Brep.CreateFromLoft(interpolatedCurves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+            if (loftedBreps == null || loftedBreps.Length == 0)
+            {
+                throw new InvalidOperationException("Failed to loft the curves into a surface.");
+            }
+
+            // 返回生成的曲面
+            return loftedBreps[0].Faces[0].ToNurbsSurface();
+        }
+
         public static GH_Structure<GH_Surface> StripFromCurves(GH_Structure<GH_Curve> uvCurves, Surface surface,double strip_width,double extend)
         {
             List<List<GH_Curve>> listCurves = TreeHelper.ConvertGHStructureToList(uvCurves);

@@ -107,7 +107,7 @@ namespace BarkBeetle.Skeletons
                 {
                     // Draw branches
                     Point3d branchPt = BBPoint.FindByIndex(curBBPoint.BranchIndex, BBPointArray).CurrentPt3d;
-                    Curve curveBranch = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentPt, branchPt }, 0.01);
+                    Curve curveBranch = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentPt, branchPt },0.1);
                     branches.Add(new GH_Curve(curveBranch));
                 }
 
