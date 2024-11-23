@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grasshopper.Kernel.Types;
+using Rhino.Collections;
 
 namespace BarkBeetle.Utils
 {
     internal class Unroll
     {
+        # region unroll from curves
         public static void CreateRectangles1(
             List<Curve> curves,
             double width,
@@ -342,8 +344,6 @@ namespace BarkBeetle.Utils
             }
         }
 
-
-
         private static Polyline CreateRectangle(Line baseLine, double width)
         {
             double halfWidth = width / 2.0;
@@ -355,6 +355,199 @@ namespace BarkBeetle.Utils
 
             return new Polyline(new List<Point3d> { pt1, pt2, pt3, pt4, pt1 });
         }
+        #endregion
+
+        #region unroll surface
+        public static void UnrollSurfacesAndLabeling(
+            List<Curve> curves, List<Surface> surfaces, double tolerance,
+            double distance, double holeRadius, double fontSize, out List<GH_Curve> stripBoundaries,
+            out List<GH_Point> points, out List<GH_Circle> holes, out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane)
+        {
+            // Initialize
+            stripBoundaries = new List<GH_Curve>();
+            points = new List<GH_Point>();
+            holes = new List<GH_Circle> ();
+            indicesTextOnCurve = new List<GH_Curve>();
+            indicesTextOnPlane = new List<GH_Curve>();
+
+            // Create a List<List> for storing all intersection points. Each sublist refers to a curve.
+            List<List<Point3d>> intersectionPts = new List<List<Point3d>>();
+            List<List<double>> allLengths = new List<List<double>>();
+            List<List<int>> intersectionIndexes = new List<List<int>>(); // to store the index for each intersection point
+            int intersectionIndex = -1;
+            for (int i=0; i<curves.Count; i++)
+            {
+                intersectionPts.Add(new List<Point3d>());
+                allLengths.Add(new List<double> ());
+                intersectionIndexes.Add(new List<int>());
+            }
+
+            List<Point3d> intersectionPointsOnSurface = new List<Point3d>();
+            List<int> intersectionIndexOnSurface = new List<int>();
+            int storeInt = -1;
+            // Go through all intersections, create labels on curves, and fill the two lists above
+            for (int i = 0; i < curves.Count; i++)
+            {
+                Curve curveA = curves[i];
+
+                for (int j = i + 1; j < curves.Count; j++)
+                {
+                    Curve curveB = curves[j];
+
+                    var intersections = Rhino.Geometry.Intersect.Intersection.CurveCurve(curveA, curveB, tolerance, tolerance);
+
+                    if (intersections != null)
+                    {
+                        foreach (var intersection in intersections)
+                        {
+                            Point3d ptA = intersection.PointA;
+                            bool check = PointDataUtils.IsPointNearList(ptA, intersectionPointsOnSurface, tolerance, out int indexAll);
+                            // Process for labels on curve
+                            if (!check)
+                            {
+                                intersectionIndex += 1;
+                                intersectionPointsOnSurface.Add(ptA);
+                                intersectionIndexOnSurface.Add(intersectionIndex);
+                                // Add labels on curve
+                                TextEntity textEntityCurve = new TextEntity
+                                {
+                                    Plane = new Plane(ptA, new Vector3d(0, 0, 1)),
+                                    PlainText = intersectionIndex.ToString(),
+                                    TextHeight = fontSize,
+                                    Justification = TextJustification.Center
+                                };
+
+                                Curve[] textCurvesOnCurve = textEntityCurve.Explode();
+                                foreach (Curve crv in textCurvesOnCurve)
+                                {
+                                    indicesTextOnCurve.Add(new GH_Curve(crv));
+                                }
+                            }
+                            else
+                            {
+                                storeInt = intersectionIndex;
+                                intersectionIndex = intersectionIndexOnSurface[indexAll];
+                            }
+
+                            // Process for A
+                            if (!PointDataUtils.IsPointNearList(ptA, intersectionPts[i], tolerance, out int indexA))
+                            {
+                                intersectionPts[i].Add(ptA);
+                                double lengthA = curveA.GetLength(new Interval(curveA.Domain.Min, intersection.ParameterA));
+                                allLengths[i].Add(lengthA);
+                                intersectionIndexes[i].Add(intersectionIndex);
+                            }
+
+                            // Process for B
+                            Point3d ptB = intersection.PointB;
+                            if (!PointDataUtils.IsPointNearList(ptB, intersectionPts[j], tolerance, out int indexB))
+                            {
+                                intersectionPts[j].Add(ptB);
+                                double lengthB = curveB.GetLength(new Interval(curveB.Domain.Min, intersection.ParameterB));
+                                allLengths[j].Add(lengthB);
+                                intersectionIndexes[j].Add(intersectionIndex);
+                            }
+
+                            if (check)
+                            {
+                                intersectionIndex = storeInt;
+                            }
+                        }
+                    }
+                }
+            }
+
+            double yOffset = 0;
+            // Go through all surfaces to unroll and label
+            for (int i = 0; i < surfaces.Count; i++)
+            {
+                Surface surface = surfaces[i];
+                Curve curve = curves[i];
+                List<Point3d> pointsX = intersectionPts[i];
+                List<int> indexX = intersectionIndexes[i];
+                List<double> lengths = allLengths[i];
+
+                // Label on curve
+                TextEntity textEntityCurve = new TextEntity
+                {
+                    Plane = new Plane(curve.PointAtStart, new Vector3d(0, 0, 1)),
+                    PlainText = "Crv_" + i,
+                    TextHeight = fontSize,
+                    Justification = TextJustification.Middle
+                };
+                foreach (Curve crv in textEntityCurve.Explode()) indicesTextOnCurve.Add(new GH_Curve(crv));
+
+                //unroll surface
+                Surface unrolledSrf = BrepUtils.UnrollSurfaceWithCurve(surface, curve, pointsX, out Curve unrolledCurve, out List<Point3d> unrolledPointsX);
+
+                // Get max Y to organize the layout
+                BoundingBox bbox = unrolledSrf.GetBoundingBox(true);
+                double width = bbox.Max.X - bbox.Min.X;
+
+                yOffset += distance + width;
+
+                // Get and locate unrolled boundary
+                Transform rotation = Transform.Rotation(- Math.PI / 2, Vector3d.ZAxis, Point3d.Origin);
+                Transform translation = Transform.Translation(- yOffset, 0, 0);
+                Transform combinedTransform = rotation * translation;
+
+                //get boundary
+                Brep brepSurface = unrolledSrf.ToBrep();
+                Brep rotatedBrep = brepSurface.DuplicateBrep();
+                rotatedBrep.Transform(combinedTransform);
+
+                Curve[] boundaryCrv = rotatedBrep.DuplicateEdgeCurves();
+                foreach (Curve crv in boundaryCrv)
+                {
+                    stripBoundaries.Add(new GH_Curve(crv));
+                }
+
+                
+
+                //go through all points, label them, and give them holes
+                for (int j = 0; j < lengths.Count; j++)
+                {
+                    // Also move points
+                    //Point3d ptX = unrolledPointsX[j];
+                    Point3d ptX = unrolledCurve.PointAtLength(lengths[j]);
+                    ptX.Transform(combinedTransform);
+                    int currentId = indexX[j];
+                    // Label
+                    TextEntity textEntity = new TextEntity
+                    {
+                        Plane = new Plane(ptX + new Vector3d(holeRadius, 0, 0), new Vector3d(0, 0, 1)),
+                        PlainText = currentId.ToString(),
+                        TextHeight = fontSize,
+                        Justification = TextJustification.Left
+                    };
+                    Curve[] textCurves = textEntity.Explode();
+                    foreach (Curve crv in textCurves) indicesTextOnPlane.Add(new GH_Curve(crv));
+
+                    Circle circle = new Circle(ptX, holeRadius);
+                    points.Add(new GH_Point(ptX));
+                    holes.Add(new GH_Circle(circle));
+
+                }
+
+                // Label the curves
+                TextEntity textEntityPlane = new TextEntity
+                {
+                    Plane = new Plane(new Point3d(distance, yOffset - distance, 0), new Vector3d(0, 0, 1)),
+                    PlainText = "Crv_" + i,
+                    TextHeight = fontSize,
+                    Justification = TextJustification.Left
+                };
+
+                foreach (Curve crv in textEntityPlane.Explode())
+                {
+                    indicesTextOnPlane.Add(new GH_Curve(crv));
+                }
+
+                
+            }
+        }
+
+        #endregion
     }
 }
 

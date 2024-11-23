@@ -133,6 +133,8 @@ namespace BarkBeetle.Utils
             return loftedBreps[0].Faces[0].ToNurbsSurface();
         }
 
+
+        #region strip related
         public static GH_Structure<GH_Surface> StripFromCurves(GH_Structure<GH_Curve> uvCurves, Surface surface,double strip_width,double extend)
         {
             List<List<GH_Curve>> listCurves = TreeHelper.ConvertGHStructureToList(uvCurves);
@@ -188,7 +190,19 @@ namespace BarkBeetle.Utils
             GH_Structure<GH_Surface>  strips = TreeHelper.ConvertToGHStructure(brepsAll);
             return strips;
         }
+        
+        public static Surface UnrollSurfaceWithCurve(Surface surface, Curve curve, List<Point3d> points, out Curve unrolledCurve, out List<Point3d> unrolledPoints)
+        {
+            Unroller unroller = new Unroller(surface);
+            unroller.AddFollowingGeometry(curve);
+            unroller.AddFollowingGeometry(points);
 
+            Brep[] unrollBreps = unroller.PerformUnroll(out Curve[] unrolledCurves, out Point3d[] unrolledPointsArray, out TextDot[] unrolledDots);
+            unrolledCurve = unrolledCurves[0];
+            unrolledPoints = new List<Point3d>(unrolledPointsArray);
+            return unrollBreps[0].Surfaces[0];
+        }
+        #endregion
 
         public static double AverageSurfaceDistance(Surface surfaceBottom, Surface surfaceTop, int sampleCount)
         {
@@ -218,6 +232,7 @@ namespace BarkBeetle.Utils
             return averageDistance;
         }
 
+        #region for tweening
         public static List<GH_Surface> TweenBetweenSurfaces(Surface surfaceA, Surface surfaceB, int n)
         {
             NurbsSurface nurbsSurfaceA = surfaceA.ToNurbsSurface();
@@ -245,7 +260,6 @@ namespace BarkBeetle.Utils
 
             return interpolatedSurfaces;
         }
-
         private static NurbsSurface MorphSurface( NurbsSurface startSurface, NurbsSurface endSurface, double t)
         {
             NurbsSurface targetSurface = startSurface.Duplicate() as NurbsSurface;
@@ -276,9 +290,12 @@ namespace BarkBeetle.Utils
             }
             return targetSurface;
         }
+        #endregion
+
+
 
     }
 
-    
+
 }
 

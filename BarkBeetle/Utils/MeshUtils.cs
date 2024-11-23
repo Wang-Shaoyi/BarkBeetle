@@ -138,7 +138,6 @@ namespace BarkBeetle.Utils
             resultMesh.Compact();
             return resultMesh;
         }
-
         private static void AddFaces(Mesh mesh, MeshFaceList faces, int vertexCount)
         {
             foreach (MeshFace face in faces)
@@ -175,6 +174,7 @@ namespace BarkBeetle.Utils
             mesh.Faces.AddFace(vertexCount -1 , vertexCount / 2 - 1, vertexCount / 2 + vertexCount -1, 2* vertexCount-1);
         }
         #endregion
+
 
 
 

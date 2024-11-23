@@ -163,6 +163,23 @@ namespace BarkBeetle.Utils
             return closestPtTree;
         }
 
+        public static bool IsPointNearList(Point3d targetPoint, List<Point3d> pointList, double tolerance, out int index)
+        {
+            // 遍历点列表，检查距离
+            for (int i = 0; i < pointList.Count; i++)
+            {
+                if (targetPoint.DistanceTo(pointList[i]) <= tolerance)
+                {
+                    index = i; // 找到满足条件的点，返回索引
+                    return true;
+                }
+            }
+
+            // 没有找到满足条件的点
+            index = -1; // 索引为 -1 表示未找到
+            return false;
+        }
+
         #region Not really in use
         // Organize the point tree sequence according to surface uv
         public static GH_Structure<GH_Point> OrganizePtSequence(Surface surface, GH_Structure<GH_Point> pointsTree, GH_Component component)
