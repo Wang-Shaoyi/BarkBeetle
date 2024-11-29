@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 using BarkBeetle.Utils;
 
-namespace BarkBeetle.Comps1NetworkGraph
+namespace BarkBeetle.Comps7Utils
 {
     public class UnrollStripTwoWidth : GH_Component
     {
@@ -15,16 +15,16 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// Initializes a new instance of the UnrollStripTwoWidth class.
         /// </summary>
         public UnrollStripTwoWidth()
-          : base("Unroll UV Strip (different width)", "UnrollUVStrip",
-              "Description",
-              "BarkBeetle", "1-Network")
+          : base("Unroll Straight UV Strip (different width)", "Unroll UV Strip",
+              "Unroll and label straight (geodesic) strips in two directions",
+              "BarkBeetle", "7-Utils")
         {
         }
 
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddCurveParameter("Curves A", "A", "The first set of input curves.", GH_ParamAccess.list);
             pManager.AddCurveParameter("Curves B", "B", "The second set of input curves.", GH_ParamAccess.list);
@@ -40,7 +40,7 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
             pManager.AddCurveParameter("Strips A", "SA", "The strips created for curves A.", GH_ParamAccess.list);
             pManager.AddCurveParameter("Strips B", "SB", "The strips created for curves B.", GH_ParamAccess.list);

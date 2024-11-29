@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\curvaturedisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\surfacecurvature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\surfacecurvature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\toolpathvisualization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -158,25 +158,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CurvatureDisplay.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurvatureDisplay.cs",
               "RelativeDocumentMoniker": "Utils\\CurvatureDisplay.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurvatureDisplay.cs",
-              "RelativeToolTip": "Utils\\CurvatureDisplay.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAAwDIAAABIAAAAAAAAAA==",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurvatureDisplay.cs*",
+              "RelativeToolTip": "Utils\\CurvatureDisplay.cs*",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAAwBQAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-29T07:08:45.21Z",
               "EditorCaption": ""
@@ -580,6 +572,14 @@
               "WhenOpened": "2024-10-16T16:53:41.148Z"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 21,
               "Title": "Resources.resx",
@@ -600,39 +600,39 @@
       "FloatingWindowState": {
         "Id": "4516a600-a0b1-4b69-8b01-805f5b16efae",
         "Display": 0,
-        "X": 20,
-        "Y": 33,
-        "Width": 1190,
+        "X": -422,
+        "Y": 160,
+        "Width": 1555,
         "Height": 815,
         "WindowState": 0
       },
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "SurfaceCurvature.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceCurvature.cs",
               "RelativeDocumentMoniker": "Comps6Display\\SurfaceCurvature.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceCurvature.cs",
               "RelativeToolTip": "Comps6Display\\SurfaceCurvature.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAywCoAAABkAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvyEAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-28T05:40:30.583Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SurfaceTwist.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceTwist.cs",
               "RelativeDocumentMoniker": "Comps6Display\\SurfaceTwist.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceTwist.cs",
               "RelativeToolTip": "Comps6Display\\SurfaceTwist.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAIwCEAAABtAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAYwCIAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-29T08:01:58.556Z",
               "EditorCaption": ""

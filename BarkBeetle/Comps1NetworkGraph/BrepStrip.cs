@@ -12,12 +12,12 @@ using BarkBeetle.Skeletons;
 
 namespace BarkBeetle.Comps1NetworkGraph
 {
-    public class StripVisualization : GH_Component
+    public class BrepStrip : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the StripVisualization class.
         /// </summary>
-        public StripVisualization()
+        public BrepStrip()
           : base("Brep Strip", "Brep Strip",
               "Create Brep Strip from Network OR Curves",
               "BarkBeetle", "1-Network")

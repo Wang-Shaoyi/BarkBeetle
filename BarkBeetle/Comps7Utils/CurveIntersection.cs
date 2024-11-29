@@ -62,6 +62,8 @@ namespace BarkBeetle.CompsUtils
             DA.SetDataList(0, intersectionPoints);
         }
 
+        public override GH_Exposure Exposure => GH_Exposure.primary;
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

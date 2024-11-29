@@ -17,7 +17,7 @@ namespace BarkBeetle.CompsVisualization
         public ToolpathVisualization()
           : base("Toolpath Mesh", "Toolpath Mesh",
               "Create toolpath mesh from ToolpathStack",
-              "BarkBeetle", "6-Visualization")
+              "BarkBeetle", "6-Display")
         {
         }
 
@@ -71,6 +71,8 @@ namespace BarkBeetle.CompsVisualization
             DA.SetData(0, mesh);
 
         }
+
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Provides an Icon for the component.
