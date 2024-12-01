@@ -90,11 +90,11 @@ namespace BarkBeetle.ToolpathStackSetting
                     double uBase, vBase;
                     baseSrf.ClosestPoint(pt, out uBase, out vBase);
 
-                    // 计算相对位置
+                    // Calculate relative position
                     double uNormalized = uDomainBase.NormalizedParameterAt(uBase);
                     double vNormalized = vDomainBase.NormalizedParameterAt(vBase);
 
-                    // 将相对位置映射到第二个曲面的 UV 范围
+                    // remap the uv position of the first surface to the second surfave
                     double uSrf = uDomainSrf.ParameterAt(uNormalized);
                     double vSrf = vDomainSrf.ParameterAt(vNormalized);
 

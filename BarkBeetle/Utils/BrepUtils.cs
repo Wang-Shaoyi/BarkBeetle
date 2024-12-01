@@ -232,6 +232,20 @@ namespace BarkBeetle.Utils
             return averageDistance;
         }
 
+        public static Point3d GetClosestPointOnSurface(Surface surface, Point3d pt3d)
+        {
+            if (surface == null)
+                throw new ArgumentNullException(nameof(surface));
+            double u, v;
+            if (surface.ClosestPoint(pt3d, out u, out v))
+            {
+                Point3d pt3dOnSurf = surface.PointAt(u, v);
+                return pt3dOnSurf;
+            }
+
+            throw new InvalidOperationException("Closest point failed");
+        }
+
         #region for tweening
         public static List<GH_Surface> TweenBetweenSurfaces(Surface surfaceA, Surface surfaceB, int n)
         {

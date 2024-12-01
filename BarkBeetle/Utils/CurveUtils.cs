@@ -1,5 +1,6 @@
 ﻿using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
+using Rhino;
 using Rhino.Geometry;
 using System;
 using System.Collections;
@@ -98,6 +99,85 @@ namespace BarkBeetle.Utils
             }
 
             return tangent;
+        }
+
+        public static bool IsConvexPointOnCurve(Curve curve, Point3d vertex)
+        {
+            if (!curve.IsClosed)
+                throw new ArgumentException("Curve should be closed");
+
+            // find parameter t on curve
+            double t;
+            if (!curve.ClosestPoint(vertex, out t))
+                throw new ArgumentException("point is not on curve");
+
+            // 获取点附近的两个参数
+            double tPrev = t - 0.001;
+            double tNext = t + 0.001;
+
+            // 确保参数在曲线域范围内（循环处理）
+            double domainStart = curve.Domain.Min;
+            double domainEnd = curve.Domain.Max;
+
+            if (tPrev < domainStart) tPrev = domainEnd - (domainStart - tPrev);
+            if (tNext > domainEnd) tNext = domainStart + (tNext - domainEnd);
+
+            // 获取前后点的坐标
+            Point3d prevPoint = curve.PointAt(tPrev);
+            Point3d nextPoint = curve.PointAt(tNext);
+
+            // 计算两条边向量
+            Vector3d vecPrev = prevPoint - vertex;
+            Vector3d vecNext = nextPoint - vertex;
+
+            // 计算法向量
+            Vector3d tangent = curve.TangentAt(t);
+            Vector3d normal = Vector3d.CrossProduct(vecNext, vecPrev);
+            normal.Unitize();
+
+            // 判断曲线方向和法向量方向的一致性
+            bool isConvexPoint = Vector3d.Multiply(normal, tangent) < 0;
+
+            // 判断法线方向
+            return isConvexPoint; // >0 为凸点，<0 为凹点
+        }
+
+        public static List<Point3d> GetDiscontinuityPoints(Curve curve, out List<Curve> segments)
+        {
+            List<Point3d> discontinuityPoints = new List<Point3d>();
+
+            double t = curve.Domain.Min;
+            List<double> splitParams = new List<double>();
+
+            while (curve.GetNextDiscontinuity(Continuity.G1_continuous, t, curve.Domain.Max, out double discontinuityT))
+            {
+                t = discontinuityT;
+                splitParams.Add(t);
+                discontinuityPoints.Add(curve.PointAt(t));
+            }
+
+            if (!discontinuityPoints.Contains(curve.PointAtStart))
+            {
+                discontinuityPoints.Insert(0, curve.PointAtStart);
+                splitParams.Insert(0, curve.Domain.Min);
+            }
+
+            segments = new List<Curve>(curve.Split(splitParams));
+
+            return discontinuityPoints;
+        }
+
+        public static List<Point3d> GetEvenlyDistributedPointsOnCrv(Curve curve, int n)
+        {
+            if (curve == null || n < 2)
+                throw new ArgumentException("Curve can't be empty");
+
+            // 使用 DivideByCount 方法获取点的参数
+            Point3d[] points;
+            curve.DivideByCount(n - 1, true, out points);
+
+
+            return new List<Point3d>(points);
         }
     }
 }

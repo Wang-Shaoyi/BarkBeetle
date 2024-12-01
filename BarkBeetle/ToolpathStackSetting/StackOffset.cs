@@ -55,6 +55,9 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override List<GH_Curve> CreateStackLayerCurves() 
         {
+
+            List<GH_Curve> stackCurves = new List<GH_Curve>();
+
             /////////// Create pattern curve list/////////
             List<Curve> allPatternCurves = new List<Curve>();
             int repeatCount = LayerNum - (Patterns.TopCount + Patterns.BottomCount);
@@ -79,12 +82,15 @@ namespace BarkBeetle.ToolpathStackSetting
 
             if (Patterns.TopPattern != null && Patterns.TopCount != 0)
             {
-                for (int i = 0; i < Patterns.TopCount; i++) allPatternCurves.Add(Patterns.TopPattern.CoutinuousCurve);
+                for (int i = 0; i < Patterns.TopCount; i++)
+                {
+                    allPatternCurves.Add(Patterns.TopPattern.CoutinuousCurve);
+                    //stackCurves.Add(new GH_Curve(Patterns.TopPattern.CoutinuousCurve));
+                }
+
             }
 
             /////////// Create pattern curve list/////////
-
-            List<GH_Curve> stackCurves = new List<GH_Curve>();
             
             for (int i = 0; i < LayerNum; i++)
             {
@@ -111,7 +117,7 @@ namespace BarkBeetle.ToolpathStackSetting
                     surfaceCurves.Add(curve);
                 }
 
-                Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 0.01); // Join the segments
+                Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 10); // Join the segments
                 stackCurves.Add(new GH_Curve(surfaceCurve[0]));
             }
             return stackCurves;

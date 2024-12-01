@@ -16,14 +16,14 @@ using System.Security.Cryptography;
 
 namespace BarkBeetle.CompsToolpath
 {
-    public class PatternSpiralComp : GH_Component
+    public class PatternZigZagComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Toolpath class.
         /// </summary>
-        public PatternSpiralComp()
-          : base("Spiral Toolpath Pattern", "Spiral Pattern",
-              "A spiral shape generated from the skeleton as a layer of the toolpath",
+        public PatternZigZagComp()
+          : base("Snake ZigZag Pattern", "ZigZag Pattern",
+              "A zigzag infill shape generated from the skeleton as a layer of the toolpath",
               "BarkBeetle", "3-Pattern")
         {
         }
@@ -35,7 +35,8 @@ namespace BarkBeetle.CompsToolpath
         {
             pManager.AddGenericParameter("Skeleton Graph", "SG", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
             pManager.AddPointParameter("Seam Point", "Pt", "Seam point of the toolpath (start point)", GH_ParamAccess.item, new Point3d(0,0,0));
-            pManager.AddNumberParameter("Path Width", "pw", "Width of the print path", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Path Width", "pw", "Seam point of the toolpath (start point)", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Spacing", "d", "How much spacing between toolpaths", GH_ParamAccess.item, 0);
         }
 
         /// <summary>
@@ -57,12 +58,14 @@ namespace BarkBeetle.CompsToolpath
             SkeletonGraphGoo goo = null;
             GH_Point ghpt = null;
             double pathWidth = 0;
+            double spacing = 0;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
             SkeletonGraph skeletonGraph = goo.Value;
             if (!DA.GetData(1, ref ghpt)) return;
             if (!DA.GetData(2, ref pathWidth)) return;
+            if (!DA.GetData(3, ref spacing)) return;
 
 
             // Error message.
@@ -76,9 +79,14 @@ namespace BarkBeetle.CompsToolpath
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "path width must be larger than 0");
                 return;
             }
+            if (skeletonGraph.UVNetwork.StripWidth < pathWidth * 6)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Strip width should be larger or path width should be smaller");
+                return;
+            }
 
             // Run Function
-            ToolpathPattern pattern = new ToolpathPatterhSpiral(skeletonGraph, ghpt.Value,pathWidth);
+            ToolpathPattern pattern = new ToolpathPatterhZigZag(skeletonGraph, ghpt.Value,pathWidth, spacing);
             GH_Curve crv = new GH_Curve(pattern.CoutinuousCurve);
 
             ToolpathPatternGoo baseGoo = new ToolpathPatternGoo(pattern);
@@ -99,7 +107,7 @@ namespace BarkBeetle.CompsToolpath
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.SpiralToolpathBase;
+                return Resources.ZigZagInfill;
             }
         }
 
@@ -108,7 +116,7 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("22E2B075-3C2B-4C83-A73B-D6F2D97C06C3"); }
+            get { return new Guid("439A162D-54A0-4AD0-A145-43104B1DC9AF"); }
         }
     }
 }

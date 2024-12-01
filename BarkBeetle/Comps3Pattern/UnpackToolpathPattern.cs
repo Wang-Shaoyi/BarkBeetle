@@ -41,7 +41,7 @@ namespace BarkBeetle.CompsToolpath
             pManager.AddGenericParameter("Skeleton Graph", "SG", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
             pManager.AddCurveParameter("Curve", "C", "Toolpath curve for a layer", GH_ParamAccess.item);
             pManager.AddCurveParameter("Bundle Curves", "Crvs", "Toolpath curves before connected", GH_ParamAccess.list);
-            pManager.AddPointParameter("Points", "P", "Toolpath corner points", GH_ParamAccess.tree);
+            pManager.AddPointParameter("Points", "P", "Toolpath corner points", GH_ParamAccess.list);
 
         }
 
@@ -66,7 +66,7 @@ namespace BarkBeetle.CompsToolpath
             SkeletonGraphGoo sgGoo = new SkeletonGraphGoo(skeletonG);
 
             List<Curve> curves = toolpathPattern.BundleCurves;
-            GH_Structure<GH_Point> corners = TreeHelper.ConvertToGHStructure(toolpathPattern.CornerPts);
+            List<Point3d> corners = toolpathPattern.CornerPtsList;
 
             List<GH_Curve> ghCurves = new List<GH_Curve>();
 
@@ -80,7 +80,7 @@ namespace BarkBeetle.CompsToolpath
             DA.SetData(0, sgGoo);
             DA.SetData(1, crv);
             DA.SetDataList(2, ghCurves);
-            DA.SetDataTree(3, corners);
+            DA.SetDataList(3, corners);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.secondary;
