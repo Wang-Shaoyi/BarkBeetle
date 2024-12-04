@@ -85,7 +85,7 @@ namespace BarkBeetle.Comps4Stack
             DA.SetDataTree(4, speedFactorTree);
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.secondary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

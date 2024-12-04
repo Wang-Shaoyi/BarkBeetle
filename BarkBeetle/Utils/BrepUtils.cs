@@ -133,6 +133,47 @@ namespace BarkBeetle.Utils
             return loftedBreps[0].Faces[0].ToNurbsSurface();
         }
 
+        public static double AverageSurfaceDistance(Surface surfaceBottom, Surface surfaceTop, int sampleCount)
+        {
+            double totalDistance = 0.0;
+            Interval uDomain = surfaceTop.Domain(0);
+            Interval vDomain = surfaceTop.Domain(1);
+
+            // sample points on top surface to get the distance
+            for (int i = 0; i < sampleCount; i++)
+            {
+                double u = uDomain.ParameterAt(i / (double)(sampleCount - 1));
+                for (int j = 0; j < sampleCount; j++)
+                {
+                    double v = vDomain.ParameterAt(j / (double)(sampleCount - 1));
+
+                    Point3d pointA = surfaceTop.PointAt(u, v);
+
+                    // Compute closest point on bottom surface
+                    surfaceBottom.ClosestPoint(pointA, out double _u, out double _v);
+                    Point3d pointB = surfaceBottom.PointAt(_u, _v);
+                    totalDistance += pointA.DistanceTo(pointB);
+                }
+            }
+
+            // Compute average distance
+            double averageDistance = totalDistance / (sampleCount * sampleCount);
+            return averageDistance;
+        }
+
+        public static Point3d GetClosestPointOnSurface(Surface surface, Point3d pt3d)
+        {
+            if (surface == null)
+                throw new ArgumentNullException(nameof(surface));
+            double u, v;
+            if (surface.ClosestPoint(pt3d, out u, out v))
+            {
+                Point3d pt3dOnSurf = surface.PointAt(u, v);
+                return pt3dOnSurf;
+            }
+
+            throw new InvalidOperationException("Closest point failed");
+        }
 
         #region strip related
         public static GH_Structure<GH_Surface> StripFromCurves(GH_Structure<GH_Curve> uvCurves, Surface surface,double strip_width,double extend)
@@ -204,47 +245,15 @@ namespace BarkBeetle.Utils
         }
         #endregion
 
-        public static double AverageSurfaceDistance(Surface surfaceBottom, Surface surfaceTop, int sampleCount)
-        {
-            double totalDistance = 0.0;
-            Interval uDomain = surfaceTop.Domain(0); 
-            Interval vDomain = surfaceTop.Domain(1); 
+        #region multi layer strip
+        //public static void MultiLayerStripsFromCurve(GH_Structure<GH_Curve> uvCurves,Surface surface, out GH_Structure<GH_Surface> strips, out GH_Structure<GH_Curve> centerCrvs, out List<Point3d> alignConnectionPts, out List<Point3d> crossIntersectionPts)
+        //{
 
-            // sample points on top surface to get the distance
-            for (int i = 0; i < sampleCount; i++)
-            {
-                double u = uDomain.ParameterAt(i / (double)(sampleCount - 1)); 
-                for (int j = 0; j < sampleCount; j++)
-                {
-                    double v = vDomain.ParameterAt(j / (double)(sampleCount - 1));
+        //}
 
-                    Point3d pointA = surfaceTop.PointAt(u, v);
 
-                    // Compute closest point on bottom surface
-                    surfaceBottom.ClosestPoint(pointA, out double _u, out double _v);
-                    Point3d pointB = surfaceBottom.PointAt(_u, _v);
-                    totalDistance += pointA.DistanceTo(pointB);
-                }
-            }
 
-            // Compute average distance
-            double averageDistance = totalDistance / (sampleCount * sampleCount);
-            return averageDistance;
-        }
-
-        public static Point3d GetClosestPointOnSurface(Surface surface, Point3d pt3d)
-        {
-            if (surface == null)
-                throw new ArgumentNullException(nameof(surface));
-            double u, v;
-            if (surface.ClosestPoint(pt3d, out u, out v))
-            {
-                Point3d pt3dOnSurf = surface.PointAt(u, v);
-                return pt3dOnSurf;
-            }
-
-            throw new InvalidOperationException("Closest point failed");
-        }
+        #endregion
 
         #region for tweening
         public static List<GH_Surface> TweenBetweenSurfaces(Surface surfaceA, Surface surfaceB, int n)

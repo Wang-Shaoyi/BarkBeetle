@@ -338,7 +338,7 @@ namespace BarkBeetle.Pattern
                         Curve insideControlCrv = Curve.JoinCurves(new List<Curve> { insideOtherSeg,insideSeg }, 0.01)[0];
 
                         // odd segments in between
-                        int maxCount = (int) (Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength())/(PathWidth + spacing));
+                        int maxCount = (int) Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 0) maxCount -= 1;
                         n = Math.Max(maxCount,1);
 
@@ -367,7 +367,7 @@ namespace BarkBeetle.Pattern
                         Curve insideControlCrv = Curve.JoinCurves(new List<Curve> { insideOtherSeg, insideMidSeg }, 0.01)[0];
 
                         // even segments in between
-                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 1) maxCount -= 1;
                         n = Math.Max(maxCount, 2);
 
@@ -400,7 +400,7 @@ namespace BarkBeetle.Pattern
                         Curve outsideControlCrv = Curve.JoinCurves(new List<Curve> { outsideOtherSeg, outsideMidSeg }, 0.01)[0];
 
                         // even segments in between
-                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 1) maxCount -= 1;
                         n = Math.Max(maxCount, 2);
 
@@ -428,7 +428,7 @@ namespace BarkBeetle.Pattern
                         Curve outsideControlCrv = Curve.JoinCurves(new List<Curve> { outsideOtherSeg, outsideSeg }, 0.01)[0];
 
                         // odd segments in between
-                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 0) maxCount -= 1;
                         n = Math.Max(maxCount, 1);
 
@@ -469,6 +469,17 @@ namespace BarkBeetle.Pattern
 
             return polyline.ToNurbsCurve();
         }
+
+        public override ToolpathPattern DeepCopy()
+        {
+            // New instance
+            var copy = new ToolpathPatterhSnake(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing);
+
+            return copy;
+        }
+
+
+
     }
         
 }

@@ -21,7 +21,7 @@ namespace BarkBeetle.CompsToolpath
         public StackPatternComp()
           : base("Stack Toolpath Pattern", "Stack Pattern",
               "Stack multiple patterns together",
-              "BarkBeetle", "3-Pattern")
+              "BarkBeetle", "4-Stack")
         {
         }
 
@@ -93,7 +93,7 @@ namespace BarkBeetle.CompsToolpath
             DA.SetData(0, stackGoo);
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.secondary;
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Provides an Icon for the component.

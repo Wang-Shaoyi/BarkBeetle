@@ -14,9 +14,9 @@ namespace BarkBeetle.Utils
     internal class CurveUtils
     {
         // Intersection with tolerance
-        public static List<GH_Point> CurveIntersect(List<Curve> curvesA,List<Curve> curvesB,double tolerance)
+        public static List<Point3d> CurveIntersect(List<Curve> curvesA,List<Curve> curvesB,double tolerance)
         {
-            List<GH_Point> intersectionPoints = new List<GH_Point>();
+            List<Point3d> intersectionPoints = new List<Point3d>();
 
             foreach (Curve curveA in curvesA)
             {
@@ -29,7 +29,7 @@ namespace BarkBeetle.Utils
                         for (int i = 0; i < intersections.Count; i++)
                         {
                             var intersection = intersections[i];
-                            intersectionPoints.Add(new GH_Point(intersection.PointA));
+                            intersectionPoints.Add(intersection.PointA);
                         }
                     }
                 }
@@ -142,6 +142,7 @@ namespace BarkBeetle.Utils
             return isConvexPoint; // >0 为凸点，<0 为凹点
         }
 
+        // This is based on discontinuity
         public static List<Point3d> GetDiscontinuityPoints(Curve curve, out List<Curve> segments)
         {
             List<Point3d> discontinuityPoints = new List<Point3d>();
@@ -167,17 +168,58 @@ namespace BarkBeetle.Utils
             return discontinuityPoints;
         }
 
-        public static List<Point3d> GetEvenlyDistributedPointsOnCrv(Curve curve, int n)
+        // This is based on explosion
+        public static List<Point3d> GetExplodedCurveVertices(Curve curve)
         {
-            if (curve == null || n < 2)
-                throw new ArgumentException("Curve can't be empty");
+            ////////////////////////////////
+            // 非递归分解
+            // 分解曲线
+            List<Point3d> vertexList = new List<Point3d>();
+            Curve[] segments = curve.DuplicateSegments();
+            if (segments != null)
+            {
+                foreach (Curve segment in segments)
+                {
+                    vertexList.Add(segment.PointAtStart);
+                }
+                vertexList.Add(segments[segments.Length - 1].PointAtEnd); // 添加最后一个顶点
+            }
+            else
+            {
+                vertexList.Add(curve.PointAtStart);
+                vertexList.Add(curve.PointAtEnd);
+            }
 
-            // 使用 DivideByCount 方法获取点的参数
-            Point3d[] points;
-            curve.DivideByCount(n - 1, true, out points);
+            return vertexList;
+        }
+        private static void GetVerticesRecursive(Curve curve, List<Point3d> vertices)
+        {
+            if (curve is PolyCurve polyCurve)
+            {
+                // 遍历 PolyCurve 的所有段
+                for (int i = 0; i < polyCurve.SegmentCount; i++)
+                {
+                    GetVerticesRecursive(polyCurve.SegmentCurve(i), vertices);
+                }
+            }
+            else
+            {
+                // 添加起点
+                if (vertices.Count == 0 || !vertices[vertices.Count - 1].EpsilonEquals(curve.PointAtStart, RhinoMath.SqrtEpsilon))
+                {
+                    vertices.Add(curve.PointAtStart);
+                }
 
+                // 添加中点
+                double halfLength = curve.GetLength() / 2.0;
+                if (curve.LengthParameter(halfLength, out double midParameter))
+                {
+                    vertices.Add(curve.PointAt(midParameter));
+                }
 
-            return new List<Point3d>(points);
+                // 添加终点
+                vertices.Add(curve.PointAtEnd);
+            }
         }
     }
 }

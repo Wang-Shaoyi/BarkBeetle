@@ -42,9 +42,9 @@ namespace BarkBeetle.Pattern
             Curve outsideCrv = closedCrvs[1];
             Curve boundaryCrv = closedCrvs[2]; 
 
-            Curve snakeCrv = CreateZigZagCurve(insideCrv, outsideCrv, spacing);
+            Curve zigzagCrv = CreateZigZagCurve(insideCrv, outsideCrv, spacing);
 
-            BundleCurves = new List<Curve> { snakeCrv, boundaryCrv};
+            BundleCurves = new List<Curve> { zigzagCrv, boundaryCrv};
             CoutinuousCurve = ToolpathContinuousStraight(BundleCurves);
         }
 
@@ -466,6 +466,14 @@ namespace BarkBeetle.Pattern
             Curve[] snakeCurve = Curve.JoinCurves(snakeCurves, 10); // Join the segments
 
             return polyline.ToNurbsCurve();
+        }
+
+        public override ToolpathPattern DeepCopy()
+        {
+            // New instance
+            var copy = new ToolpathPatterhZigZag(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing);
+
+            return copy;
         }
     }
         

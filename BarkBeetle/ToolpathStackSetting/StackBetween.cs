@@ -75,7 +75,7 @@ namespace BarkBeetle.ToolpathStackSetting
             for (int i = 0; i < LayerNum; i++)
             {
                 Curve baseCurve = allPatternCurves[i];
-                List<Point3d> points = PointDataUtils.GetExplodedCurveVertices(baseCurve);
+                List<Point3d> points = CurveUtils.GetExplodedCurveVertices(baseCurve);
 
                 // Get current surface
                 Surface srf = Surfaces[i].Value.Surfaces[0];
@@ -128,7 +128,7 @@ namespace BarkBeetle.ToolpathStackSetting
             {
                 List<GH_Plane> planesThis = new List<GH_Plane>();
                 List<GH_Number> doublesThis = new List<GH_Number>();
-                List<Point3d> toolpathExplodedPts = PointDataUtils.GetExplodedCurveVertices(gH_Curves[i].Value);
+                List<Point3d> toolpathExplodedPts = CurveUtils.GetExplodedCurveVertices(gH_Curves[i].Value);
                 Surface surface = gH_Surfaces[i].Value.Surfaces[0];
                 Surface nextSurface = null;
                 if (i != gH_Curves.Count - 1)

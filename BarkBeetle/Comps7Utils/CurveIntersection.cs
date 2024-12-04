@@ -56,7 +56,7 @@ namespace BarkBeetle.CompsUtils
             if (!DA.GetData(2, ref tolerance)) return;
 
             // Call the static method to find intersection points
-            List<GH_Point> intersectionPoints = CurveUtils.CurveIntersect(curvesA, curvesB, tolerance);
+            List<Point3d> intersectionPoints = CurveUtils.CurveIntersect(curvesA, curvesB, tolerance);
 
             // Output the result
             DA.SetDataList(0, intersectionPoints);

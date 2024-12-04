@@ -69,6 +69,8 @@ namespace BarkBeetle.Pattern
 
         public abstract void ConstructToolpathPattern();
 
+        public abstract ToolpathPattern DeepCopy();
+
         public Curve ToolpathContinuousIncline(List<Curve> spiralCurves)
         {
             Point3d cutPt = SeamPt;

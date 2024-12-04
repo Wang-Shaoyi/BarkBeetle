@@ -64,58 +64,7 @@ namespace BarkBeetle.Utils
             return countRemain;
         }
 
-        public static List<Point3d> GetExplodedCurveVertices(Curve curve)
-        {
-            ////////////////////////////////
-            // 非递归分解
-            // 分解曲线
-            List<Point3d> vertexList = new List<Point3d>();
-            Curve[] segments = curve.DuplicateSegments();
-            if (segments != null)
-            {
-                foreach (Curve segment in segments)
-                {
-                    vertexList.Add(segment.PointAtStart);
-                }
-                vertexList.Add(segments[segments.Length - 1].PointAtEnd); // 添加最后一个顶点
-            }
-            else
-            {
-                vertexList.Add(curve.PointAtStart);
-                vertexList.Add(curve.PointAtEnd);
-            }
-
-            return vertexList;
-        }
-        private static void GetVerticesRecursive(Curve curve, List<Point3d> vertices)
-        {
-            if (curve is PolyCurve polyCurve)
-            {
-                // 遍历 PolyCurve 的所有段
-                for (int i = 0; i < polyCurve.SegmentCount; i++)
-                {
-                    GetVerticesRecursive(polyCurve.SegmentCurve(i), vertices);
-                }
-            }
-            else
-            {
-                // 添加起点
-                if (vertices.Count == 0 || !vertices[vertices.Count - 1].EpsilonEquals(curve.PointAtStart, RhinoMath.SqrtEpsilon))
-                {
-                    vertices.Add(curve.PointAtStart);
-                }
-
-                // 添加中点
-                double halfLength = curve.GetLength() / 2.0;
-                if (curve.LengthParameter(halfLength, out double midParameter))
-                {
-                    vertices.Add(curve.PointAt(midParameter));
-                }
-
-                // 添加终点
-                vertices.Add(curve.PointAtEnd);
-            }
-        }
+        
 
 
         // Pull points on the surface

@@ -502,8 +502,6 @@ namespace BarkBeetle.Utils
                     stripBoundaries.Add(new GH_Curve(crv));
                 }
 
-                
-
                 //go through all points, label them, and give them holes
                 for (int j = 0; j < lengths.Count; j++)
                 {
@@ -546,6 +544,14 @@ namespace BarkBeetle.Utils
                 
             }
         }
+
+        //public static void UnrollSurfacesAndLabelingWithPoints(
+        //    List<Curve> curves, List<Surface> surfaces, double tolerance, List<Point3d> intersectionPts,
+        //    double distance, double holeRadius, double fontSize, out List<GH_Curve> stripBoundaries,
+        //    out List<GH_Point> points, out List<GH_Circle> holes, out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane)
+        //{
+
+        //}
 
         #endregion
     }

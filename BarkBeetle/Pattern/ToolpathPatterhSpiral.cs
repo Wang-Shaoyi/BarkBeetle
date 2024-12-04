@@ -267,5 +267,13 @@ namespace BarkBeetle.Pattern
             }
             return toolpathList;
         }
+
+        public override ToolpathPattern DeepCopy()
+        {
+            // New instance
+            var copy = new ToolpathPatterhSpiral(this.Skeleton, this.SeamPt, this.PathWidth);
+
+            return copy;
+        }
     }
 }
