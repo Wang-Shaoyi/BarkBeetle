@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Rhino.Runtime.ViewCaptureWriter;
 using Rhino.Geometry;
+using Grasshopper;
 
 namespace BarkBeetle.Utils
 {
@@ -202,27 +203,22 @@ namespace BarkBeetle.Utils
             return array;
         }
 
-        // Convert 3D array to multi-layer tree
-        public static GH_Structure<T> Convert3DArrayToGHStructure<T>(T[,,] array) where T : IGH_Goo
+        // Convert 2D array to multi-layer tree
+        public static GH_Structure<T> Convert3DArrayToGHStructure<T>(T[,] array) where T : IGH_Goo
         {
             GH_Structure<T> structure = new GH_Structure<T>();
             int dim1 = array.GetLength(0);
             int dim2 = array.GetLength(1);
-            int dim3 = array.GetLength(2);
 
             for (int i = 0; i < dim1; i++)
             {
                 for (int j = 0; j < dim2; j++)
                 {
-                    for (int k = 0; k < dim3; k++)
-                    {
-                        T item = array[i, j, k];
-                        GH_Path path = new GH_Path(i, j);
-                        structure.Append(item, path);
-                    }
+                    T item = array[i, j];
+                    GH_Path path = new GH_Path(i);
+                    structure.Append(item, path);
                 }
             }
-
             return structure;
         }
 
@@ -248,6 +244,70 @@ namespace BarkBeetle.Utils
             }
 
             return result;
+        }
+
+        public static GH_Structure<T> DuplicateTree<T>(GH_Structure<T> tree, int count) where T : IGH_Goo
+        {
+            GH_Structure<T> newTree = new GH_Structure<T>();
+
+            for (int i = 0; i < count; i++)
+            {
+                foreach (GH_Path path in tree.Paths)
+                {
+                    IList<T> items = tree[path];
+                    GH_Path newPath = new GH_Path(new int[] { i }.Concat(path.Indices).ToArray());
+                    newTree.AppendRange(items, newPath);
+                }
+            }
+            return newTree;
+        }
+
+        public static List<T> FlattenStructure<T>(GH_Structure<T> structure) where T : IGH_Goo
+        {
+            List<T> flattenedItems = new List<T>();
+
+            // 遍历 GH_Structure 的所有路径
+            foreach (GH_Path path in structure.Paths)
+            {
+                // 获取当前路径下的分支
+                IList<T> branch = structure[path];
+
+                // 添加非空元素到列表
+                foreach (T item in branch)
+                {
+                    if (item != null)
+                    {
+                        flattenedItems.Add(item);
+                    }
+                }
+            }
+
+            return flattenedItems;
+        }
+
+        public static List<List<T>> FlattenStructureList<T>(GH_Structure<T> structure) where T : IGH_Goo
+        {
+            List<List<T>> flattenedItems = new List<List<T>>();
+
+            // 遍历 GH_Structure 的所有路径
+            foreach (GH_Path path in structure.Paths)
+            {
+                List<T> currentList = new List<T>();
+                // 获取当前路径下的分支
+                IList<T> branch = structure[path];
+
+                // 添加非空元素到列表
+                foreach (T item in branch)
+                {
+                    if (item != null)
+                    {
+                        currentList.Add(item);
+                    }
+                }
+                flattenedItems.Add(currentList);
+            }
+
+            return flattenedItems;
         }
 
     }

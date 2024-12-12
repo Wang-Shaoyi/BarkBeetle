@@ -245,15 +245,6 @@ namespace BarkBeetle.Utils
         }
         #endregion
 
-        #region multi layer strip
-        //public static void MultiLayerStripsFromCurve(GH_Structure<GH_Curve> uvCurves,Surface surface, out GH_Structure<GH_Surface> strips, out GH_Structure<GH_Curve> centerCrvs, out List<Point3d> alignConnectionPts, out List<Point3d> crossIntersectionPts)
-        //{
-
-        //}
-
-
-
-        #endregion
 
         #region for tweening
         public static List<GH_Surface> TweenBetweenSurfaces(Surface surfaceA, Surface surfaceB, int n)

@@ -16,7 +16,7 @@ namespace BarkBeetle.Comps7Utils
         public UnrollStraightStripConsistentWidth()
           : base("Unroll Straight Strip (consistent width)", "Unroll Straight Strip",
               "Unroll and label straight (geodesic) strips",
-              "BarkBeetle", "1-Network")
+              "BarkBeetle", "7-Utils")
         {
         }
 

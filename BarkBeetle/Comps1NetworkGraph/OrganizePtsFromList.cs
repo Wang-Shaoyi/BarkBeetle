@@ -14,7 +14,7 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// Initializes a new instance of the OrganizePtsFromList class.
         /// </summary>
         public OrganizePtsFromList()
-          : base("Organize PtTree From List", "PTG",
+          : base("Organize Point Tree From List", "PtTree From List",
               "Generates a point tree structure from a point list and a sequence list.",
               "BarkBeetle", "1-Network")
         {

@@ -17,7 +17,7 @@ namespace BarkBeetle.CompsVisualization
         public ToolpathVisualization()
           : base("Toolpath Mesh", "Toolpath Mesh",
               "Create toolpath mesh from ToolpathStack",
-              "BarkBeetle", "6-Display")
+              "BarkBeetle", "6-Display & Analysis")
         {
         }
 

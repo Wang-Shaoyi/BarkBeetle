@@ -9,12 +9,12 @@ using BarkBeetle.Utils;
 
 namespace BarkBeetle.Comps7Utils
 {
-    public class UnrollStripTwoWidth : GH_Component
+    public class UnrollStraightStripTwoWidth : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the UnrollStripTwoWidth class.
         /// </summary>
-        public UnrollStripTwoWidth()
+        public UnrollStraightStripTwoWidth()
           : base("Unroll Straight UV Strip (different width)", "Unroll UV Strip",
               "Unroll and label straight (geodesic) strips in two directions",
               "BarkBeetle", "7-Utils")

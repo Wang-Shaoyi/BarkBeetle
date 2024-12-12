@@ -8,13 +8,13 @@ using BarkBeetle.Utils;
 
 namespace BarkBeetle.Comps7Utils
 {
-    public class UnrollSrfStrip : GH_Component
+    public class UnrollSrfWithPoints : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the MyComponent1 class.
         /// </summary>
-        public UnrollSrfStrip()
-          : base("Unroll Surface Strip", "Unroll Srf Strip",
+        public UnrollSrfWithPoints()
+          : base("Unroll Intersect Surface Strip", "Unroll Srf Strip",
               "Unroll and label intersecting surface strips",
               "BarkBeetle", "7-Utils")
         {
@@ -74,7 +74,7 @@ namespace BarkBeetle.Comps7Utils
             }
 
             // Run
-            Unroll.UnrollSurfacesAndLabeling(
+            Unroll.UnrollIntersectSurfacesAndLabeling(
             curves, surfaces, tolerance, distance, holeRadius, fontSize, out List<GH_Curve> stripBoundaries,
             out List<GH_Point> points, out List<GH_Circle> holes,
             out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane);
@@ -98,7 +98,7 @@ namespace BarkBeetle.Comps7Utils
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.UnrollStrip;
+                return Resources.unrollIntersectSurface;
             }
         }
 
@@ -107,7 +107,7 @@ namespace BarkBeetle.Comps7Utils
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("BA46F98E-E656-44D6-98DC-8196C38347BA"); }
+            get { return new Guid("69FDE932-C5A0-4E75-AB75-A52B6B08F502"); }
         }
     }
 }

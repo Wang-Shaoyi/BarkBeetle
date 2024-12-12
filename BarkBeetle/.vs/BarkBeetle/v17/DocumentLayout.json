@@ -3,6 +3,94 @@
   "WorkspaceRootPath": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\surfacetwist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\evaluationdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\evaluationdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\evaluateoverhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\evaluateoverhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps4stack\\edgebeamcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps4stack\\edgebeamcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps4stack\\stackverticalcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps4stack\\stackverticalcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\toolpathvisualization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\toolpathvisualization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps6display\\surfacecurvature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps6display\\surfacecurvature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps3pattern\\patternzigzagcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps3pattern\\patternzigzagcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps5output\\togcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps5output\\togcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps5output\\torobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps5output\\torobot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps4stack\\stackbrepcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps4stack\\stackbrepcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps1networkgraph\\uvnetworkcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps1networkgraph\\uvnetworkcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps1networkgraph\\organizeptsfromlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps1networkgraph\\organizeptsfromlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\unrollintersectsrfstrips.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps7utils\\unrollintersectsrfstrips.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\unrollsrfstripwithpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps7utils\\unrollsrfstripwithpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps3pattern\\patternavoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps3pattern\\patternavoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\extendsurface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps7utils\\extendsurface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\unrollstraightstripconsistentwidth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps7utils\\unrollstraightstripconsistentwidth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\treehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\treehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\breputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\breputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\unrollstraightstriptwowidth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps7utils\\unrollstraightstriptwowidth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\curveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\curveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\pattern\\avoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:pattern\\avoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,36 +103,12 @@
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:pattern\\toolpathpatterhspiral.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\pattern\\toolpathpatterhsnake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:pattern\\toolpathpatterhsnake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps3pattern\\unpacktoolpathpattern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps3pattern\\unpacktoolpathpattern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps3pattern\\patternavoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps3pattern\\patternavoidobstacles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\curveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\curveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\breputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\breputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps3pattern\\patternzigzagcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps3pattern\\patternzigzagcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\unroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\unroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\pointdatautils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,18 +117,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\pattern\\stackpatterns.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:pattern\\stackpatterns.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps4stack\\unpacktoolpathstack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps4stack\\unpacktoolpathstack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps4stack\\fillettoolpathstackcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps4stack\\fillettoolpathstackcomp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\treehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\treehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,7 +126,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,84 +134,260 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ToolpathPatterhSpiral.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSpiral.cs",
-              "RelativeDocumentMoniker": "Pattern\\ToolpathPatterhSpiral.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSpiral.cs",
-              "RelativeToolTip": "Pattern\\ToolpathPatterhSpiral.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEBAABbAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ToolpathVisualization.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\ToolpathVisualization.cs",
+              "RelativeDocumentMoniker": "Comps6Display\\ToolpathVisualization.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\ToolpathVisualization.cs",
+              "RelativeToolTip": "Comps6Display\\ToolpathVisualization.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxMAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:19:48.759Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T02:03:05.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SurfaceCurvature.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceCurvature.cs",
+              "RelativeDocumentMoniker": "Comps6Display\\SurfaceCurvature.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceCurvature.cs",
+              "RelativeToolTip": "Comps6Display\\SurfaceCurvature.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvxQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T02:02:52.364Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AvoidObstacles.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\AvoidObstacles.cs",
-              "RelativeDocumentMoniker": "Pattern\\AvoidObstacles.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\AvoidObstacles.cs",
-              "RelativeToolTip": "Pattern\\AvoidObstacles.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAAwCoAAAAAAAAAAAAAAA==",
+              "Title": "SurfaceTwist.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceTwist.cs",
+              "RelativeDocumentMoniker": "Comps6Display\\SurfaceTwist.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\SurfaceTwist.cs",
+              "RelativeToolTip": "Comps6Display\\SurfaceTwist.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvx8AAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T01:03:11.33Z",
+              "WhenOpened": "2024-12-06T01:22:34.133Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Unroll.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\Unroll.cs",
-              "RelativeDocumentMoniker": "Utils\\Unroll.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\Unroll.cs",
-              "RelativeToolTip": "Utils\\Unroll.cs",
-              "ViewState": "AgIAAAgCAAAAAAAAAAAAwCkCAAALAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EvaluateOverhang.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\EvaluateOverhang.cs",
+              "RelativeDocumentMoniker": "Comps6Display\\EvaluateOverhang.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps6Display\\EvaluateOverhang.cs",
+              "RelativeToolTip": "Comps6Display\\EvaluateOverhang.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAIwBgAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T00:52:27.333Z"
+              "WhenOpened": "2024-12-09T02:02:42.903Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "EvaluationDisplay.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\EvaluationDisplay.cs",
+              "RelativeDocumentMoniker": "Utils\\EvaluationDisplay.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\EvaluationDisplay.cs",
+              "RelativeToolTip": "Utils\\EvaluationDisplay.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAgwG8AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T18:09:37.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EdgeBeamComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\EdgeBeamComp.cs",
+              "RelativeDocumentMoniker": "Comps4Stack\\EdgeBeamComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\EdgeBeamComp.cs",
+              "RelativeToolTip": "Comps4Stack\\EdgeBeamComp.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAADwv38AAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T04:31:23.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ToGCode.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToGCode.cs",
+              "RelativeDocumentMoniker": "Comps5Output\\ToGCode.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToGCode.cs",
+              "RelativeToolTip": "Comps5Output\\ToGCode.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAA+wGUAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T00:41:18.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StackVerticalComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\StackVerticalComp.cs",
+              "RelativeDocumentMoniker": "Comps4Stack\\StackVerticalComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\StackVerticalComp.cs",
+              "RelativeToolTip": "Comps4Stack\\StackVerticalComp.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAswHYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T00:26:11.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "StackBrepComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\StackBrepComp.cs",
+              "RelativeDocumentMoniker": "Comps4Stack\\StackBrepComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\StackBrepComp.cs",
+              "RelativeToolTip": "Comps4Stack\\StackBrepComp.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAYwHYAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T00:34:26.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ToRobot.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToRobot.cs",
+              "RelativeDocumentMoniker": "Comps5Output\\ToRobot.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToRobot.cs",
+              "RelativeToolTip": "Comps5Output\\ToRobot.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAA4AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T00:39:09.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PatternZigZagComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternZigZagComp.cs",
+              "RelativeDocumentMoniker": "Comps3Pattern\\PatternZigZagComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternZigZagComp.cs",
+              "RelativeToolTip": "Comps3Pattern\\PatternZigZagComp.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvxgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-01T01:54:57.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UVNetworkComp.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps1NetworkGraph\\UVNetworkComp.cs",
+              "RelativeDocumentMoniker": "Comps1NetworkGraph\\UVNetworkComp.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps1NetworkGraph\\UVNetworkComp.cs",
+              "RelativeToolTip": "Comps1NetworkGraph\\UVNetworkComp.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAwBkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T19:59:52.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrganizePtsFromList.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps1NetworkGraph\\OrganizePtsFromList.cs",
+              "RelativeDocumentMoniker": "Comps1NetworkGraph\\OrganizePtsFromList.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps1NetworkGraph\\OrganizePtsFromList.cs",
+              "RelativeToolTip": "Comps1NetworkGraph\\OrganizePtsFromList.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T19:56:36.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UnrollIntersectSrfStrips.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollIntersectSrfStrips.cs",
+              "RelativeDocumentMoniker": "Comps7Utils\\UnrollIntersectSrfStrips.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollIntersectSrfStrips.cs",
+              "RelativeToolTip": "Comps7Utils\\UnrollIntersectSrfStrips.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvxAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T01:33:30.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ExtendSurface.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\ExtendSurface.cs",
+              "RelativeDocumentMoniker": "Comps7Utils\\ExtendSurface.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\ExtendSurface.cs",
+              "RelativeToolTip": "Comps7Utils\\ExtendSurface.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T01:17:46.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UnrollSrfStripWithPoints.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollSrfStripWithPoints.cs",
+              "RelativeDocumentMoniker": "Comps7Utils\\UnrollSrfStripWithPoints.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollSrfStripWithPoints.cs",
+              "RelativeToolTip": "Comps7Utils\\UnrollSrfStripWithPoints.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAwwHUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T22:30:37.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "PatternAvoidObstacles.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternAvoidObstacles.cs",
               "RelativeDocumentMoniker": "Comps3Pattern\\PatternAvoidObstacles.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternAvoidObstacles.cs",
               "RelativeToolTip": "Comps3Pattern\\PatternAvoidObstacles.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAUwFIAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAYwGgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T02:48:20.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T02:48:20.864Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CurveUtils.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurveUtils.cs",
-              "RelativeDocumentMoniker": "Utils\\CurveUtils.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurveUtils.cs",
-              "RelativeToolTip": "Utils\\CurveUtils.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABsAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "UnrollStraightStripConsistentWidth.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
+              "RelativeDocumentMoniker": "Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
+              "RelativeToolTip": "Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAIwBIAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T01:56:21.346Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T21:48:41.378Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ToolpathPatterhSnake.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSnake.cs",
-              "RelativeDocumentMoniker": "Pattern\\ToolpathPatterhSnake.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSnake.cs",
-              "RelativeToolTip": "Pattern\\ToolpathPatterhSnake.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAwNgBAAAIAAAAAAAAAA==",
+              "DocumentIndex": 20,
+              "Title": "UnrollStraightStripTwoWidth.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripTwoWidth.cs",
+              "RelativeDocumentMoniker": "Comps7Utils\\UnrollStraightStripTwoWidth.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripTwoWidth.cs",
+              "RelativeToolTip": "Comps7Utils\\UnrollStraightStripTwoWidth.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T20:26:00.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T22:29:39.752Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 19,
+              "Title": "BrepUtils.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\BrepUtils.cs",
+              "RelativeDocumentMoniker": "Utils\\BrepUtils.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\BrepUtils.cs",
+              "RelativeToolTip": "Utils\\BrepUtils.cs",
+              "ViewState": "AgIAALAAAAAAAAAAAAAUwPEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T23:10:22.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "TreeHelper.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\TreeHelper.cs",
+              "RelativeDocumentMoniker": "Utils\\TreeHelper.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\TreeHelper.cs",
+              "RelativeToolTip": "Utils\\TreeHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgBAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T05:16:48.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
               "Title": "StackBetween.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\ToolpathStackSetting\\StackBetween.cs",
               "RelativeDocumentMoniker": "ToolpathStackSetting\\StackBetween.cs",
@@ -171,7 +399,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 22,
+              "Title": "AvoidObstacles.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\AvoidObstacles.cs",
+              "RelativeDocumentMoniker": "Pattern\\AvoidObstacles.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\AvoidObstacles.cs",
+              "RelativeToolTip": "Pattern\\AvoidObstacles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T01:03:11.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CurveUtils.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurveUtils.cs",
+              "RelativeDocumentMoniker": "Utils\\CurveUtils.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\CurveUtils.cs",
+              "RelativeToolTip": "Utils\\CurveUtils.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAJEAAABhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T18:47:11.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ToolpathPatterhSpiral.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSpiral.cs",
+              "RelativeDocumentMoniker": "Pattern\\ToolpathPatterhSpiral.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhSpiral.cs",
+              "RelativeToolTip": "Pattern\\ToolpathPatterhSpiral.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEBAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:19:48.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "ToolpathPatterhZigZag.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\ToolpathPatterhZigZag.cs",
               "RelativeDocumentMoniker": "Pattern\\ToolpathPatterhZigZag.cs",
@@ -179,24 +443,11 @@
               "RelativeToolTip": "Pattern\\ToolpathPatterhZigZag.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAQwNkBAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T02:11:39.776Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T02:11:39.776Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BrepUtils.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\BrepUtils.cs",
-              "RelativeDocumentMoniker": "Utils\\BrepUtils.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\BrepUtils.cs",
-              "RelativeToolTip": "Utils\\BrepUtils.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPsAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:10:22.714Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "UnpackToolpathPattern.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\UnpackToolpathPattern.cs",
               "RelativeDocumentMoniker": "Comps3Pattern\\UnpackToolpathPattern.cs",
@@ -204,36 +455,11 @@
               "RelativeToolTip": "Comps3Pattern\\UnpackToolpathPattern.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAUwFUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T02:50:13.417Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T02:50:13.417Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PatternZigZagComp.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternZigZagComp.cs",
-              "RelativeDocumentMoniker": "Comps3Pattern\\PatternZigZagComp.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps3Pattern\\PatternZigZagComp.cs",
-              "RelativeToolTip": "Comps3Pattern\\PatternZigZagComp.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAYwFkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T01:54:57.185Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UnpackToolpathStack.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\UnpackToolpathStack.cs",
-              "RelativeDocumentMoniker": "Comps4Stack\\UnpackToolpathStack.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\UnpackToolpathStack.cs",
-              "RelativeToolTip": "Comps4Stack\\UnpackToolpathStack.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwB8AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T21:59:13.567Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 27,
               "Title": "PointDataUtils.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\PointDataUtils.cs",
               "RelativeDocumentMoniker": "Utils\\PointDataUtils.cs",
@@ -245,19 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "FilletToolpathStackComp.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\FilletToolpathStackComp.cs",
-              "RelativeDocumentMoniker": "Comps4Stack\\FilletToolpathStackComp.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps4Stack\\FilletToolpathStackComp.cs",
-              "RelativeToolTip": "Comps4Stack\\FilletToolpathStackComp.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAYwFAAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T21:59:29.084Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 28,
               "Title": "StackPatterns.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Pattern\\StackPatterns.cs",
               "RelativeDocumentMoniker": "Pattern\\StackPatterns.cs",
@@ -268,16 +482,8 @@
               "WhenOpened": "2024-12-02T22:05:27.657Z"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "TreeHelper.cs",
-              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\TreeHelper.cs",
-              "RelativeDocumentMoniker": "Utils\\TreeHelper.cs",
-              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\TreeHelper.cs",
-              "RelativeToolTip": "Utils\\TreeHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T05:16:48.196Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             }
           ]
         }

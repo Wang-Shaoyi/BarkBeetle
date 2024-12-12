@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Rhino 7</ActiveDebugProfile>
+    <ActiveDebugProfile>Rhino 8 - netfx</ActiveDebugProfile>
     <ActiveDebugFramework>net48</ActiveDebugFramework>
   </PropertyGroup>
   <ItemGroup>

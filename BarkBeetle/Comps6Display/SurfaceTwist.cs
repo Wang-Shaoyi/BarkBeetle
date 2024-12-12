@@ -18,7 +18,7 @@ namespace BarkBeetle.Comps6Display
         public SurfaceTwist()
           : base("Surface Twist Angle per Length", "Surface Twist",
               "Display surface (stirp) twist angle per length",
-              "BarkBeetle", "6-Display")
+              "BarkBeetle", "6-Display & Analysis")
         {
         }
 
@@ -75,7 +75,7 @@ namespace BarkBeetle.Comps6Display
             List<double> legendTags;
 
             // Call the curvature display function
-            CurvatureDisplay display = new CurvatureDisplay();
+            EvaluationDisplay display = new EvaluationDisplay();
             display.DisplayTwist(surfaces, curves, density, outputUnit, out meshes, out legendColors, out legendTags);
 
             // Set outputs
@@ -95,7 +95,7 @@ namespace BarkBeetle.Comps6Display
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.twisting;
             }
         }
 

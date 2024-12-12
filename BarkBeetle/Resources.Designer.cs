@@ -63,6 +63,46 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BrepStack {
+            get {
+                object obj = ResourceManager.GetObject("BrepStack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap copyTree {
+            get {
+                object obj = ResourceManager.GetObject("copyTree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Curvature {
+            get {
+                object obj = ResourceManager.GetObject("Curvature", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap edge_beam {
+            get {
+                object obj = ResourceManager.GetObject("edge-beam", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap ExtendSurface {
             get {
                 object obj = ResourceManager.GetObject("ExtendSurface", resourceCulture);
@@ -103,6 +143,16 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap obstacle {
+            get {
+                object obj = ResourceManager.GetObject("obstacle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap OffsetStack {
             get {
                 object obj = ResourceManager.GetObject("OffsetStack", resourceCulture);
@@ -126,6 +176,16 @@ namespace BarkBeetle {
         internal static System.Drawing.Bitmap OrganizePointTreeformSurface {
             get {
                 object obj = ResourceManager.GetObject("OrganizePointTreeformSurface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap overhang {
+            get {
+                object obj = ResourceManager.GetObject("overhang", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +303,29 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap ToRobot {
+            get {
+                object obj = ResourceManager.GetObject("ToRobot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap TriangularToolpathBase {
             get {
                 object obj = ResourceManager.GetObject("TriangularToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap twisting {
+            get {
+                object obj = ResourceManager.GetObject("twisting", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,6 +363,16 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap unrollIntersectSurface {
+            get {
+                object obj = ResourceManager.GetObject("unrollIntersectSurface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap UnrollStrip {
             get {
                 object obj = ResourceManager.GetObject("UnrollStrip", resourceCulture);
@@ -296,6 +386,16 @@ namespace BarkBeetle {
         internal static System.Drawing.Bitmap UnrollUVStrip {
             get {
                 object obj = ResourceManager.GetObject("UnrollUVStrip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UnrollWithPts {
+            get {
+                object obj = ResourceManager.GetObject("UnrollWithPts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

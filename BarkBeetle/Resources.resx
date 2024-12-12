@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BrepStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\BrepStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="copyTree" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\copyTree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Curvature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Curvature.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edge-beam" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\edge-beam.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ExtendSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ExtendSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,6 +142,9 @@
   <data name="Intersection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Intersection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="obstacle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\obstacle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="OffsetStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\OffsetStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,6 +153,9 @@
   </data>
   <data name="OrganizePointTreeformSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\OrganizePointTreeformSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overhang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\overhang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SimpleSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\SimpleSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +190,14 @@
   <data name="ToolpathToMesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ToolpathToMesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ToRobot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ToRobot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TriangularToolpathBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\TriangularToolpathBase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="twisting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\twisting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UnpackSkeletonPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnpackSkeletonPackage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,11 +208,17 @@
   <data name="UnpackToolpathStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnpackToolpathStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="unrollIntersectSurface" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\unrollIntersectSurface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="UnrollStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnrollStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UnrollUVStrip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UnrollUVStrip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnrollWithPts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnrollWithPts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UVNetworkOnSrf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\UVNetworkOnSrf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

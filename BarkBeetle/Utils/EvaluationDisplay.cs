@@ -7,12 +7,19 @@ using System.Drawing;
 using Rhino.Geometry;
 using Grasshopper.Kernel;
 using Rhino;
+using BarkBeetle.ToolpathStackSetting;
+using System.Drawing.Imaging;
+using System.Security.Cryptography;
+
 
 namespace BarkBeetle.Utils
 {
 
-    internal class CurvatureDisplay
+    internal class EvaluationDisplay
     {
+        /// <summary>
+        /// Evaluating curvature and twisitng
+        /// </summary>
         public void DisplayCurvature(List<Surface> surfaces, int density, int type, int outputUnit, out List<Mesh> meshes, out List<Color> legendColors, out List<double> legendTags)
         {
             //Initialize
@@ -201,10 +208,54 @@ namespace BarkBeetle.Utils
         }
 
         /// <summary>
+        /// Evaluating overhang
+        /// </summary>
+        public void EvaluateDiscontinueAngles(ToolpathStack toolpathStack, int displayThickness, out List<Curve> allSegments, out List<double> allAngles, out List<Color> legendColors, out List<double> legendTags)
+        {
+            List<Curve> layerCurves = toolpathStack.LayerCurves.Select(ghCrv => ghCrv.Value).ToList();
+
+            Curve topCrv = layerCurves[layerCurves.Count - 1];
+
+            List<Point3d> topDiscontinuePoints = CurveUtils.GetDiscontinuityPoints(topCrv, out List<Curve> segments);
+
+            // Step 1: get all points
+            Point3d[,] pointArray = new Point3d[layerCurves.Count, topDiscontinuePoints.Count];
+            for (int i = 0; i < layerCurves.Count; i++)
+            {
+                Curve currentCrv = layerCurves[i];
+                for (int j = 0; j < topDiscontinuePoints.Count; j++)
+                {
+                    currentCrv.ClosestPoint(topDiscontinuePoints[j], out double t);
+                    pointArray[i, j] = currentCrv.PointAt(t);
+                }
+            }
+
+            // Step 2: calculate angles
+            allSegments = new List<Curve>();
+            allAngles = new List<double>();
+            for (int j = 0; j < topDiscontinuePoints.Count; j++)
+            {
+                for (int i = 0; i < layerCurves.Count - 1; i++)
+                {
+                    Line newLine = new Line(pointArray[i, j], pointArray[i + 1, j]);
+                    allSegments.Add(newLine.ToNurbsCurve());
+                    Vector3d newVector = pointArray[i + 1, j] - pointArray[i, j];
+                    double angle = Vector3d.VectorAngle(newVector, Vector3d.ZAxis);
+                    allAngles.Add(Math.Round(angle,2));
+                }
+            }
+
+            legendColors = new List<Color>();
+            legendTags = new List<double>();
+            GenerateLegend(allAngles.Min(), allAngles.Max(), legendColors, legendTags, 10);
+
+        }
+
+        /// <summary>
         /// Below is color related
         /// </summary>
         // generate the legend
-        private void GenerateLegend(double minValue, double maxValue, List<Color> legendColors, List<double> legendTags, int legendSteps)
+        public void GenerateLegend(double minValue, double maxValue, List<Color> legendColors, List<double> legendTags, int legendSteps)
         {
             double step = (maxValue - minValue) / (legendSteps - 1);
             Color[] colormap = CreateColormap();
@@ -218,20 +269,26 @@ namespace BarkBeetle.Utils
             }
         }
 
-        private Color[] CreateColormap()
+        public Color[] CreateColormap()
         {
+            // This is the sunset colormap, friendly for color blind people
             return new Color[]
             {
-                Color.Blue,
-                Color.Cyan,
-                Color.Green,
-                Color.Yellow,
-                Color.Orange,
-                Color.Red
+                Color.FromArgb(54, 75, 154),
+                Color.FromArgb(74, 123, 183),
+                Color.FromArgb(110, 166, 205),
+                Color.FromArgb(152, 202, 225),
+                Color.FromArgb(194, 228, 239),
+                Color.FromArgb(234, 236, 204),
+                Color.FromArgb(254, 218, 139),
+                Color.FromArgb(253, 179, 102),
+                Color.FromArgb(246, 126, 75),
+                Color.FromArgb(221, 61, 45),
+                Color.FromArgb(165, 0, 38)
             };
         }
 
-        private Color MapToColor(double t, Color[] colormap)
+        public Color MapToColor(double t, Color[] colormap)
         {
             // Clamp t to the valid range [0, 1]
             t = Math.Max(0, Math.Min(1, t));

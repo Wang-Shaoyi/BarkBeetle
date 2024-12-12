@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Grasshopper.Kernel.Types;
 using Rhino.Collections;
+using Rhino.Geometry.Intersect;
+using Microsoft.VisualBasic;
 
 namespace BarkBeetle.Utils
 {
@@ -358,7 +360,7 @@ namespace BarkBeetle.Utils
         #endregion
 
         #region unroll surface
-        public static void UnrollSurfacesAndLabeling(
+        public static void UnrollIntersectSurfacesAndLabeling(
             List<Curve> curves, List<Surface> surfaces, double tolerance,
             double distance, double holeRadius, double fontSize, out List<GH_Curve> stripBoundaries,
             out List<GH_Point> points, out List<GH_Circle> holes, out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane)
@@ -540,18 +542,124 @@ namespace BarkBeetle.Utils
                 {
                     indicesTextOnPlane.Add(new GH_Curve(crv));
                 }
-
-                
             }
         }
 
-        //public static void UnrollSurfacesAndLabelingWithPoints(
-        //    List<Curve> curves, List<Surface> surfaces, double tolerance, List<Point3d> intersectionPts,
-        //    double distance, double holeRadius, double fontSize, out List<GH_Curve> stripBoundaries,
-        //    out List<GH_Point> points, out List<GH_Circle> holes, out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane)
-        //{
+        public static void UnrollSurfacesAndLabelingWithPoints(
+            List<Curve> curves, List<Surface> surfaces, double tolerance, List<List<Point3d>> intersectionPts, 
+            double distance, double holeRadius, double fontSize, out List<GH_Curve> stripBoundaries, 
+            out List<GH_Point> points, out List<GH_Circle> holes, out List<GH_Curve> indicesTextOnCurve, out List<GH_Curve> indicesTextOnPlane,
+            List<List<int>> intersectionIndexes = null)
+        {
+            // Initialize
+            stripBoundaries = new List<GH_Curve>();
+            points = new List<GH_Point>();
+            holes = new List<GH_Circle>();
+            indicesTextOnCurve = new List<GH_Curve>();
+            indicesTextOnPlane = new List<GH_Curve>();
 
-        //}
+            double yOffset = 0;
+            // Go through all surfaces to unroll and label
+            for (int i = 0; i < surfaces.Count; i++)
+            {
+                Surface surface = surfaces[i];
+                Curve curve = curves[i];
+                List<Point3d> pointsX = intersectionPts[i];
+                List<int> indexX = new List<int>();
+
+                if (intersectionIndexes != null)
+                {
+                    indexX = intersectionIndexes[i];
+                }
+
+                List<double> lengths = new List<double>();
+                foreach (Point3d point in pointsX)
+                {
+                    curve.ClosestPoint(point, out double t);
+                    double length = curve.GetLength(new Interval(curve.Domain.Min, t));
+                    lengths.Add(length);
+                }
+
+                // Label on curve
+                TextEntity textEntityCurve = new TextEntity
+                {
+                    Plane = new Plane(curve.PointAtStart, new Vector3d(0, 0, 1)),
+                    PlainText = "Crv_" + i,
+                    TextHeight = fontSize,
+                    Justification = TextJustification.Middle
+                };
+                foreach (Curve crv in textEntityCurve.Explode()) indicesTextOnCurve.Add(new GH_Curve(crv));
+
+                //unroll surface
+                Surface unrolledSrf = BrepUtils.UnrollSurfaceWithCurve(surface, curve, pointsX, out Curve unrolledCurve, out List<Point3d> unrolledPointsX);
+
+                // Get max Y to organize the layout
+                BoundingBox bbox = unrolledSrf.GetBoundingBox(true);
+                double width = bbox.Max.X - bbox.Min.X;
+
+                yOffset += distance + width;
+
+                // Get and locate unrolled boundary
+                Transform rotation = Transform.Rotation(-Math.PI / 2, Vector3d.ZAxis, Point3d.Origin);
+                Transform translation = Transform.Translation(-yOffset, 0, 0);
+                Transform combinedTransform = rotation * translation;
+
+                //get boundary
+                Brep brepSurface = unrolledSrf.ToBrep();
+                Brep rotatedBrep = brepSurface.DuplicateBrep();
+                rotatedBrep.Transform(combinedTransform);
+
+                Curve[] boundaryCrv = rotatedBrep.DuplicateEdgeCurves();
+                foreach (Curve crv in boundaryCrv)
+                {
+                    stripBoundaries.Add(new GH_Curve(crv));
+                }
+
+                //go through all points, label them, and give them holes
+                for (int j = 0; j < pointsX.Count; j++)
+                {
+                    // Also move points
+                    Point3d ptX = pointsX[j];
+                    Point3d ptPlane = unrolledCurve.PointAtLength(lengths[j]);
+                    ptPlane.Transform(combinedTransform);
+                    points.Add(new GH_Point(ptPlane));
+
+                    if (intersectionIndexes != null)
+                    {
+                        int currentId = indexX[j];
+
+                        // Label
+                        TextEntity textEntity = new TextEntity
+                        {
+                            Plane = new Plane(ptPlane + new Vector3d(holeRadius, 0, 0), new Vector3d(0, 0, 1)),
+                            PlainText = currentId.ToString(),
+                            TextHeight = fontSize,
+                            Justification = TextJustification.Left
+                        };
+                        Curve[] textCurves = textEntity.Explode();
+
+                        foreach (Curve crv in textCurves) indicesTextOnPlane.Add(new GH_Curve(crv));
+                    }
+                        
+                    Circle circle = new Circle(ptPlane, holeRadius);
+                    holes.Add(new GH_Circle(circle));
+                }
+
+                // Label the curves
+                TextEntity textEntityPlane = new TextEntity
+                {
+                    Plane = new Plane(new Point3d(distance, yOffset - distance, 0), new Vector3d(0, 0, 1)),
+                    PlainText = "Crv_" + i,
+                    TextHeight = fontSize,
+                    Justification = TextJustification.Left
+                };
+
+                foreach (Curve crv in textEntityPlane.Explode())
+                {
+                    indicesTextOnPlane.Add(new GH_Curve(crv));
+                }
+            }
+        }
 
         #endregion
     }

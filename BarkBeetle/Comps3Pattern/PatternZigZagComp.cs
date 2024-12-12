@@ -22,7 +22,7 @@ namespace BarkBeetle.CompsToolpath
         /// Initializes a new instance of the Toolpath class.
         /// </summary>
         public PatternZigZagComp()
-          : base("Snake ZigZag Pattern", "ZigZag Pattern",
+          : base("ZigZag Infill Pattern", "ZigZag Pattern",
               "A zigzag infill shape generated from the skeleton as a layer of the toolpath",
               "BarkBeetle", "3-Pattern")
         {

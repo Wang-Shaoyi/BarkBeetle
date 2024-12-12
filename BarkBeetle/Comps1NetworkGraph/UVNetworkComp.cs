@@ -23,8 +23,8 @@ namespace BarkBeetle.CompsGeoPack
         /// Initializes a new instance of the SkeletonFromSAndPT class.
         /// </summary>
         public UVNetworkComp()
-          : base("UV Network", "UVNetwork",
-              "Create BarkBeetle UV Network",
+          : base("BarkBeetle Network", "Network",
+              "Create BarkBeetle Network",
               "BarkBeetle", "1-Network")
         {
         }

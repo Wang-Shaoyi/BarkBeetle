@@ -18,7 +18,7 @@ namespace BarkBeetle.Comps6Display
         public SurfaceCurvature()
           : base("Surface Curvature", "Surface Curvature",
               "Display surface curvature",
-              "BarkBeetle", "6-Display")
+              "BarkBeetle", "6-Display & Analysis")
         {
         }
 
@@ -84,7 +84,7 @@ namespace BarkBeetle.Comps6Display
             List<double> legendTags;
 
             // Call the curvature display function
-            CurvatureDisplay display = new CurvatureDisplay();
+            EvaluationDisplay display = new EvaluationDisplay();
             display.DisplayCurvature(surfaces, density, type, outputUnit, out meshes, out legendColors, out legendTags);
 
             // Set outputs
@@ -104,7 +104,7 @@ namespace BarkBeetle.Comps6Display
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Resources.Curvature;
             }
         }
 
