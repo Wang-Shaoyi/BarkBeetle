@@ -1,5 +1,6 @@
 ﻿
 using Rhino.Geometry;
+using Rhino.DocObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,11 +50,10 @@ namespace BarkBeetle.ToolpathStackSetting
         }
 
         // 4 Plane (Frame) Reference orientation
-        private Point3d planeRefPt { get; set; }
-        public Point3d PlaneRefPt
-        {
-            get { return planeRefPt; }
-            set { planeRefPt = value; }
+        private GeometryBase refGeo { get; set; }
+        public GeometryBase RefGeo { 
+            get { return refGeo; }
+            set { refGeo = value; }
         }
 
         // 5 Planes on the toolpath
@@ -94,21 +94,21 @@ namespace BarkBeetle.ToolpathStackSetting
             get { return angleGlobal; }
         }
 
-        // 9 Whether z axis is the global axis or is z surface on the surface
+        // 10 Whether z axis is the global axis or is z surface on the surface
         private double rotateAngle { get; set; } // true: global z axis; false: local z axis
         public double RotateAngle
         {
             get { return rotateAngle; }
         }
 
-        public ToolpathStack(StackPatterns sp,  double h, bool ag, Point3d refPt, double angle) { }
+        public ToolpathStack(StackPatterns sp,  double h, bool ag, GeometryBase refGeo, double angle) { }
 
-        public void GenerateToolpathStack(StackPatterns sp,  double h, bool ag, Point3d refPt, double angle)
+        public void GenerateToolpathStack(StackPatterns sp,  double h, bool ag, GeometryBase refg, double angle)
         {
             patterns = sp;
             layerHeight = h;
             angleGlobal = ag;
-            planeRefPt = refPt;
+            refGeo = refg;
             rotateAngle = angle;
 
             surfaces = CreateStackSurfaces();
@@ -144,6 +144,46 @@ namespace BarkBeetle.ToolpathStackSetting
             return new GH_Curve(polyCurve);
         }
         public abstract List<List<GH_Plane>> CreateStackOrientPlanes(double angle, ref List<List<GH_Number>> speedFactor);
+
+
+        public static Point3d GetClosestPoint(GeometryBase geometry, Point3d referencePoint)
+        {
+            Point3d closestPoint = Point3d.Unset;
+
+            switch (geometry.ObjectType)
+            {
+                case ObjectType.Point:
+                    if (geometry is Rhino.Geometry.Point pointGeometry)
+                    {
+                        closestPoint = pointGeometry.Location;  // Rhino.Geometry.Point 类有一个 Location 属性，其类型是 Point3d
+                    }
+                    break;
+                case ObjectType.Curve:
+                    Curve curve = geometry as Curve;
+                    double t;
+                    curve.ClosestPoint(referencePoint, out t);
+                    closestPoint = curve.PointAt(t);
+                    break;
+                case ObjectType.Surface:
+                    Surface surface = geometry as Surface;
+                    double u, v;
+                    surface.ClosestPoint(referencePoint, out u, out v);
+                    closestPoint = surface.PointAt(u, v);
+                    break;
+                case ObjectType.Brep:
+                    Brep brep = geometry as Brep;
+                    closestPoint = brep.ClosestPoint(referencePoint);
+                    break;
+                case ObjectType.Mesh:
+                    Mesh mesh = geometry as Mesh;
+                    closestPoint = mesh.ClosestPoint(referencePoint);
+                    break;
+                default:
+                    throw new ArgumentException("Unsupported geometry type for closest point calculation.");
+            }
+
+            return closestPoint;
+        }
 
 
     }

@@ -21,15 +21,13 @@ namespace BarkBeetle.Pattern
         public List<Curve> TrimCurves;
         public List<Point3d> IntersectionPts;
         private Surface surface;
-        private double xSize;
-        private double ySize;
         private double pathWidth;
 
 
         public AvoidObstacles(ToolpathPattern pattern, List<Point3d> pts, Curve block, Plane blockPlane, out ToolpathPattern OutputPattern)
         {
             skeletonCrv = pattern.Skeleton.SkeletonMainCurve.Value;
-            surface = pattern.Skeleton.UVNetwork.ExtendedSurface;
+            surface = pattern.BaseSrf;
 
             BlockBoundaries = new List<Curve>();
             TrimCurves = new List<Curve>();

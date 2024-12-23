@@ -18,13 +18,13 @@ using System.Threading.Tasks;
 
 namespace BarkBeetle.Pattern
 {
-    internal class ToolpathPatterhSnake : ToolpathPattern
+    internal class ToolpathPatternZigZag : ToolpathPattern
     {
         private double spacing;
         private List<int> depthList = new List<int>();
         private Point3d[,,] inAndOutCornerPts { get; set; }
 
-        public ToolpathPatterhSnake(SkeletonGraph sG, Point3d seam, double pw, double s) : base(sG, seam, pw)
+        public ToolpathPatternZigZag(SkeletonGraph sG, Point3d seam, double pw, double s) : base(sG, seam, pw)
         {
             double stripWidth = sG.UVNetwork.StripWidth;
             if (stripWidth < pw * 6) return;
@@ -42,9 +42,9 @@ namespace BarkBeetle.Pattern
             Curve outsideCrv = closedCrvs[1];
             Curve boundaryCrv = closedCrvs[2]; 
 
-            Curve snakeCrv = CreateSnakeCurve(insideCrv, outsideCrv, spacing);
+            Curve zigzagCrv = CreateZigZagCurve(insideCrv, outsideCrv, spacing);
 
-            BundleCurves = new List<Curve> { snakeCrv, boundaryCrv};
+            BundleCurves = new List<Curve> { zigzagCrv, boundaryCrv};
             CoutinuousCurve = ToolpathContinuousStraight(BundleCurves);
         }
 
@@ -53,8 +53,7 @@ namespace BarkBeetle.Pattern
             // Set up all needed properties
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
 
-            int uCnt = bbPointArray.GetLength(0);
-            int vCnt = bbPointArray.GetLength(1);
+            int ptCount = CountNonNull(bbPointArray);
 
             // calculate number of circles
             double stripWidth = Skeleton.UVNetwork.StripWidth;
@@ -62,11 +61,11 @@ namespace BarkBeetle.Pattern
             depthList = new List<int> { 0, depthNum - 2, depthNum - 1 };
 
             // Set up an empty array
-            Point3d[,,] ptArray3D = new Point3d[uCnt * vCnt, 3, 6];
+            Point3d[,,] ptArray3D = new Point3d[ptCount, 3, 6];
             BBPoint curBBPoint = bbPointArray[0, 0];
 
             // Go though all points in gh_Points
-            for (int i = 0; i < uCnt * vCnt; i++)
+            for (int i = 0; i < ptCount; i++)
             {
                 Point3d pt = curBBPoint.CurrentPt3d;
 
@@ -143,7 +142,7 @@ namespace BarkBeetle.Pattern
 
         private List<Curve> CreatClosedReferenceCurves(Point3d[,,] ptArray3D)
         {
-            Surface surface = Skeleton.UVNetwork.ExtendedSurface;
+            Surface surface = BaseSrf;
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
             BBPoint curBBPoint = bbPointArray[0, 0];
 
@@ -152,19 +151,14 @@ namespace BarkBeetle.Pattern
             // Create an empty list to save all the tool paths
             List<Curve> toolpathList = new List<Curve>();
 
-            int cnt1 = bbPointArray.GetLength(0);
-            int cnt2 = bbPointArray.GetLength(1);
-
-            int count = ptArray3D.GetLength(0);
-
-            int countLastLine = PointDataUtils.FindSpiralLastLineCount(cnt1, cnt2);
-            int depthNum = ptArray3D.GetLength(1);
+            int count = CountNonNull(bbPointArray);
 
             // For each toolpath circle
             for (int k = 0; k < 3; k++)
             {
                 // Create an empty list to sort the points
                 List<Point3d> toolpathPointList = new List<Point3d>();
+                curBBPoint = bbPointArray[0, 0];
 
                 ////////////Add points with sequence///////////////
                 // For each point
@@ -248,12 +242,12 @@ namespace BarkBeetle.Pattern
                             toolpathPointList.Add(ptArray3D[i, k, 0]);
                         }
                     }
+                    else curBBPoint = bbPointArray[0, 0];
 
                     if (curBBPoint.IsNextIndexAssigned())
                     {
                         curBBPoint = BBPoint.FindByIndex(curBBPoint.NextIndex, bbPointArray);
                     }
-                    else curBBPoint = bbPointArray[0, 0];
                 }
 
                 //if (k == 2) CornerPtsList.AddRange(toolpathPointList);
@@ -286,9 +280,9 @@ namespace BarkBeetle.Pattern
             return toolpathList;
         }
 
-        private Curve CreateSnakeCurve(Curve insideCrv, Curve outsideCrv, double density)
+        private Curve CreateZigZagCurve(Curve insideCrv, Curve outsideCrv, double density)
         {
-            Surface surface = Skeleton.UVNetwork.ExtendedSurface;
+            Surface surface = BaseSrf;
             List<Point3d> insideDiscontinuousPts = CurveUtils.GetDiscontinuityPoints(insideCrv, out List<Curve> insideSegments);
             List<Point3d> outsideDiscontinuousPts = CurveUtils.GetDiscontinuityPoints(outsideCrv, out List<Curve> outsideSegments);
 
@@ -338,7 +332,7 @@ namespace BarkBeetle.Pattern
                         Curve insideControlCrv = Curve.JoinCurves(new List<Curve> { insideOtherSeg,insideSeg }, 0.01)[0];
 
                         // odd segments in between
-                        int maxCount = (int) Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int) (Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength())/(PathWidth + spacing));
                         if (maxCount % 2 == 0) maxCount -= 1;
                         n = Math.Max(maxCount,1);
 
@@ -367,7 +361,7 @@ namespace BarkBeetle.Pattern
                         Curve insideControlCrv = Curve.JoinCurves(new List<Curve> { insideOtherSeg, insideMidSeg }, 0.01)[0];
 
                         // even segments in between
-                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 1) maxCount -= 1;
                         n = Math.Max(maxCount, 2);
 
@@ -400,7 +394,7 @@ namespace BarkBeetle.Pattern
                         Curve outsideControlCrv = Curve.JoinCurves(new List<Curve> { outsideOtherSeg, outsideMidSeg }, 0.01)[0];
 
                         // even segments in between
-                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 1) maxCount -= 1;
                         n = Math.Max(maxCount, 2);
 
@@ -428,7 +422,7 @@ namespace BarkBeetle.Pattern
                         Curve outsideControlCrv = Curve.JoinCurves(new List<Curve> { outsideOtherSeg, outsideSeg }, 0.01)[0];
 
                         // odd segments in between
-                        int maxCount = (int)Math.Round(Math.Max(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
+                        int maxCount = (int)(Math.Min(outsideControlCrv.GetLength(), insideControlCrv.GetLength()) / (PathWidth + spacing));
                         if (maxCount % 2 == 0) maxCount -= 1;
                         n = Math.Max(maxCount, 1);
 
@@ -447,12 +441,10 @@ namespace BarkBeetle.Pattern
                     if (flipSequence)
                     {
                         ptsAll.Add(BrepUtils.GetClosestPointOnSurface(surface, insideControlPts[j]));
-                        ptsAll.Add(BrepUtils.GetClosestPointOnSurface(surface, outsideControlPts[j]));
                     }
                     else
                     {
                         ptsAll.Add(BrepUtils.GetClosestPointOnSurface(surface, outsideControlPts[j]));
-                        ptsAll.Add(BrepUtils.GetClosestPointOnSurface(surface, insideControlPts[j]));
                     }
                     flipSequence = !flipSequence;
                 }
@@ -473,13 +465,10 @@ namespace BarkBeetle.Pattern
         public override ToolpathPattern DeepCopy()
         {
             // New instance
-            var copy = new ToolpathPatterhSnake(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing);
+            var copy = new ToolpathPatternZigZag(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing);
 
             return copy;
         }
-
-
-
     }
         
 }

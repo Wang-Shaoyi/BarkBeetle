@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace BarkBeetle.Pattern
 {
-    internal class ToolpathPatterhSpiral : ToolpathPattern
+    internal class ToolpathPatternSpiral : ToolpathPattern
     {
         // 3 Pattern corner points
         private Point3d[,,] cornerPts { get; set; }
 
-        public ToolpathPatterhSpiral(SkeletonGraph sG, Point3d seam, double pw) : base(sG, seam, pw) 
+        public ToolpathPatternSpiral(SkeletonGraph sG, Point3d seam, double pw) : base(sG, seam, pw) 
         {
             ConstructToolpathPattern();
         }
@@ -37,19 +37,18 @@ namespace BarkBeetle.Pattern
             // Set up all needed properties
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
 
-            int uCnt = bbPointArray.GetLength(0);
-            int vCnt = bbPointArray.GetLength(1);
-            
+            int ptCount = CountNonNull(bbPointArray);
+
             // calculate number of circles
             double stripWidth = Skeleton.UVNetwork.StripWidth;
             int depthNum = (int)(stripWidth / (PathWidth * 2));
 
             // Set up an empty array
-            Point3d[,,] ptArray3D = new Point3d[uCnt * vCnt, depthNum, 6];
+            Point3d[,,] ptArray3D = new Point3d[ptCount, depthNum, 6];
             BBPoint curBBPoint = bbPointArray[0, 0];
 
             // Go though all points in gh_Points
-            for (int i = 0; i < uCnt * vCnt; i++)
+            for (int i = 0; i < ptCount; i++)
             {
                 Point3d pt = curBBPoint.CurrentPt3d;
 
@@ -126,7 +125,7 @@ namespace BarkBeetle.Pattern
 
         private List<Curve> CreatSpiralToolpath(Point3d[,,] ptArray3D)
         {
-            Surface surface = Skeleton.UVNetwork.ExtendedSurface;
+            Surface surface = BaseSrf;
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
             BBPoint curBBPoint = bbPointArray[0, 0];
 
@@ -135,20 +134,16 @@ namespace BarkBeetle.Pattern
             // Create an empty list to save all the tool paths
             List<Curve> toolpathList = new List<Curve>();
 
-            int cnt1 = bbPointArray.GetLength(0);
-            int cnt2 = bbPointArray.GetLength(1);
+            int count = CountNonNull(bbPointArray);
 
-            int count = ptArray3D.GetLength(0);
-
-            int countLastLine = PointDataUtils.FindSpiralLastLineCount(cnt1, cnt2);
             int depthNum = ptArray3D.GetLength(1);
 
             // For each toolpath circle
             for (int k = 0; k < depthNum; k++)
             {
-                
                 // Create an empty list to sort the points
                 List<Point3d> toolpathPointList = new List<Point3d>();
+                curBBPoint = bbPointArray[0, 0];
 
                 ////////////Add points with sequence///////////////
                 // For each point
@@ -233,12 +228,14 @@ namespace BarkBeetle.Pattern
                         }
                     }
 
+                    else curBBPoint = bbPointArray[0, 0];
+
                     if (curBBPoint.IsNextIndexAssigned())
                     {
                         curBBPoint = BBPoint.FindByIndex(curBBPoint.NextIndex, bbPointArray);
                     }
-                    else curBBPoint = bbPointArray[0, 0];
                 }
+
 
                 ///////////////////////Draw Curve///////////////////
                 // Pull all points on surface
@@ -264,6 +261,10 @@ namespace BarkBeetle.Pattern
 
                 Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 0.01); // Join the segments
                 toolpathList.Add(surfaceCurve[0]);
+                if (surfaceCurve.Count() != 1)
+                {
+                    toolpathList.Add(surfaceCurve[1]);
+                }
             }
             return toolpathList;
         }
@@ -271,7 +272,7 @@ namespace BarkBeetle.Pattern
         public override ToolpathPattern DeepCopy()
         {
             // New instance
-            var copy = new ToolpathPatterhSpiral(this.Skeleton, this.SeamPt, this.PathWidth);
+            var copy = new ToolpathPatternSpiral(this.Skeleton, this.SeamPt, this.PathWidth);
 
             return copy;
         }

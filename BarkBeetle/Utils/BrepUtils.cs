@@ -306,7 +306,37 @@ namespace BarkBeetle.Utils
         }
         #endregion
 
+        #region breps
+        public static Surface GetTopSurface(Brep brep)
+        {
+            if (brep == null) throw new ArgumentNullException(nameof(brep));
 
+            Surface topSurface = null;
+            double maxZ = double.MinValue; // 记录最高的面
+
+            // 遍历 Brep 的每个面
+            foreach (BrepFace face in brep.Faces)
+            {
+                // 尝试将面拟合为平面
+                if (face.TryGetPlane(out Plane plane))
+                {
+                    // 检查法向量是否接近 Z 轴正方向
+                    if (plane.Normal.Z > 0.9) // 允许一定的角度误差
+                    {
+                        // 找到最高的面
+                        if (plane.OriginZ > maxZ)
+                        {
+                            maxZ = plane.OriginZ;
+                            topSurface = face.DuplicateSurface();
+                        }
+                    }
+                }
+            }
+
+            return topSurface;
+        }
+
+        #endregion
 
     }
 

@@ -33,9 +33,12 @@ namespace BarkBeetle.Comps4Stack
             pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
             pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, true);
-            pManager.AddPointParameter("Reference Point", "Pt", "Reference point for frame orientation", GH_ParamAccess.item, Point3d.Origin);
+            pManager.AddGeometryParameter("Reference Geometry", "Reference", "Input geometry for robot", GH_ParamAccess.item);
+            pManager[3].Optional = true;
+            pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, false);
             pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Rotation towards the reference point", GH_ParamAccess.item, 0.0);
+
+            
         }
 
         /// <summary>
@@ -59,7 +62,7 @@ namespace BarkBeetle.Comps4Stack
             double layerH = 0;
             double totalH = 0;
             bool angleGlobal = true;
-            Point3d refPt = new Point3d();
+            GeometryBase geometry = null;
             double angle = 0.0;
 
             //Set inputs
@@ -68,8 +71,11 @@ namespace BarkBeetle.Comps4Stack
 
             if (!DA.GetData(1, ref layerH)) return;
             if (!DA.GetData(2, ref totalH)) return;
-            if (!DA.GetData(3, ref angleGlobal)) return;
-            if (!DA.GetData(4, ref refPt)) return;
+            if (!DA.GetData(3, ref geometry))
+            {
+                geometry = stackPatterns.MainPatterns[0].BaseSrf;
+            };
+            if (!DA.GetData(4, ref angleGlobal)) return;
             if (!DA.GetData(5, ref angle)) return;
 
 
@@ -86,7 +92,7 @@ namespace BarkBeetle.Comps4Stack
             }
 
             // Run Function
-            StackOffset toolpathStack = new StackOffset(stackPatterns, layerH, angleGlobal, totalH, refPt, angle);
+            StackVertical toolpathStack = new StackVertical(stackPatterns, layerH, angleGlobal, totalH, geometry, angle);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;

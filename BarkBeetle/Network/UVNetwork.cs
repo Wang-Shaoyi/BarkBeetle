@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BarkBeetle.Utils;
 using static System.Xml.Schema.XmlSchemaInference;
+using BarkBeetle.Pattern;
 
 namespace BarkBeetle.Network
 {
@@ -81,6 +82,7 @@ namespace BarkBeetle.Network
 
             return (NetworkReferenceOption)value;
         }
+
 
     }
 }

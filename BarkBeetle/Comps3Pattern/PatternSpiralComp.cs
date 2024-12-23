@@ -78,7 +78,7 @@ namespace BarkBeetle.CompsToolpath
             }
 
             // Run Function
-            ToolpathPattern pattern = new ToolpathPatterhSpiral(skeletonGraph, ghpt.Value,pathWidth);
+            ToolpathPattern pattern = new ToolpathPatternSpiral(skeletonGraph, ghpt.Value,pathWidth);
             GH_Curve crv = new GH_Curve(pattern.CoutinuousCurve);
 
             ToolpathPatternGoo baseGoo = new ToolpathPatternGoo(pattern);

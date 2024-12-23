@@ -15,20 +15,20 @@ namespace BarkBeetle.ToolpathStackSetting
 {
     internal class StackBetween : ToolpathStack
     {
-        Surface topSrf = null;
+        public Surface topSrf = null;
 
-        public StackBetween(StackPatterns tb,  double h, bool ag, Surface topS, Point3d refPt, double angle) : base(tb,h,ag, refPt, angle) 
+        public StackBetween(StackPatterns tb,  double h, bool ag, Surface topS, GeometryBase refGeo, double angle) : base(tb,h,ag, refGeo, angle) 
         {
             topSrf = topS;
-            GenerateToolpathStack(tb, h, ag, refPt, angle);
+            GenerateToolpathStack(tb, h, ag, refGeo, angle);
         }
 
         public override List<GH_Surface> CreateStackSurfaces()
         {
 
             Surface baseSurface = null;
-            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.Skeleton.UVNetwork.ExtendedSurface;
-            else baseSurface = Patterns.MainPatterns[0].Skeleton.UVNetwork.ExtendedSurface;
+            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.BaseSrf;
+            else baseSurface = Patterns.MainPatterns[0].BaseSrf;
 
             LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) +1;
 
@@ -138,7 +138,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
-                    Vector3d xDir =  pt -  PlaneRefPt;
+                    Vector3d xDir = pt - GetClosestPoint(RefGeo, pt);
                     xDir.Z = 0; // project the vector on the global xy plane
 
                     Plane newPlane = new Plane();
@@ -178,7 +178,7 @@ namespace BarkBeetle.ToolpathStackSetting
                         Point3d closestPointOnSurface = nextSurface.PointAt(u, v);
                         double distance = pt.DistanceTo(closestPointOnSurface);
 
-                        doublesThis.Add(new GH_Number(distance/LayerHeight)); // TODO: should be rounded?
+                        doublesThis.Add(new GH_Number(LayerHeight/distance)); // TODO: should be rounded?
                     }
                 }
 

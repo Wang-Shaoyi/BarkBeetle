@@ -221,5 +221,69 @@ namespace BarkBeetle.Utils
                 vertices.Add(curve.PointAtEnd);
             }
         }
+
+        public static PolyCurve CreatePolyCurveOnSurface(Surface surface, List<Point3d> points)
+        {
+            if (surface == null || points == null || points.Count < 2)
+            {
+                throw new ArgumentException("Surface and point list must be valid and contain at least two points.");
+            }
+
+            // Step 1: 将点拉回曲面上
+            List<Point3d> projectedPoints = new List<Point3d>();
+            foreach (Point3d point in points)
+            {
+                if (surface.ClosestPoint(point, out double u, out double v))
+                {
+                    projectedPoints.Add(surface.PointAt(u, v));
+                }
+            }
+
+            // Step 2: 创建 PolyCurve
+            PolyCurve polyCurve = new PolyCurve();
+
+            for (int i = 0; i < projectedPoints.Count - 1; i++)
+            {
+                // 创建两点之间的直线段
+                Line segment = new Line(projectedPoints[i], projectedPoints[i + 1]);
+                polyCurve.Append(new LineCurve(segment));
+            }
+
+            return polyCurve;
+        }
+
+        public static Curve RemapPolyCurveOnNewSurface(Surface newSrf, Surface oldSrf, List<Point3d> points)
+        {
+            newSrf.SetDomain(0, new Interval(oldSrf.Domain(0).T0, oldSrf.Domain(0).T1));
+            newSrf.SetDomain(1, new Interval(oldSrf.Domain(1).T0, oldSrf.Domain(1).T1));
+
+            if (newSrf == null || points == null || points.Count < 2)
+            {
+                throw new ArgumentException("Surface and point list must be valid and contain at least two points.");
+            }
+
+            // Pull point to surface
+            List<Point3d> projectedPoints = new List<Point3d>();
+            foreach (Point3d point in points)
+            {
+                if (oldSrf.ClosestPoint(point, out double u, out double v))
+                {
+                    projectedPoints.Add(newSrf.PointAt(u, v));
+                }
+            }
+
+            // Generate the new curve
+            List<Curve> surfaceCurves = new List<Curve>();
+            for (int j = 0; j < projectedPoints.Count - 1; j++) // Generate curve by segments
+            {
+                Curve curve = newSrf.InterpolatedCurveOnSurface(new List<Point3d> { projectedPoints[j], projectedPoints[j + 1] }, 0.01);
+                surfaceCurves.Add(curve);
+            }
+
+            Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 10); // Join the segments
+
+            return surfaceCurve[0];
+        }
+
     }
 }

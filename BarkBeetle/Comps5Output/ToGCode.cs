@@ -30,7 +30,9 @@ namespace BarkBeetle.CompsToolpathOutput
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Vel Max", "Vel", "Maximum velocity", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Min Speed", "Min", "Maximum Speed", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("Max Speed", "Max", "Maximum Speed", GH_ParamAccess.item, 1);
+            pManager.AddIntegerParameter("Rounding", "Rounding", "Speed Rounding", GH_ParamAccess.item, 2);
         }
 
         /// <summary>
@@ -38,6 +40,7 @@ namespace BarkBeetle.CompsToolpathOutput
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
+            pManager.AddTextParameter("Gcode", "Gcode", "Generated gcode", GH_ParamAccess.list);
             pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.list);
             pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.list);
         }
@@ -48,14 +51,17 @@ namespace BarkBeetle.CompsToolpathOutput
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Initialize
             ToolpathStackGoo goo = null;
-            double maxSpeed = 0;
+            double maxSpeed = 1;
+            double minSpeed = 0;
+            int rounding = 2;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
             ToolpathStack toolpathStack = goo.Value;
-            if (!DA.GetData(1, ref maxSpeed)) return;
+            if (!DA.GetData(1, ref minSpeed)) return;
+            if (!DA.GetData(2, ref maxSpeed)) return;
+            if (!DA.GetData(3, ref rounding)) return;
 
             if (toolpathStack == null)
             {
@@ -68,15 +74,21 @@ namespace BarkBeetle.CompsToolpathOutput
             List<GH_Plane> flattenFrames = TreeHelper.FlattenList(frames);
 
             List<List<GH_Number>> speedFactor = toolpathStack.SpeedFactors;
-            List<GH_Number> flattenSpeed = TreeHelper.FlattenList(speedFactor);
-            for (int i = 0; i < flattenFrames.Count; i++)
-            {
-                flattenSpeed[i] = new GH_Number(flattenSpeed[i].Value * maxSpeed);
-            }
+            List<double> flattenSpeedFactor = TreeHelper.FlattenList(speedFactor).Select(x => x.Value).ToList();
+
+
+            double minFactor = flattenSpeedFactor.Min();
+            double maxFactor = flattenSpeedFactor.Max();
+
+            List<double> actualSpeeds = flattenSpeedFactor.Select(factor => Math.Round
+            (minSpeed + (factor - minFactor) * (maxSpeed - minSpeed) / (maxFactor - minFactor), rounding)).ToList();
+
+            List<string> gcode = GcodeRelated.ConvertPlanesToGCodeWithSpeed(flattenFrames, actualSpeeds);
 
             // Output
-            DA.SetDataList(0, flattenFrames);
-            DA.SetDataList(1, flattenSpeed);
+            DA.SetDataList(0, gcode);
+            DA.SetDataList(1, flattenFrames);
+            DA.SetDataList(2, actualSpeeds);
         }
 
         public override GH_Exposure Exposure => GH_Exposure.tertiary;

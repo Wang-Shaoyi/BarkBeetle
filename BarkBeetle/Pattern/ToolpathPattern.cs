@@ -60,8 +60,17 @@ namespace BarkBeetle.Pattern
             get { return pathWidth; }
         }
 
+        // 6 Base surface
+        private Surface baseSrf { get; set; }
+        public Surface BaseSrf
+        {
+            get { return baseSrf; }
+            set { baseSrf = value; }
+        }
+
         public ToolpathPattern(SkeletonGraph sG, Point3d seam, double pw) 
         {
+            baseSrf = sG.UVNetwork.ExtendedSurface.Duplicate() as Surface;
             pathWidth = pw;
             seamPt = seam;
             skeleton = sG;
@@ -167,6 +176,26 @@ namespace BarkBeetle.Pattern
 
             Curve[] surfaceCurve = Curve.JoinCurves(curvesToConnect, 0.01); // Join the segments
             return surfaceCurve[0];
+        }
+
+        public static int CountNonNull(BBPoint[,] bbPointArray)
+        {
+            int nonNullCount = 0; // 用来计数非null的数量
+            int rows = bbPointArray.GetLength(0); // 获取二维数组的行数
+            int cols = bbPointArray.GetLength(1); // 获取二维数组的列数
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (bbPointArray[r, c] != null)
+                    {
+                        nonNullCount++; // 如果当前元素不是null，计数器加1
+                    }
+                }
+            }
+
+            return nonNullCount; // 返回非null元素的总数
         }
     }
 }

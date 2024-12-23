@@ -5,22 +5,24 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 
-using BarkBeetle.Skeletons;
-using BarkBeetle.Pattern;
 using BarkBeetle.ToolpathStackSetting;
 using BarkBeetle.Utils;
+using BarkBeetle.Pattern;
 using Grasshopper.Kernel.Data;
+using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace BarkBeetle.Comps4Stack
 {
+    /*
     public class StackBrepComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
         public StackBrepComp()
-          : base("Toolpath Stack Brep", "Brep Toolpath",
-              "Stack toolpath layers within a closed brep.",
+          : base("Toolpath Stack in Brep", "Stack Brep Toolpath",
+              "[Note: This component is still under develop, and the result is not accurate.]Stack toolpath layers in a Brep, a close brep is required",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -32,8 +34,8 @@ namespace BarkBeetle.Comps4Stack
         {
             pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, true);
+            pManager.AddBrepParameter("Brep", "B", "Brep to generate toolpath stack", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, false);
             pManager.AddPointParameter("Reference Point", "Pt", "Reference point for frame orientation", GH_ParamAccess.item, Point3d.Origin);
             pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Rotation towards the reference point", GH_ParamAccess.item, 0.0);
         }
@@ -45,7 +47,7 @@ namespace BarkBeetle.Comps4Stack
         {
             pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
             pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
-            pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.tree);
+            pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace BarkBeetle.Comps4Stack
             // Initialize
             StackPatternsGoo goo = null;
             double layerH = 0;
-            double totalH = 0;
+            Brep brep = null;
             bool angleGlobal = true;
             Point3d refPt = new Point3d();
             double angle = 0.0;
@@ -67,26 +69,16 @@ namespace BarkBeetle.Comps4Stack
             StackPatterns stackPatterns = goo.Value;
 
             if (!DA.GetData(1, ref layerH)) return;
-            if (!DA.GetData(2, ref totalH)) return;
+            if (!DA.GetData(2, ref brep)) return;
             if (!DA.GetData(3, ref angleGlobal)) return;
             if (!DA.GetData(4, ref refPt)) return;
             if (!DA.GetData(5, ref angle)) return;
 
 
             // Error message.
-            if (totalH <= 0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Total height must be larger than 0");
-                return;
-            }
-            if (layerH <= 0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Layer height must be larger than 0");
-                return;
-            }
 
             // Run Function
-            StackOffset toolpathStack = new StackOffset(stackPatterns, layerH, angleGlobal, totalH, refPt, angle);
+            StackBrep toolpathStack = new StackBrep(stackPatterns, layerH, angleGlobal, brep, refPt, angle);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 
             GH_Curve gH_Curve = toolpathStack.FinalCurve;
@@ -116,7 +108,7 @@ namespace BarkBeetle.Comps4Stack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.BrepStack;
+                return Resources.SurfaceBetweenStack;
             }
         }
 
@@ -125,7 +117,8 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("C30BB399-A0AC-4B85-BB8C-3D99EF6D2160"); }
+            get { return new Guid("C6B71CB4-8537-459E-90F3-EE32CFB68CE1"); }
         }
     }
+    */
 }

@@ -12,7 +12,7 @@ namespace BarkBeetle.Skeletons
 {
     internal class SkeletonGraphSpiral:SkeletonGraph
     {
-        public SkeletonGraphSpiral(UVNetwork network): base(network) { }
+        public SkeletonGraphSpiral(UVNetwork network, int edgeOption = 0) : base(network, edgeOption) { }
 
         public override BBPoint[,] OrganizeSkeletonStructure()
         {

@@ -78,7 +78,7 @@ namespace BarkBeetle.Comps4Stack
             DA.SetData(0, cachedCurve);
             DA.SetData(1, new ToolpathStackGoo(newToolpathStack));
         }
-        public override GH_Exposure Exposure => GH_Exposure.tertiary;
+        public override GH_Exposure Exposure => GH_Exposure.quarternary;
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

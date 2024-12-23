@@ -33,7 +33,7 @@ namespace BarkBeetle.ToolpathStackSetting
                     toolpathStack.LayerHeight,
                     toolpathStack.AngleGlobal,
                     toolpathStack.LayerHeight * layerCount,
-                    toolpathStack.PlaneRefPt,
+                    toolpathStack.RefGeo,
                     toolpathStack.RotateAngle);
             }
             else if (toolpathStack is StackBetween)
@@ -44,7 +44,7 @@ namespace BarkBeetle.ToolpathStackSetting
                     toolpathStack.LayerHeight,
                     toolpathStack.AngleGlobal,
                     toolpathStack.Surfaces[layerCount - 1].Value.Surfaces[0],
-                    toolpathStack.PlaneRefPt,
+                    toolpathStack.RefGeo,
                     toolpathStack.RotateAngle);
             }
 

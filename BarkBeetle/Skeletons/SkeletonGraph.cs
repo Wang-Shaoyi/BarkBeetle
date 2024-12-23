@@ -66,14 +66,18 @@ namespace BarkBeetle.Skeletons
             set { skeletonVectors = value; }
         }
 
+        public int edgeOption;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public SkeletonGraph(UVNetwork network)
+        public SkeletonGraph(UVNetwork network, int edgeOption)
         {
+            this.edgeOption = edgeOption % 4;
             uvNetwork = network;
             bbPointArray = OrganizeSkeletonStructure();
             ProcessSkeletonCurves();
+            
         }
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace BarkBeetle.Skeletons
 
         public void ProcessSkeletonCurves()
         {
-            Surface surface = uvNetwork.ExtendedSurface;
+            Surface surface = uvNetwork.ExtendedSurface.Duplicate() as Surface;
 
             int uCnt = uvNetwork.OrganizedPtsArray.GetLength(0);
             int vCnt = uvNetwork.OrganizedPtsArray.GetLength(1);
@@ -96,7 +100,7 @@ namespace BarkBeetle.Skeletons
 
             BBPoint curBBPoint = BBPointArray[0, 0];
 
-            for (int i = 0; i < uCnt * vCnt; i++)
+            for (int i = 0; i < CountNonNull(BBPointArray); i++)
             {
                 Point3d currentPt = curBBPoint.CurrentPt3d;
                 pts.Add(new GH_Point(currentPt));
@@ -130,6 +134,26 @@ namespace BarkBeetle.Skeletons
             skeletonMainCurve = new GH_Curve(surfaceCurve[0]);
             skeletonBranchCurves = branches;
             skeletonVectors = vectors;
+        }
+
+        private static int CountNonNull(BBPoint[,] bbPointArray)
+        {
+            int nonNullCount = 0;
+            int rows = bbPointArray.GetLength(0);
+            int cols = bbPointArray.GetLength(1);
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (bbPointArray[r, c] != null)
+                    {
+                        nonNullCount++; 
+                    }
+                }
+            }
+
+            return nonNullCount; 
         }
     }
 }

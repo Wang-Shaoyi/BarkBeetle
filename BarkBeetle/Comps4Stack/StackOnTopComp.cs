@@ -13,14 +13,14 @@ using Grasshopper.Kernel.Data;
 
 namespace BarkBeetle.Comps4Stack
 {
-    public class EdgeBeamComp : GH_Component
+    public class StackOnTopComp : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
-        public EdgeBeamComp()
-          : base("Edge Beam", "Edge Beam",
-              "Stack toolpath layers on the vertical direction",
+        public StackOnTopComp()
+          : base("Stack On Top", "Stack On Top",
+              "Create a new stack from a pattern on the top of a given stack. In this case the are separated toolpaths that align with each other.",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -30,12 +30,10 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Pattern", "TP", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
             pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, true);
-            pManager.AddPointParameter("Reference Point", "Pt", "Reference point for frame orientation", GH_ParamAccess.item, Point3d.Origin);
-            pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Rotation towards the reference point", GH_ParamAccess.item, 0.0);
         }
 
         /// <summary>
@@ -46,6 +44,7 @@ namespace BarkBeetle.Comps4Stack
             pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
             pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
             pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Mapped Toolpath Pattern", "Mapped Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -54,23 +53,24 @@ namespace BarkBeetle.Comps4Stack
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
             // Initialize
-            StackPatternsGoo goo = null;
-            double layerH = 0;
-            double totalH = 0;
-            bool angleGlobal = true;
-            Point3d refPt = new Point3d();
-            double angle = 0.0;
+            ToolpathStackGoo stackGoo = null;
+            ToolpathPatternGoo patternGoo = null;
 
             //Set inputs
-            if (!DA.GetData(0, ref goo)) return;
-            StackPatterns stackPatterns = goo.Value;
+            if (!DA.GetData(0, ref stackGoo)) return;
+            ToolpathStack toolpathStack = stackGoo.Value;
+            if (!DA.GetData(1, ref patternGoo)) return;
+            ToolpathPattern toolpathPattern = patternGoo.Value;
 
-            if (!DA.GetData(1, ref layerH)) return;
-            if (!DA.GetData(2, ref totalH)) return;
-            if (!DA.GetData(3, ref angleGlobal)) return;
-            if (!DA.GetData(4, ref refPt)) return;
-            if (!DA.GetData(5, ref angle)) return;
+            // Initialize
+            double layerH = 0;
+            double totalH = 0;
+
+            //Set inputs
+            if (!DA.GetData(2, ref layerH)) return;
+            if (!DA.GetData(3, ref totalH)) return;
 
 
             // Error message.
@@ -86,17 +86,19 @@ namespace BarkBeetle.Comps4Stack
             }
 
             // Run Function
-            StackOffset toolpathStack = new StackOffset(stackPatterns, layerH, angleGlobal, totalH, refPt, angle);
-            ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
+            ToolpathStack newStack = StackOnTop.CreatStackOnTop(toolpathStack, toolpathPattern, layerH, totalH, out ToolpathPattern newPattern);
+            ToolpathStackGoo newStackGoo = new ToolpathStackGoo(newStack);
+            ToolpathPatternGoo newPatternGoo = new ToolpathPatternGoo(newPattern);
 
-            GH_Curve gH_Curve = toolpathStack.FinalCurve;
-            List<List<GH_Plane>> frames = toolpathStack.OrientPlanes;
+            GH_Curve gH_Curve = newStack.FinalCurve;
+            List<List<GH_Plane>> frames = newStack.OrientPlanes;
             GH_Structure<GH_Plane> frameTree = TreeHelper.ConvertToGHStructure(frames);
 
             // Finally assign the spiral to the output parameter.
-            DA.SetData(0, stackGoo);
+            DA.SetData(0, newStackGoo);
             DA.SetData(1, gH_Curve);
             DA.SetDataTree(2, frameTree);
+            DA.SetData(3, newPatternGoo);
 
             var param = Params.Output[2] as IGH_PreviewObject;
             if (param != null)
@@ -105,7 +107,7 @@ namespace BarkBeetle.Comps4Stack
             }
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.secondary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

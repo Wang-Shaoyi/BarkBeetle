@@ -13,7 +13,7 @@ namespace BarkBeetle.Skeletons
 {
     internal class SkeletonGraphSnake:SkeletonGraph
     {
-        public SkeletonGraphSnake(UVNetwork network): base(network) { }
+        public SkeletonGraphSnake(UVNetwork network, int edgeOption = 0) : base(network, edgeOption) { }
 
         public override BBPoint[,] OrganizeSkeletonStructure()
         {

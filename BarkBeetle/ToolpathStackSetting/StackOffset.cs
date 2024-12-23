@@ -18,10 +18,10 @@ namespace BarkBeetle.ToolpathStackSetting
 
         double totalHeight = 0;
 
-        public StackOffset(StackPatterns sp,  double h, bool ag, double totalH, Point3d refPt, double angle) : base(sp, h, ag, refPt, angle) 
+        public StackOffset(StackPatterns sp,  double h, bool ag, double totalH, GeometryBase refGeo, double angle) : base(sp, h, ag, refGeo, angle) 
         {
             totalHeight = totalH;
-            GenerateToolpathStack(sp, h, ag, refPt, angle);
+            GenerateToolpathStack(sp, h, ag, refGeo, angle);
         }
 
         public override List<GH_Surface> CreateStackSurfaces()
@@ -29,8 +29,8 @@ namespace BarkBeetle.ToolpathStackSetting
             LayerNum = (int)(totalHeight / LayerHeight);
             Surface baseSurface = null;
 
-            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.Skeleton.UVNetwork.ExtendedSurface;
-            else baseSurface = Patterns.MainPatterns[0].Skeleton.UVNetwork.ExtendedSurface;
+            if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.BaseSrf;
+            else baseSurface = Patterns.MainPatterns[0].BaseSrf;
 
             List<GH_Surface> stackSurfaces = new List<GH_Surface>();
 
@@ -139,7 +139,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
-                    Vector3d xDir =  pt -  PlaneRefPt;
+                    Vector3d xDir =  pt - GetClosestPoint(RefGeo, pt);
                     xDir.Z = 0; // project onto xy plane
 
                     Plane newPlane = new Plane();
