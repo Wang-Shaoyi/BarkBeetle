@@ -20,7 +20,7 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         public StackOnTopComp()
           : base("Stack On Top", "Stack On Top",
-              "Create a new stack from a pattern on the top of a given stack. In this case the are separated toolpaths that align with each other.",
+              "Create a new stack from a pattern on the top of a given stack.",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -30,10 +30,10 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Toolpath Pattern", "TP", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Pattern", "Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Layer Height", "Layer Height", "Height of a single layer", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Total Height", "Total Height", "Total Height of the print", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
-            pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("New Toolpath Stack", "New Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath Curve", "Curve", "New continuous toolpath curve", GH_ParamAccess.item);
+            pManager.AddPlaneParameter("Toolpath Planes", "Planes", "New toolpath planes", GH_ParamAccess.tree);
             pManager.AddGenericParameter("Mapped Toolpath Pattern", "Mapped Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
         }
 

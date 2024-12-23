@@ -20,9 +20,9 @@ namespace BarkBeetle.Skeletons
 
         public override bool IsValid => Value != null;
 
-        public override string TypeName => "UVNetwork";
+        public override string TypeName => "Skeleton Graph";
 
-        public override string TypeDescription => "Contains a UVNetwork";
+        public override string TypeDescription => "Contains a SkeletonGraph";
 
         public override IGH_Goo Duplicate()
         {
@@ -32,7 +32,7 @@ namespace BarkBeetle.Skeletons
 
         public override string ToString()
         {
-            return "BarkBeetle UVNetwork Object";
+            return "BarkBeetle Skeleton Object";
         }
 
         public override bool CastFrom(object source)

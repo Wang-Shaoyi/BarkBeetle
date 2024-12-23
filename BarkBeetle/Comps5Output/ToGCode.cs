@@ -19,7 +19,7 @@ namespace BarkBeetle.CompsToolpathOutput
         /// </summary>
         public ToGCode()
           : base("To GCode", "To GCode",
-              "Transfrom Toolpath Stack to Kuka movement (e.g., LINear Movement)",
+              "Transfrom Toolpath Stack to GCode",
               "BarkBeetle", "5-Output")
         {
         }
@@ -29,7 +29,7 @@ namespace BarkBeetle.CompsToolpathOutput
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Min Speed", "Min", "Maximum Speed", GH_ParamAccess.item, 0);
             pManager.AddNumberParameter("Max Speed", "Max", "Maximum Speed", GH_ParamAccess.item, 1);
             pManager.AddIntegerParameter("Rounding", "Rounding", "Speed Rounding", GH_ParamAccess.item, 2);
@@ -42,7 +42,7 @@ namespace BarkBeetle.CompsToolpathOutput
         {
             pManager.AddTextParameter("Gcode", "Gcode", "Generated gcode", GH_ParamAccess.list);
             pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Speed Factors", "Speed", "Speed factors for each toolpath frame, 0.5 = median, 1 = max, 0 = min", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Robot Speed", "Speed", "Robot Speed", GH_ParamAccess.list);
         }
 
         /// <summary>

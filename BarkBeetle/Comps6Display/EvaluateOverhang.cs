@@ -31,7 +31,7 @@ namespace BarkBeetle.Comps6Display
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Display Thickness", "Thickness", "Display thickness of the segments", GH_ParamAccess.item, 1);
         }
 
@@ -40,9 +40,9 @@ namespace BarkBeetle.Comps6Display
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddColourParameter("Legend Colors", "C", "Colors for legend visualization", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Legend Tags", "T", "Tags for legend visualization", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Curves", "C", "Output curves to measure angle.", GH_ParamAccess.list);
+            pManager.AddColourParameter("Legend Colors", "Colors", "Colors for legend visualization", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Legend Tags", "Tags", "Tags for legend visualization", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Curves", "Curves", "Output curves to measure angle.", GH_ParamAccess.list);
         }
 
         private List<Curve> allSegments;

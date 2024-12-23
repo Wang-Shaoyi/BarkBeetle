@@ -25,8 +25,8 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddPointParameter("Points", "Pts", "The list of points.", GH_ParamAccess.list);
-            pManager.AddIntegerParameter("Sequence", "Seq", "The sequence to reorder points.", GH_ParamAccess.list);
+            pManager.AddPointParameter("Points", "Points", "The list of points.", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Sequence", "Sequence", "The sequence to reorder points.", GH_ParamAccess.list);
             pManager.AddIntegerParameter("PointsPerBranch", "N", "Number of points per branch.", GH_ParamAccess.item);
         }
 

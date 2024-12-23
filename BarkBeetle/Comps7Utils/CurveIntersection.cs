@@ -15,7 +15,7 @@ namespace BarkBeetle.CompsUtils
         /// Initializes a new instance of the CurveIntersection class.
         /// </summary>
         public CurveIntersection()
-          : base("Curve Intersection", "Curve Intersect",
+          : base("Curve Intersection with Tolerance", "Curve Intersect",
               "Curve Intersection with Tolerance",
               "BarkBeetle", "7-Utils")
         {
@@ -26,9 +26,9 @@ namespace BarkBeetle.CompsUtils
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddCurveParameter("Curves A", "A", "First set of curves", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Curves B", "B", "Second set of curves", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tolerance", "T", "Intersection tolerance", GH_ParamAccess.item, 0.01);
+            pManager.AddCurveParameter("Curves A", "Curves A", "First set of curves", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Curves B", "Curves B", "Second set of curves", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Tolerance", "Tolerance", "Intersection tolerance", GH_ParamAccess.item, 0.01);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace BarkBeetle.CompsUtils
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("Intersection Points", "P", "Intersection points between the curves", GH_ParamAccess.list);
+            pManager.AddPointParameter("Intersection Points", "Points", "Intersection points between the curves", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace BarkBeetle.CompsUtils
             DA.SetDataList(0, intersectionPoints);
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

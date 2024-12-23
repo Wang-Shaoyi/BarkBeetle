@@ -33,10 +33,10 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Skeleton Graph", "SG", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
-            pManager.AddPointParameter("Seam Point", "Pt", "Seam point of the toolpath (start point)", GH_ParamAccess.item, new Point3d(0,0,0));
-            pManager.AddNumberParameter("Path Width", "pw", "Seam point of the toolpath (start point)", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Spacing", "d", "How much spacing between toolpaths", GH_ParamAccess.item, 0);
+            pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
+            pManager.AddPointParameter("Seam Point", "Seam Point", "Seam point of the toolpath (start point)", GH_ParamAccess.item, new Point3d(0,0,0));
+            pManager.AddNumberParameter("Path Width", "Path Width", "Seam point of the toolpath (start point)", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Spacing", "Spacing", "How much spacing between toolpaths", GH_ParamAccess.item, 0);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Pattern", "TP", "BarkBeetle ToolpathPattern object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Curve", "C", "Toolpath curve for a layer", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Pattern", "Pattern", "BarkBeetle ToolpathPattern object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Pattern Curve", "Curve", "Toolpath curve for a layer", GH_ParamAccess.item);
         }
 
         /// <summary>

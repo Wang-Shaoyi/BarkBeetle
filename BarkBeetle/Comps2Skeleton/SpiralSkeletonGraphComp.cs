@@ -22,8 +22,8 @@ namespace BarkBeetle.CompsGeoPack
         /// Initializes a new instance of the SkeletonFromSAndPT class.
         /// </summary>
         public SpiralSkeletonGraphComp()
-          : base("Spiral skeleton graph", "Spiral skeleton",
-              "Skeleton is a data tree re-sorted by a certain sequence",
+          : base("Spiral Skeleton Graph", "Spiral Skeleton",
+              "Points re-sorted by a spiral sequence without intersection.",
               "BarkBeetle", "2-Skeleton")
         {
         }
@@ -42,10 +42,10 @@ namespace BarkBeetle.CompsGeoPack
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle SkeletonGraph object", GH_ParamAccess.item);
-            pManager.AddPointParameter("Skeleton Points", "Pts", "Re-sorted the sequence of points", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Main Curve", "C", "Skeleton main curve", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Branch Curves", "BC", "Skeleton branch curve", GH_ParamAccess.list);
-            pManager.AddVectorParameter("Vectors", "V", "Vectors", GH_ParamAccess.list);
+            pManager.AddPointParameter("Skeleton Points", "Points", "Re-sorted the sequence of points", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Main Curve", "Curve", "Skeleton main curve", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Branch Curves", "Branch Curves", "Skeleton branch curves", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Vectors", "Vectors", "Vectors for skeleton points. Each point has two perpendicular vectors", GH_ParamAccess.list);
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace BarkBeetle.CompsVisualization
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Parameter", "p", "Part of the toolpath to display", GH_ParamAccess.item, 1);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Stack object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Parameter", "Parameter", "Part of the toolpath to display", GH_ParamAccess.item, 1);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace BarkBeetle.CompsVisualization
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddMeshParameter("Toolpath Mesh", "M", "Toolpath Mesh", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Toolpath Mesh", "Mesh", "Toolpath Mesh", GH_ParamAccess.item);
         }
 
         /// <summary>

@@ -28,9 +28,9 @@ namespace BarkBeetle.CompsUtils
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddSurfaceParameter("Surface", "S", "Surface", GH_ParamAccess.item);
-            pManager.AddNumberParameter("uDistance", "u_d", "Extend distance on u direction", GH_ParamAccess.item, 0);
-            pManager.AddNumberParameter("vDistance", "v_d", "Extend distance on v direction", GH_ParamAccess.item, 0);
+            pManager.AddSurfaceParameter("Surface", "Surface", "Surface", GH_ParamAccess.item);
+            pManager.AddNumberParameter("uDistance", "uDistance", "Extend distance on u direction", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("vDistance", "vDistance", "Extend distance on v direction", GH_ParamAccess.item, 0);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace BarkBeetle.CompsUtils
             DA.SetData(0, extendedSurface);
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

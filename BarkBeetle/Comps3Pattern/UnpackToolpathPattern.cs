@@ -30,7 +30,7 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Pattern", "TP", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Pattern", "Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -38,10 +38,10 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Skeleton Graph", "SG", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Curve", "C", "Toolpath curve for a layer", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Bundle Curves", "Crvs", "Toolpath curves before connected", GH_ParamAccess.list);
-            pManager.AddPointParameter("Points", "P", "Toolpath corner points", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curve", "Curve", "Toolpath curve for a layer", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Bundle Curves", "Bundle Curves", "Toolpath curves before connected", GH_ParamAccess.list);
+            pManager.AddPointParameter("Points", "Points", "Toolpath corner points", GH_ParamAccess.list);
 
         }
 

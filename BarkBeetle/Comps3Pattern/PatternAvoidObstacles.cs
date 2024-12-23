@@ -17,7 +17,7 @@ namespace BarkBeetle.Comps3Pattern
         /// </summary>
         public PatternAvoidObstacles()
           : base("Pattern Avoid Obstacles", " Avoid Obstacles",
-              "Can avoid obstacles such as shear blocks. Only works for snake infill pattern and spiral infill pattern",
+              "Can avoid obstacles such as shear blocks. Only works for snake infill pattern and spiral infill pattern.",
               "BarkBeetle", "3-Pattern")
         {
         }
@@ -27,10 +27,10 @@ namespace BarkBeetle.Comps3Pattern
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Pattern", "TP", "BarkBeetle Toolpath Pattern object, only works for snake infill pattern and spiral infill pattern.", GH_ParamAccess.item);
-            pManager.AddPointParameter("Location Points", "Pt", "Locations of the obstacles", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Obstacle Curve", "Obs", "Obstacle Curve",GH_ParamAccess.item);
-            pManager.AddPlaneParameter("Reference Plane", "Pl", "Plane of the obstable curve", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Pattern", "Pattern", "BarkBeetle Toolpath Pattern object, only works for snake infill pattern and spiral infill pattern", GH_ParamAccess.item);
+            pManager.AddPointParameter("Obstacle Location Points", "Locations", "Locations of the obstacles", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Obstacle Curve", "Obstacle Curve", "Obstacle boundary curve",GH_ParamAccess.item);
+            pManager.AddPlaneParameter("Reference Plane", "Plane", "Plane of the obstable curve", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace BarkBeetle.Comps3Pattern
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Output Toolpath Pattern", "Output", "BarkBeetle Toolpath Pattern object.", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Curve", "C", "Toolpath curve for a layer", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Block Curves", "BC", "Boundaries of blocking obstacles", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Trim Curves", "TC", "Curves trimming the toolpath", GH_ParamAccess.list);
-            pManager.AddPointParameter("Intersection Pts", "Pts", "Intersection points", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Output Toolpath Pattern", "Output Pattern", "BarkBeetle Toolpath Pattern object.", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curve", "Curve", "Toolpath curve for a layer", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Obstacle Boundaries", "Obstacles", "Boundaries of obstacles", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Trim Curves", "Trim Curves", "Curves trimming the toolpath", GH_ParamAccess.list);
+            pManager.AddPointParameter("Intersection Points", "Points", "Intersection points", GH_ParamAccess.list);
 
             if (pManager[3] is IGH_PreviewObject trimCurvesParam)
             {

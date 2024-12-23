@@ -25,12 +25,12 @@ namespace BarkBeetle.Comps7Utils
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddCurveParameter("Curves", "C", "Input curves", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tolerance", "T", "Intersection tolerance", GH_ParamAccess.item, 0.1);
-            pManager.AddNumberParameter("Width", "W", "Strip width", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Distance", "D", "Distance between strips", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Hole Radius", "HR", "Radius of the holes", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Font Size", "FS", "Font size for labels", GH_ParamAccess.item, 1);
+            pManager.AddCurveParameter("Curves", "Curves", "Input curves", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Tolerance", "Tolerance", "Intersection tolerance", GH_ParamAccess.item, 0.1);
+            pManager.AddNumberParameter("Width", "Width", "Strip width", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Distance", "Distance", "Distance between strips", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Hole Radius", "Hole Radius", "Radius of the holes", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Font Size", "Font Size", "Font size for labels", GH_ParamAccess.item, 1);
         }
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace BarkBeetle.Comps7Utils
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Strips", "S", "Generated strips", GH_ParamAccess.list);
-            pManager.AddPointParameter("Points", "P", "Intersection points", GH_ParamAccess.tree);
-            pManager.AddCircleParameter("Holes", "H", "Intersection holes", GH_ParamAccess.tree);
-            pManager.AddCurveParameter("Labels", "L", "Labels on strips", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Original Labels", "OL", "Labels on the original curves", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Strips", "Strips", "Generated strips", GH_ParamAccess.list);
+            pManager.AddPointParameter("Points", "Points", "Intersection points", GH_ParamAccess.tree);
+            pManager.AddCircleParameter("Holes", "Holes", "Intersection holes", GH_ParamAccess.tree);
+            pManager.AddCurveParameter("Labels", "Labels", "Labels on strips", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Original Labels", "Original Labels", "Labels on the original curves", GH_ParamAccess.list);
         }
 
         /// <summary>

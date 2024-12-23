@@ -19,7 +19,7 @@ namespace BarkBeetle.CompsToolpathOutput
         /// </summary>
         public ToRobot()
           : base("To Robot Targets", "To Robot Targets",
-              "[Note: This component is still under develop, and the result is not accurate.]Transfrom Toolpath Stack to Kuka movement (e.g., LINear Movement)",
+              "[Note: This component is still under development, please don't use it]",
               "BarkBeetle", "5-Output")
         {
         }

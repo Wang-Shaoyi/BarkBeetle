@@ -17,7 +17,7 @@ namespace BarkBeetle.CompsUtils
         /// Initializes a new instance of the OrganizePtTreeFromSrf class.
         /// </summary>
         public OrganizePtTreeFromSrf()
-          : base("Organize point tree from surface", "OrganizePT",
+          : base("Organize point tree from surface", "Organize Point Tree",
               "Organize the sequence of a point tree according to the uv sequence of a surface",
               "BarkBeetle", "7-Utils")
         {
@@ -28,8 +28,8 @@ namespace BarkBeetle.CompsUtils
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddSurfaceParameter("Surface", "S", "Base surface to organize the skeleton", GH_ParamAccess.item);
-            pManager.AddPointParameter("Point tree", "PT", "Input a point tree (m by n)", GH_ParamAccess.tree);
+            pManager.AddSurfaceParameter("Surface", "Surface", "Base surface to organize the skeleton", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point Tree", "Point Tree", "Input a point tree (m by n)", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace BarkBeetle.CompsUtils
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("Organized point tree", "Organized PT", "Re-sorted the sequence of points", GH_ParamAccess.tree);
+            pManager.AddPointParameter("Organized Point Tree", "Organized Point Tree", "Re-sorted the sequence of points", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace BarkBeetle.CompsUtils
             DA.SetDataTree(0, organizedPT);
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

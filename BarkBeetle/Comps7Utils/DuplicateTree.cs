@@ -27,8 +27,8 @@ namespace BarkBeetle.Comps7Utils
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Input Tree", "T", "Input tree to duplicate", GH_ParamAccess.tree);
-            pManager.AddIntegerParameter("Count", "C", "Number of times to duplicate the tree", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Input Tree", "Tree", "Input tree to duplicate", GH_ParamAccess.tree);
+            pManager.AddIntegerParameter("Count", "Count", "Number of times to duplicate the tree", GH_ParamAccess.item);
 
         }
 
@@ -37,7 +37,7 @@ namespace BarkBeetle.Comps7Utils
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Duplicated Tree", "D", "Duplicated tree with two-layer structure", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Duplicated Tree", "Duplicated Tree", "Duplicated tree with two-layer structure", GH_ParamAccess.tree);
         }
 
         /// <summary>

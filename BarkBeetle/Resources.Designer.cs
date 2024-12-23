@@ -103,6 +103,16 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap edgeSkeleton {
+            get {
+                object obj = ResourceManager.GetObject("edgeSkeleton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap ExtendSurface {
             get {
                 object obj = ResourceManager.GetObject("ExtendSurface", resourceCulture);

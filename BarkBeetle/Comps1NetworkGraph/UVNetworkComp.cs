@@ -34,11 +34,11 @@ namespace BarkBeetle.CompsGeoPack
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddPointParameter("Points tree", "PT", "Input a point tree (m by n)", GH_ParamAccess.tree);
-            pManager.AddSurfaceParameter("Surface", "S", "Base surface to organize the skeleton", GH_ParamAccess.item);
-            pManager.AddMeshParameter("Mesh", "M", "Base surface to organize the skeleton", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Strip width", "sw", "Input the strip width", GH_ParamAccess.item, 1);
-            pManager.AddIntegerParameter("Reference Option", "option", "Which the position is the network refering to. 0-points, 1-surface, 2-mesh", GH_ParamAccess.item, 0);
+            pManager.AddPointParameter("Points Tree", "Points Tree", "Input a point tree (m by n)", GH_ParamAccess.tree);
+            pManager.AddSurfaceParameter("Base Surface", "Base Surface", "Optional, base surface to organize the skeleton", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Mesh", "Mesh", "Optional, base mesh to organize the skeleton", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Strip width", "Width", "Input the strip width", GH_ParamAccess.item, 1);
+            pManager.AddIntegerParameter("Reference Option", "Option", "Which position is the network refering to. 0-points, 1-surface, 2-mesh", GH_ParamAccess.item, 0);
 
             Params.Input[1].Optional = true;
             Params.Input[2].Optional = true;
@@ -50,9 +50,9 @@ namespace BarkBeetle.CompsGeoPack
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
-            pManager.AddPointParameter("Points", "P", "Points pulled on the surface", GH_ParamAccess.tree);
-            pManager.AddCurveParameter("UVCurves", "C", "UV curves generated from the point tree", GH_ParamAccess.tree);
-            pManager.AddSurfaceParameter("Extended Srf", "S", "Extended Surface", GH_ParamAccess.item);
+            pManager.AddPointParameter("Points", "Points", "Points pulled on the surface", GH_ParamAccess.tree);
+            pManager.AddCurveParameter("UVCurves", "UVCurves", "UV curves generated from the point tree", GH_ParamAccess.tree);
+            pManager.AddSurfaceParameter("Extended Surface", "Surface", "Extended surface for toolpath generation", GH_ParamAccess.item);
         }
 
         /// <summary>

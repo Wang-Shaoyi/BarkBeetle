@@ -23,8 +23,8 @@ namespace BarkBeetle.CompsGeoPack
         /// Initializes a new instance of the SkeletonFromSAndPT class.
         /// </summary>
         public EdgeSkeletonGraphComp()
-          : base("Edge skeleton graph", "Edge skeleton",
-              "Skeleton is a data tree re-sorted by a certain sequence",
+          : base("Edge Skeleton Graph", "Edge Skeleton",
+              "Edge points re-sorted by surrounding sequence without intersection.",
               "BarkBeetle", "2-Skeleton")
         {
         }
@@ -35,7 +35,7 @@ namespace BarkBeetle.CompsGeoPack
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Edge option", "Edge Option", "0: all edges, 1: edge 1, 2: edge 2, 3: edge 3, 4: edge 4", GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("Edge Option", "Edge Option", "0: all edges, 1: edge 1, 2: edge 2, 3: edge 3, 4: edge 4", GH_ParamAccess.item, 0);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace BarkBeetle.CompsGeoPack
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle SkeletonGraph object", GH_ParamAccess.item);
-            pManager.AddPointParameter("Skeleton Points", "Pts", "Re-sorted the sequence of points", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Main Curve", "C", "Skeleton main curve", GH_ParamAccess.item);
-            pManager.AddVectorParameter("Vectors", "V", "Vectors", GH_ParamAccess.list);
+            pManager.AddPointParameter("Skeleton Points", "Points", "Re-sorted the sequence of points", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Main Curve", "Curve", "Skeleton main curve", GH_ParamAccess.item);
+            pManager.AddVectorParameter("Vectors", "Vectors", "Vectors for skeleton points. Each point has two perpendicular vectors", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace BarkBeetle.CompsGeoPack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.SpiralSkeleton;
+                return Resources.edgeSkeleton;
             }
         }
 

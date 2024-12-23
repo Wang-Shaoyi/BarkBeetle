@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 
+
 using BarkBeetle.Utils;
-using Rhino.Display;
-using System.ComponentModel;
-using System.Collections;
-
-using BarkBeetle.Network;
+using Grasshopper.Kernel.Data;
+using BarkBeetle.Pattern;
 using BarkBeetle.Skeletons;
+using BarkBeetle.Network;
 
-namespace BarkBeetle.CompsGeoPack
+namespace BarkBeetle.Comps2Skeleton
 {
-    public class SnakeSkeletonGraphComp : GH_Component
+    public class UnpackSkeletonGraph : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the SkeletonFromSAndPT class.
+        /// Initializes a new instance of the Extract_RefinedGeometry class.
         /// </summary>
-        public SnakeSkeletonGraphComp()
-          : base("Snake Skeleton Graph", "Snake Skeleton",
-              "Points re-sorted by a snake sequence without intersection.",
+        public UnpackSkeletonGraph()
+          : base("Unpack Skeleton Graph", "Unpack Skeleton",
+              "Unpack all geometries in the Skeleton Graph",
               "BarkBeetle", "2-Skeleton")
         {
         }
@@ -31,21 +29,22 @@ namespace BarkBeetle.CompsGeoPack
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle Skeleton Graph object", GH_ParamAccess.item);
         }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle SkeletonGraph object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
             pManager.AddPointParameter("Skeleton Points", "Points", "Re-sorted the sequence of points", GH_ParamAccess.list);
             pManager.AddCurveParameter("Main Curve", "Curve", "Skeleton main curve", GH_ParamAccess.item);
             pManager.AddCurveParameter("Branch Curves", "Branch Curves", "Skeleton branch curves", GH_ParamAccess.list);
             pManager.AddVectorParameter("Vectors", "Vectors", "Vectors for skeleton points. Each point has two perpendicular vectors", GH_ParamAccess.list);
+
         }
 
         /// <summary>
@@ -54,37 +53,29 @@ namespace BarkBeetle.CompsGeoPack
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            //Initialize
-            UVNetworkGoo goo = null;
+            // Initialize
+            SkeletonGraphGoo goo = null;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
-            UVNetwork network = goo.Value;
+            SkeletonGraph skeletonGraph = goo.Value;
 
-            // Run Function
-            SkeletonGraphSnake snake = new SkeletonGraphSnake(network);
-            SkeletonGraphGoo skeletonGoo = new SkeletonGraphGoo(snake);
-
-            List<GH_Point> points = snake.SkeletonPtList;
-            GH_Curve curve = snake.SkeletonMainCurve;
-            List<GH_Curve> curves = snake.SkeletonBranchCurves;
-            List<GH_Vector> vectors = snake.SkeletonVectors;
+            //Run
+            UVNetworkGoo uvNetworkGoo = new UVNetworkGoo(skeletonGraph.UVNetwork);
+            List<GH_Point> points = skeletonGraph.SkeletonPtList;
+            GH_Curve curve = skeletonGraph.SkeletonMainCurve;
+            List<GH_Curve> curves = skeletonGraph.SkeletonBranchCurves;
+            List<GH_Vector> vectors = skeletonGraph.SkeletonVectors;
 
             // Finally assign the spiral to the output parameter.
-            DA.SetData(0, skeletonGoo);
+            DA.SetData(0, uvNetworkGoo);
             DA.SetDataList(1, points);
             DA.SetData(2, curve);
             DA.SetDataList(3, curves);
             DA.SetDataList(4, vectors);
-
-            var param = Params.Output[3] as IGH_PreviewObject;
-            if (param != null)
-            {
-                param.Hidden = true;
-            }
         }
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -95,7 +86,7 @@ namespace BarkBeetle.CompsGeoPack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.SnakeSkeleton;
+                return Resources.UnpackSkeletonPackage;
             }
         }
 
@@ -104,7 +95,7 @@ namespace BarkBeetle.CompsGeoPack
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("F0A34392-00CB-477D-998B-C8E49051F3F9"); }
+            get { return new Guid("77F1C066-C675-47B6-A44D-DDB6821B908C"); }
         }
     }
 }

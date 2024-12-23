@@ -27,11 +27,11 @@ namespace BarkBeetle.Comps6Display
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddSurfaceParameter("Surfaces", "S", "List of surfaces to analyze twisting", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Curves", "C", "Center curves of the surfaces. Must match surfaces to analyze", GH_ParamAccess.list);
-            pManager.AddIntegerParameter("Density", "D", "Mesh density for curvature analysis", GH_ParamAccess.item, 1);
+            pManager.AddSurfaceParameter("Surfaces", "Surfaces", "List of surfaces to analyze twisting", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Center Curves", "Curves", "Center curves of the surfaces. Must match surfaces to analyze", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Density", "Density", "Mesh density for curvature analysis", GH_ParamAccess.item, 1);
 
-            pManager.AddIntegerParameter("Output Unit", "U", "Unit for output (0: rad/m, 1: rad/cm, 2: rad/mm)", GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("Output Unit", "Unit", "Unit for output (0: rad/m, 1: rad/cm, 2: rad/mm)", GH_ParamAccess.item, 0);
             var unitParam = pManager[3] as Param_Integer;
             if (unitParam != null)
             {
@@ -46,9 +46,9 @@ namespace BarkBeetle.Comps6Display
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddMeshParameter("Meshes", "M", "Curvature-colored meshes", GH_ParamAccess.list);
-            pManager.AddColourParameter("Legend Colors", "C", "Colors for legend visualization", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Legend Tags", "T", "Tags for legend visualization", GH_ParamAccess.list);
+            pManager.AddMeshParameter("Meshes", "Meshes", "Curvature-colored meshes", GH_ParamAccess.list);
+            pManager.AddColourParameter("Legend Colors", "Colors", "Colors for legend visualization", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Legend Tags", "Tags", "Tags for legend visualization", GH_ParamAccess.list);
         }
 
         /// <summary>

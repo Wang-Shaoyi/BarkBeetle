@@ -19,8 +19,8 @@ namespace BarkBeetle.Comps4Stack
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
         public StackBetweenComp()
-          : base("Toolpath Stack Between Surfaces", "Between Surface Toolpath",
-              "Stack toolpath layers between two surfaces",
+          : base("Toolpath Stack Between Surfaces", "Between Surface Stack",
+              "Stack toolpath layers between two surfaces. The base surface is the surface in UVNetwork.",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -30,13 +30,13 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
-            pManager.AddSurfaceParameter("Top Surface", "S", "Top Surface", GH_ParamAccess.item);
-            pManager.AddGeometryParameter("Reference Geometry", "Reference", "Input geometry for robot", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Organized Stack Patterns", "Organized Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Layer Height", "Layer Height", "Height of a single layer", GH_ParamAccess.item);
+            pManager.AddSurfaceParameter("Top Surface", "Top Surface", "Top Surface", GH_ParamAccess.item);
+            pManager.AddGeometryParameter("Reference Geometry", "Reference", "Input geometry for robot Location. Now only takes curve, surface, brep, and mesh", GH_ParamAccess.item);
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, false);
-            pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Rotation towards the reference point", GH_ParamAccess.item, 0.0);
+            pManager.AddNumberParameter("Plane Rotate Angle", "Angle", "Palne rotation towards the reference geometry", GH_ParamAccess.item, 0.0);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
-            pManager.AddPlaneParameter("Toolpath Frames", "TS", "Toolpath frames", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath Curve", "Curve", "Continuous toolpath curve", GH_ParamAccess.item);
+            pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.tree);
         }
 
         /// <summary>

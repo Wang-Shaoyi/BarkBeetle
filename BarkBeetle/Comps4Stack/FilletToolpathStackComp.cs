@@ -13,7 +13,7 @@ namespace BarkBeetle.Comps4Stack
         /// Initializes a new instance of the FilletToolpathBase class.
         /// </summary>
         public FilletToolpathStackComp()
-          : base("Fillet toolpath from ToolpathStack", "Fillet Toolpath",
+          : base("Fillet Toolpath Stack", "Fillet Toolpath Stack",
               "Fillets BarkBeetle generated non-planar toolpath",
               "BarkBeetle", "4-Stack")
         {
@@ -28,10 +28,10 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("ToolpathStack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Radius", "r", "Radius for fillet", GH_ParamAccess.item, 1.0); //default is here
-            pManager.AddBooleanParameter("Trigger", "T", "Run and update this component", GH_ParamAccess.item, false);
-            pManager.AddNumberParameter("SeamLength Factor", "f", "Length factor of the seam area (compared to radius)", GH_ParamAccess.item, 10);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Radius", "Radius", "Radius for fillet", GH_ParamAccess.item, 1.0); //default is here
+            pManager.AddBooleanParameter("Trigger", "Trigger", "Run and update this component", GH_ParamAccess.item, false);
+            pManager.AddNumberParameter("SeamLength Factor", "SeamLength Factor", "Length factor of the seam area (compared to radius)", GH_ParamAccess.item, 10);
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Curve", "C", "Finished Curve", GH_ParamAccess.item);
-            pManager.AddGenericParameter("ToolpathStack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curve", "Curve", "Output curve", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
         }
 
         /// <summary>

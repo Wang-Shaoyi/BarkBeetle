@@ -21,9 +21,9 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override bool IsValid => Value != null;
 
-        public override string TypeName => "RefinedGeometry";
+        public override string TypeName => "Toolpath Stack";
 
-        public override string TypeDescription => "Contains a RefinedGeometry object";
+        public override string TypeDescription => "Contains a Toolpath Stack object";
 
         public override IGH_Goo Duplicate()
         {
@@ -33,7 +33,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
         public override string ToString()
         {
-            return "BarkBeetle RefinedGeometry Object";
+            return "BarkBeetle Toolpath Stack Object";
         }
 
         //// 渲染输出对象的简化版本

@@ -19,8 +19,8 @@ namespace BarkBeetle.CompsToolpath
         /// Initializes a new instance of the Extract_RefinedGeometry class.
         /// </summary>
         public StackPatternComp()
-          : base("Stack Toolpath Pattern", "Stack Pattern",
-              "Stack multiple patterns together",
+          : base("Organize Toolpath Pattern(s)", "Organize Pattern(s)",
+              "Organize multiple patterns with a sequence",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -30,11 +30,11 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Top Pattern", "Top", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Top Count", "TC", "Number of top layers", GH_ParamAccess.item, 0);
-            pManager.AddGenericParameter("Middle Pattern(s)", "Middle", "BarkBeetle Toolpath Pattern object, may have multiple", GH_ParamAccess.list);
-            pManager.AddGenericParameter("Bottom Pattern", "Bottom", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Bottom Count", "TP", "Number of bottom layers", GH_ParamAccess.item, 0);
+            pManager.AddGenericParameter("Top Pattern", "Top Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Top Count", "Top Count", "Number of top layers", GH_ParamAccess.item, 0);
+            pManager.AddGenericParameter("Middle Pattern(s)", "Middle Pattern(s)", "BarkBeetle Toolpath Pattern object, may have multiple", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Bottom Pattern", "Bottom Pattern", "BarkBeetle Toolpath Pattern object", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Bottom Count", "Bottom Count", "Number of bottom layers", GH_ParamAccess.item, 0);
             
 
             pManager[0].Optional = true;
@@ -49,7 +49,7 @@ namespace BarkBeetle.CompsToolpath
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Organized Stack Patterns", "Organized Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
 
         }
 

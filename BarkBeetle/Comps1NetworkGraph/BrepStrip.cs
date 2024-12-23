@@ -19,7 +19,7 @@ namespace BarkBeetle.Comps1NetworkGraph
         /// </summary>
         public BrepStrip()
           : base("Brep Strip", "Brep Strip",
-              "Create Brep Strip from Network OR Curves",
+              "Create Brep Strip from Network OR Curves. (One set of input is enough)",
               "BarkBeetle", "1-Network")
         {
         }
@@ -30,10 +30,10 @@ namespace BarkBeetle.Comps1NetworkGraph
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Strip Extension", "e", "How long strips extends on both sides", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Curves", "C", "Input curves", GH_ParamAccess.tree);
-            pManager.AddSurfaceParameter("Surface", "S", "Surface to generate strips on", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Strip Width", "w", "Strip width", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Strip Extension", "Extension", "How long strips extends on both sides", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curves", "Curves", "Strip center curves", GH_ParamAccess.tree);
+            pManager.AddSurfaceParameter("Ref Surface", "Surface", "Reference surface to generate strips on", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Strip Width", "Width", "Strip width", GH_ParamAccess.item);
 
             pManager[0].Optional = true;  // UVNetwork
             pManager[1].Optional = false;  // Strip Extension

@@ -30,7 +30,7 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Stack Patterns", "Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Organized Stack Patterns", "Organized Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
             pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
             pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
             pManager.AddGeometryParameter("Reference Geometry", "Reference", "Input geometry for robot", GH_ParamAccess.item);
@@ -46,8 +46,8 @@ namespace BarkBeetle.Comps4Stack
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Toolpath Stack", "TS", "BarkBeetle ToolpathStack object", GH_ParamAccess.item);
-            pManager.AddCurveParameter("Toolpath Curve", "C", "Continuous toolpath curve", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Toolpath Curve", "Curve", "Continuous toolpath curve", GH_ParamAccess.item);
             pManager.AddPlaneParameter("Toolpath Planes", "Planes", "Toolpath planes", GH_ParamAccess.tree);
         }
 
