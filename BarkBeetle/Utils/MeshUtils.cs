@@ -43,7 +43,7 @@ namespace BarkBeetle.Utils
                         z = -z;
                     }
 
-                    Line sdl = new Line(p.Origin, z, h * speeds[j].Value);
+                    Line sdl = new Line(p.Origin, z, h / speeds[j].Value);
                     lines.Add(sdl);
                     count++;
                 }

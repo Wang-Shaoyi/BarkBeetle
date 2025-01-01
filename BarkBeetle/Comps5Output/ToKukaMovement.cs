@@ -30,7 +30,7 @@ namespace BarkBeetle.CompsToolpathOutput
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Toolpath Stack", "Stack", "BarkBeetle Toolpath Stack object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Min Speed", "Min", "Maximum Speed", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("Min Speed", "Min", "Maximum Speed", GH_ParamAccess.item, 0.1);
             pManager.AddNumberParameter("Max Speed", "Max", "Maximum Speed", GH_ParamAccess.item, 1);
             pManager.AddIntegerParameter("Rounding", "Rounding", "Speed Rounding", GH_ParamAccess.item, 2);
 

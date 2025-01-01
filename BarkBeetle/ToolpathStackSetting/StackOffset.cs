@@ -116,7 +116,7 @@ namespace BarkBeetle.ToolpathStackSetting
                     surfaceCurves.Add(curve);
                 }
 
-                Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 10); // Join the segments
+                Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 0); // Join the segments
                 stackCurves.Add(new GH_Curve(surfaceCurve[0]));
             }
             return stackCurves;
