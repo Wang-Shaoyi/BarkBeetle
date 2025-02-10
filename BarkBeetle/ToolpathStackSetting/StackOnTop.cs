@@ -20,7 +20,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
             Surface topSurface = originalStack.Surfaces[originalStack.Surfaces.Count - 1].Value.Surfaces[0].Duplicate() as Surface;
             Surface oldSurface = toolpathPattern.BaseSrf.Duplicate() as Surface;
-            List<Point3d> points = CurveUtils.GetExplodedCurveVertices(newPattern.CoutinuousCurve);
+            List<Point3d> points = CurveUtils.GetExplodedCurveVertices(newPattern.CoutinuousCurve, originalStack.LayerHeight * 5);
             Curve newBaseCrv = CurveUtils.RemapPolyCurveOnNewSurface(topSurface, oldSurface, points);
             newPattern.CoutinuousCurve = newBaseCrv;
 

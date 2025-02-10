@@ -3,16 +3,23 @@
   "WorkspaceRootPath": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Wang-\\AppData\\Local\\Temp\\.vsdbgsrc\\c541b5a61edba2e9d36fac3e6167104ae6eb11780cbad6ef7edd559ae8e9a77b\\-Module-.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps5output\\tokukamovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:comps5output\\tokukamovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\utils\\meshutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:utils\\meshutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\toolpathstacksetting\\stackoffset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:toolpathstacksetting\\stackoffset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|solutionrelative:toolpathstacksetting\\stackbetween.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA730B4D-B191-48F2-9C95-6938B469A5CC}|BarkBeetle.csproj|e:\\research\\2024_fall_research\\ghplugin\\barkbeetle\\comps7utils\\unrollstraightstripconsistentwidth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,6 +74,29 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "-Module-.cs",
+              "DocumentMoniker": "C:\\Users\\Wang-\\AppData\\Local\\Temp\\.vsdbgsrc\\c541b5a61edba2e9d36fac3e6167104ae6eb11780cbad6ef7edd559ae8e9a77b\\-Module-.cs",
+              "ToolTip": "C:\\Users\\Wang-\\AppData\\Local\\Temp\\.vsdbgsrc\\c541b5a61edba2e9d36fac3e6167104ae6eb11780cbad6ef7edd559ae8e9a77b\\-Module-.cs",
+              "ViewState": "AgIAADELAAAAAAAAAAAcwEELAAAEAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T19:48:05.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ToKukaMovement.cs",
+              "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToKukaMovement.cs",
+              "RelativeDocumentMoniker": "Comps5Output\\ToKukaMovement.cs",
+              "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps5Output\\ToKukaMovement.cs",
+              "RelativeToolTip": "Comps5Output\\ToKukaMovement.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwCIAAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T01:06:00.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MeshUtils.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Utils\\MeshUtils.cs",
               "RelativeDocumentMoniker": "Utils\\MeshUtils.cs",
@@ -74,8 +104,7 @@
               "RelativeToolTip": "Utils\\MeshUtils.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T03:30:02.722Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T03:30:02.722Z"
             },
             {
               "$type": "Document",
@@ -85,13 +114,13 @@
               "RelativeDocumentMoniker": "ToolpathStackSetting\\StackBetween.cs",
               "ToolTip": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\ToolpathStackSetting\\StackBetween.cs",
               "RelativeToolTip": "ToolpathStackSetting\\StackBetween.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAUwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAA2wB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-24T03:04:13.021Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "StackOffset.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\ToolpathStackSetting\\StackOffset.cs",
               "RelativeDocumentMoniker": "ToolpathStackSetting\\StackOffset.cs",
@@ -103,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "OrganizePtTreeFromSrf.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\OrganizePtTreeFromSrf.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\OrganizePtTreeFromSrf.cs",
@@ -115,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "UnrollIntersectSrfStrips.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollIntersectSrfStrips.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\UnrollIntersectSrfStrips.cs",
@@ -127,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UnrollSrfStripWithPoints.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollSrfStripWithPoints.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\UnrollSrfStripWithPoints.cs",
@@ -139,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "UnrollStraightStripConsistentWidth.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\UnrollStraightStripConsistentWidth.cs",
@@ -151,7 +180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ExtendSurface.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\ExtendSurface.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\ExtendSurface.cs",
@@ -163,7 +192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "DuplicateTree.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\DuplicateTree.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\DuplicateTree.cs",
@@ -175,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "CurveIntersection.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\CurveIntersection.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\CurveIntersection.cs",
@@ -187,7 +216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "UnpackSkeletonGRaph.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps2Skeleton\\UnpackSkeletonGRaph.cs",
               "RelativeDocumentMoniker": "Comps2Skeleton\\UnpackSkeletonGRaph.cs",
@@ -199,7 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "UnrollStraightStripTwoWidth.cs",
               "DocumentMoniker": "E:\\Research\\2024_Fall_Research\\ghPlugin\\BarkBeetle\\Comps7Utils\\UnrollStraightStripTwoWidth.cs",
               "RelativeDocumentMoniker": "Comps7Utils\\UnrollStraightStripTwoWidth.cs",

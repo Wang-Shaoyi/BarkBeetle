@@ -114,12 +114,12 @@ namespace BarkBeetle.ToolpathStackSetting
             {
                 List<GH_Plane> planesThis = new List<GH_Plane>();
                 List<GH_Number> doublesThis = new List<GH_Number>();
-                List<Point3d> toolpathExplodedPts = CurveUtils.GetExplodedCurveVertices(gH_Curves[i].Value);
+                List<Point3d> toolpathExplodedPts = CurveUtils.GetExplodedCurveVertices(gH_Curves[i].Value, LayerHeight * 5);
                 Surface surface = gH_Surfaces[i].Value.Surfaces[0];
 
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
-                    Vector3d xDir = pt - GetClosestPoint(RefGeo, pt);
+                    Vector3d xDir = Vector3d.YAxis;
                     xDir.Z = 0; // project onto xy plane
 
                     Plane newPlane = new Plane();

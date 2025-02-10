@@ -87,19 +87,6 @@ namespace BarkBeetle.Utils
             return uvCurves;
         }
 
-        public static Vector3d GetTangentAtPoint(Curve curve, Point3d point, double epsilon = 1e-10)
-        {
-            Vector3d tangent = Vector3d.Unset;
-
-            double t;
-            if (curve.ClosestPoint(point, out t))
-            {
-                tangent = curve.TangentAt(t + epsilon);
-                tangent.Unitize();
-            }
-
-            return tangent;
-        }
 
         public static bool IsConvexPointOnCurve(Curve curve, Point3d vertex)
         {
@@ -169,20 +156,43 @@ namespace BarkBeetle.Utils
         }
 
         // This is based on explosion
-        public static List<Point3d> GetExplodedCurveVertices(Curve curve)
+        public static List<Point3d> GetExplodedCurveVertices(Curve curve, double d)
         {
-            ////////////////////////////////
-            // 非递归分解
-            // 分解曲线
+
             List<Point3d> vertexList = new List<Point3d>();
             Curve[] segments = curve.DuplicateSegments();
+            //if (segments != null)
+            //{
+            //    foreach (Curve segment in segments)
+            //    {
+            //        vertexList.Add(segment.PointAtStart);
+            //    }
+            //    vertexList.Add(segments[segments.Length - 1].PointAtEnd); // 添加最后一个顶点
+            //}
             if (segments != null)
             {
                 foreach (Curve segment in segments)
                 {
-                    vertexList.Add(segment.PointAtStart);
+                    if (segment.GetLength() > d * 1.5)
+                    {
+                        double segmentLength = segment.GetLength();
+                        int count = (int)(segmentLength / d);
+                        for (int i = 0; i <= count; i++)
+                        {
+                            double t = segment.Domain.ParameterAt(i * d / segmentLength);
+                            vertexList.Add(segment.PointAt(t));
+                        }
+                    }
+                    else
+                    {
+                        vertexList.Add(segment.PointAtStart);
+                    }
                 }
-                vertexList.Add(segments[segments.Length - 1].PointAtEnd); // 添加最后一个顶点
+                // 确保最后一个点总是包含
+                if (!vertexList.Contains(segments[segments.Length - 1].PointAtEnd))
+                {
+                    vertexList.Add(segments[segments.Length - 1].PointAtEnd);
+                }
             }
             else
             {
