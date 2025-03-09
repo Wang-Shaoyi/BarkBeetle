@@ -51,6 +51,7 @@ namespace BarkBeetle.Pattern
         public Point3d SeamPt
         {
             get { return seamPt; }
+            set { seamPt = value; }
         }
 
         // 5 Path width
@@ -178,24 +179,24 @@ namespace BarkBeetle.Pattern
             return surfaceCurve[0];
         }
 
-        public static int CountNonNull(BBPoint[,] bbPointArray)
-        {
-            int nonNullCount = 0; // 用来计数非null的数量
-            int rows = bbPointArray.GetLength(0); // 获取二维数组的行数
-            int cols = bbPointArray.GetLength(1); // 获取二维数组的列数
+        //public static int CountNonNull(SkeletonGraph skeleton, BBPoint[,] bbPointArray)
+        //{
+        //    int nonNullCount = 0; 
+        //    int rows = bbPointArray.GetLength(0); 
+        //    int cols = bbPointArray.GetLength(1); 
 
-            for (int r = 0; r < rows; r++)
-            {
-                for (int c = 0; c < cols; c++)
-                {
-                    if (bbPointArray[r, c] != null)
-                    {
-                        nonNullCount++; // 如果当前元素不是null，计数器加1
-                    }
-                }
-            }
+        //    for (int r = 0; r < rows; r++)
+        //    {
+        //        for (int c = 0; c < cols; c++)
+        //        {
+        //            if (bbPointArray[r, c] != null)
+        //            {
+        //                nonNullCount++; 
+        //            }
+        //        }
+        //    }
 
-            return nonNullCount; // 返回非null元素的总数
-        }
+        //    return nonNullCount; 
+        //}
     }
 }

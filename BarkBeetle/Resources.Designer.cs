@@ -153,6 +153,26 @@ namespace BarkBeetle {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap LinearNetwork {
+            get {
+                object obj = ResourceManager.GetObject("LinearNetwork", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap LinearSkeleton {
+            get {
+                object obj = ResourceManager.GetObject("LinearSkeleton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap obstacle {
             get {
                 object obj = ResourceManager.GetObject("obstacle", resourceCulture);
@@ -196,6 +216,16 @@ namespace BarkBeetle {
         internal static System.Drawing.Bitmap overhang {
             get {
                 object obj = ResourceManager.GetObject("overhang", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SimplePattern {
+            get {
+                object obj = ResourceManager.GetObject("SimplePattern", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,6 +286,16 @@ namespace BarkBeetle {
         internal static System.Drawing.Bitmap SpiralToolpathBase {
             get {
                 object obj = ResourceManager.GetObject("SpiralToolpathBase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap StackBetweenClosest {
+            get {
+                object obj = ResourceManager.GetObject("StackBetweenClosest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

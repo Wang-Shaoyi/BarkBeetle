@@ -19,8 +19,8 @@ namespace BarkBeetle.Comps4Stack
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
         public StackBetweenComp()
-          : base("Toolpath Stack Between Surfaces", "Between Surface Stack",
-              "Stack toolpath layers between two surfaces. The base surface is the surface in UVNetwork.",
+          : base("Toolpath Stack Between Surfaces (Closest)", "Between Surface Stack (Closest)",
+              "Stack toolpath layers between two surfaces. The base surface is the surface in Network.",
               "BarkBeetle", "4-Stack")
         {
         }
@@ -110,7 +110,7 @@ namespace BarkBeetle.Comps4Stack
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Resources.SurfaceBetweenStack;
+                return Resources.StackBetweenClosest;
             }
         }
 

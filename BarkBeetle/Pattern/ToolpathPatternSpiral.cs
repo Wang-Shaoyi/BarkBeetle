@@ -37,7 +37,7 @@ namespace BarkBeetle.Pattern
             // Set up all needed properties
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
 
-            int ptCount = CountNonNull(bbPointArray);
+            int ptCount = Skeleton.SkeletonPtList.Count;
 
             // calculate number of circles
             double stripWidth = Skeleton.UVNetwork.StripWidth;
@@ -134,7 +134,7 @@ namespace BarkBeetle.Pattern
             // Create an empty list to save all the tool paths
             List<Curve> toolpathList = new List<Curve>();
 
-            int count = CountNonNull(bbPointArray);
+            int count = Skeleton.SkeletonPtList.Count;
 
             int depthNum = ptArray3D.GetLength(1);
 

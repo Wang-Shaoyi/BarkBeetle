@@ -21,15 +21,18 @@ namespace BarkBeetle.Pattern
     internal class ToolpathPatternSnake : ToolpathPattern
     {
         private double spacing;
-        private List<int> depthList = new List<int>();
+        private int middleCrvOption;
+        private List<double> depthList = new List<double>();
         private Point3d[,,] inAndOutCornerPts { get; set; }
 
-        public ToolpathPatternSnake(SkeletonGraph sG, Point3d seam, double pw, double s) : base(sG, seam, pw)
+        public ToolpathPatternSnake(SkeletonGraph sG, Point3d seam, double pw, double s, int middleCrvOption) : base(sG, seam, pw)
         {
             double stripWidth = sG.UVNetwork.StripWidth;
             if (stripWidth < pw * 6) return;
             spacing = s;
+            this.middleCrvOption = middleCrvOption;
             ConstructToolpathPattern();
+            
         }
 
         public override void ConstructToolpathPattern()
@@ -38,13 +41,30 @@ namespace BarkBeetle.Pattern
             inAndOutCornerPts = ReplicatePtsToCorners();
             CornerPtsList = new List<Point3d>();
             List<Curve> closedCrvs = CreatClosedReferenceCurves(inAndOutCornerPts);
+
             Curve insideCrv = closedCrvs[0];
             Curve outsideCrv = closedCrvs[1];
-            Curve boundaryCrv = closedCrvs[2]; 
+            Curve boundaryCrv = closedCrvs[2];
+            if (middleCrvOption == 2)
+            {
+                insideCrv = closedCrvs[1];
+                outsideCrv = closedCrvs[2];
+                boundaryCrv = closedCrvs[3];
+            }
 
             Curve snakeCrv = CreateSnakeCurve(insideCrv, outsideCrv, spacing);
 
-            BundleCurves = new List<Curve> { snakeCrv, boundaryCrv};
+            if (middleCrvOption == 1) 
+            {
+                BundleCurves = new List<Curve> { Skeleton.SkeletonMainCurve.Value, snakeCrv, boundaryCrv };
+                SeamPt = Skeleton.SkeletonMainCurve.Value.PointAtEnd;
+            }
+            else if (middleCrvOption == 2)
+            {
+                BundleCurves = new List<Curve> { closedCrvs[0], snakeCrv, boundaryCrv };
+            }
+            else BundleCurves = new List<Curve> { snakeCrv, boundaryCrv };
+
             CoutinuousCurve = ToolpathContinuousStraight(BundleCurves);
         }
 
@@ -53,15 +73,27 @@ namespace BarkBeetle.Pattern
             // Set up all needed properties
             BBPoint[,] bbPointArray = Skeleton.BBPointArray;
 
-            int ptCount = CountNonNull(bbPointArray);
+            int ptCount = Skeleton.SkeletonPtList.Count;
 
             // calculate number of circles
             double stripWidth = Skeleton.UVNetwork.StripWidth;
-            int depthNum = (int)(stripWidth / (PathWidth * 2));
-            depthList = new List<int> { 0, depthNum - 2, depthNum - 1 };
+            double depthNum = (int)(stripWidth / (PathWidth * 2));
+
+            int bundleCrvCount = 3;
+            // set up middle curve option
+            if (middleCrvOption == 1)
+            {
+                depthList = new List<double> { 0.5, depthNum - 2, depthNum - 1 };
+            }
+            else if (middleCrvOption == 2)
+            {
+                depthList = new List<double> { 0, 1, depthNum - 2, depthNum - 1 };
+                bundleCrvCount = 4;
+            }
+            else depthList = new List<double> { 0, depthNum - 2, depthNum - 1 }; // no middle curve
 
             // Set up an empty array
-            Point3d[,,] ptArray3D = new Point3d[ptCount, 3, 6];
+            Point3d[,,] ptArray3D = new Point3d[ptCount, bundleCrvCount, 6];
             BBPoint curBBPoint = bbPointArray[0, 0];
 
             // Go though all points in gh_Points
@@ -77,7 +109,7 @@ namespace BarkBeetle.Pattern
                 vecMain = vecMain / sin;
                 vecSub = vecSub / sin;
 
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < bundleCrvCount; j++)
                 {
                     Vector3d moveMain = vecMain * PathWidth * (depthList[j] + 0.5);
                     Vector3d moveSub = vecSub * PathWidth * (depthList[j] + 0.5);
@@ -122,7 +154,7 @@ namespace BarkBeetle.Pattern
                     neighSideVec = neighSideVec / sinBranch;
 
                     // Move new points
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < bundleCrvCount; j++)
                     {
                         Vector3d moveTowards = neighTowardsVec * PathWidth * (2 * depthNum - depthList[j] - 0.5);
                         Vector3d moveSide = neighSideVec * PathWidth * (depthList[j] + 0.5);
@@ -151,10 +183,17 @@ namespace BarkBeetle.Pattern
             // Create an empty list to save all the tool paths
             List<Curve> toolpathList = new List<Curve>();
 
-            int count = CountNonNull(bbPointArray);
+            int count = Skeleton.SkeletonPtList.Count;
+
+            int bundleCrvCount = 3;
+            // set up middle curve option
+            if (middleCrvOption == 2)
+            {
+                bundleCrvCount = 4;
+            }
 
             // For each toolpath circle
-            for (int k = 0; k < 3; k++)
+            for (int k = 0; k < bundleCrvCount; k++)
             {
                 // Create an empty list to sort the points
                 List<Point3d> toolpathPointList = new List<Point3d>();
@@ -467,7 +506,7 @@ namespace BarkBeetle.Pattern
         public override ToolpathPattern DeepCopy()
         {
             // New instance
-            var copy = new ToolpathPatternSnake(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing);
+            var copy = new ToolpathPatternSnake(this.Skeleton, this.SeamPt, this.PathWidth, this.spacing, this.middleCrvOption);
 
             return copy;
         }

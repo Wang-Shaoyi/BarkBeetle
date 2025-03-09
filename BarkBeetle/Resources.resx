@@ -121,6 +121,15 @@
   <data name="BrepStack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\BrepStack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LinearNetwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LinearNetwork.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinearSkeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LinearSkeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SimplePattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SimplePattern.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="copyTree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\copyTree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -234,5 +243,8 @@
   </data>
   <data name="ZigZagInfill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ZigZagInfill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StackBetweenClosest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\StackBetweenClosest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

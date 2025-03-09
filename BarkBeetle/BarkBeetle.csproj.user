@@ -4,8 +4,8 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Rhino 7</ActiveDebugProfile>
-    <ActiveDebugFramework>net48</ActiveDebugFramework>
+    <ActiveDebugProfile>Rhino 8 - netfx</ActiveDebugProfile>
+    <ActiveDebugFramework>net7.0</ActiveDebugFramework>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources.resx">

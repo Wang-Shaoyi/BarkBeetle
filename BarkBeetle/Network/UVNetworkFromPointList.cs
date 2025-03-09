@@ -85,8 +85,6 @@ namespace BarkBeetle.Network
             UVCurves = new List<List<GH_Curve>> { uvcrvs };
             UVVectors = uvVectors;
             OrganizedPtsArray = organizedPtsArray;
-
-
         }
     }
 }

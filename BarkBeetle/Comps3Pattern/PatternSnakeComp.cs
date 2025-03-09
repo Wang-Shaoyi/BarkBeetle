@@ -37,6 +37,8 @@ namespace BarkBeetle.CompsToolpath
             pManager.AddPointParameter("Seam Point", "Seam Point", "Seam point of the toolpath (start point)", GH_ParamAccess.item, new Point3d(0,0,0));
             pManager.AddNumberParameter("Path Width", "Path Width", "Seam point of the toolpath (start point)", GH_ParamAccess.item);
             pManager.AddNumberParameter("Spacing", "Spacing", "How much spacing between toolpaths", GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("Mid Curve Count", "Mid Crv Cnt", "How many middle curves do you want?", GH_ParamAccess.item, 0);
+
         }
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace BarkBeetle.CompsToolpath
             GH_Point ghpt = null;
             double pathWidth = 0;
             double spacing = 0;
+            int mid = 0;
 
             //Set inputs
             if (!DA.GetData(0, ref goo)) return;
@@ -66,6 +69,7 @@ namespace BarkBeetle.CompsToolpath
             if (!DA.GetData(1, ref ghpt)) return;
             if (!DA.GetData(2, ref pathWidth)) return;
             if (!DA.GetData(3, ref spacing)) return;
+            if (!DA.GetData(4, ref mid)) return;
 
 
             // Error message.
@@ -86,7 +90,7 @@ namespace BarkBeetle.CompsToolpath
             }
 
             // Run Function
-            ToolpathPattern pattern = new ToolpathPatternSnake(skeletonGraph, ghpt.Value,pathWidth, spacing);
+            ToolpathPattern pattern = new ToolpathPatternSnake(skeletonGraph, ghpt.Value,pathWidth, spacing, mid);
             GH_Curve crv = new GH_Curve(pattern.CoutinuousCurve);
 
             ToolpathPatternGoo baseGoo = new ToolpathPatternGoo(pattern);
