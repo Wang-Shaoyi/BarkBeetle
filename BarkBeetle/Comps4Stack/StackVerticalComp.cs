@@ -31,8 +31,8 @@ namespace BarkBeetle.Comps4Stack
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Organized Stack Patterns", "Organized Patterns", "BarkBeetle Stack Patterns object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Layer Height", "h", "Height of a single layer", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Total Height", "H", "Total Height", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Layer Height", "Layer Height", "Height of a single layer", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Total Height", "Total Height", "Total Height", GH_ParamAccess.item);
             pManager.AddGeometryParameter("Reference Geometry", "Reference", "Input geometry for robot", GH_ParamAccess.item);
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Orient Option", "Orient", "Frame z axis global or local(true: global; false: local)", GH_ParamAccess.item, false);

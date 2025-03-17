@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Description of BarkBeetle")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1e7a4a9acbc7fd107cdf65749eb778c10bff41c8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+04e62a3e165954f8b26c74d6af71ef241636be39")]
 [assembly: System.Reflection.AssemblyProductAttribute("BarkBeetle")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarkBeetle")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

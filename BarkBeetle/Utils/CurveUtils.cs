@@ -99,57 +99,36 @@ namespace BarkBeetle.Utils
             int direction = DetermineCurveDirection(curve, vertex);
 
             return (counterClockwise && direction == 1) || (!counterClockwise && direction != 1);
-
-
-            //    // find parameter t on curve
-            //    double t;
-            //if (!curve.ClosestPoint(vertex, out t))
-            //    throw new ArgumentException("point is not on curve");
-
-            //// 获取点附近的两个参数
-            //double tPrev = t - 0.001;
-            //double tNext = t + 0.001;
-
-            //// 确保参数在曲线域范围内（循环处理）
-            //double domainStart = curve.Domain.Min;
-            //double domainEnd = curve.Domain.Max;
-
-            //if (tPrev < domainStart) tPrev = domainEnd - (domainStart - tPrev);
-            //if (tNext > domainEnd) tNext = domainStart + (tNext - domainEnd);
-
-            //// 获取前后点的坐标
-            //Point3d prevPoint = curve.PointAt(tPrev);
-            //Point3d nextPoint = curve.PointAt(tNext);
-
-            //// 计算两条边向量
-            //Vector3d vecPrev = prevPoint - vertex;
-            //Vector3d vecNext = nextPoint - vertex;
-
-            //// 计算法向量
-            //Vector3d tangent = curve.TangentAt(t);
-            //Vector3d normal = Vector3d.CrossProduct(vecNext, vecPrev);
-            //normal.Unitize();
-
-            //// 判断曲线方向和法向量方向的一致性
-            //bool isConvexPoint = Vector3d.Multiply(normal, tangent) < 0;
-
-            //// 判断法线方向
-            //return isConvexPoint; // >0 为凸点，<0 为凹点
         }
 
         // This is based on discontinuity
         public static List<Point3d> GetDiscontinuityPoints(Curve curve, out List<Curve> segments)
         {
+
+
             List<Point3d> discontinuityPoints = new List<Point3d>();
 
             double t = curve.Domain.Min;
             List<double> splitParams = new List<double>();
+            Vector3d tangentBefore, tangentAfter;
 
             while (curve.GetNextDiscontinuity(Continuity.G1_continuous, t, curve.Domain.Max, out double discontinuityT))
             {
                 t = discontinuityT;
-                splitParams.Add(t);
-                discontinuityPoints.Add(curve.PointAt(t));
+
+                // 计算前后切线
+                tangentBefore = curve.TangentAt(t - Rhino.RhinoMath.ZeroTolerance);
+                tangentAfter = curve.TangentAt(t + Rhino.RhinoMath.ZeroTolerance);
+
+                double angle = Vector3d.VectorAngle(tangentBefore, tangentAfter) * (180.0 / System.Math.PI); // 角度转换为度
+
+                // 如果角度大于给定的degree，则认为是不连续点
+                if (angle > 30)
+                {
+                    Point3d discontinuityPoint = curve.PointAt(t);
+                    splitParams.Add(t);
+                    discontinuityPoints.Add(curve.PointAt(t));
+                }
             }
 
             if (!discontinuityPoints.Contains(curve.PointAtStart))
@@ -161,6 +140,45 @@ namespace BarkBeetle.Utils
             segments = new List<Curve>(curve.Split(splitParams));
 
             return discontinuityPoints;
+        }
+
+        public static bool IsPointADiscontinuity(Curve curve, Point3d point, double degree)
+        {
+            List<Point3d> discontinuities = new List<Point3d>();
+            double t;
+            double searchStart = curve.Domain.Min;
+            Vector3d tangentBefore, tangentAfter;
+
+            // Get all discontinuity points
+            while (curve.GetNextDiscontinuity(Continuity.G1_locus_continuous, searchStart, curve.Domain.Max, out t))
+            {
+                // 计算前后切线
+                tangentBefore = curve.TangentAt(t - Rhino.RhinoMath.ZeroTolerance);
+                tangentAfter = curve.TangentAt(t + Rhino.RhinoMath.ZeroTolerance);
+
+                // 计算两切线向量之间的角度
+                double angle = Vector3d.VectorAngle(tangentBefore, tangentAfter) * (180.0 / System.Math.PI); // 角度转换为度
+
+                // 如果角度大于给定的degree，则认为是不连续点
+                if (angle > degree)
+                {
+                    Point3d discontinuityPoint = curve.PointAt(t);
+                    discontinuities.Add(discontinuityPoint);
+                }
+
+                searchStart = t + Rhino.RhinoMath.ZeroTolerance;
+            }
+
+            // 检查点是否在不连续点列表中
+            foreach (Point3d dp in discontinuities)
+            {
+                if (point.DistanceTo(dp) < Rhino.RhinoMath.ZeroTolerance)
+                {
+                    return true; // 点是不连续点
+                }
+            }
+
+            return false; // 点不是不连续点
         }
 
         // This is based on explosion
@@ -303,44 +321,7 @@ namespace BarkBeetle.Utils
             return surfaceCurve[0];
         }
 
-        public static bool IsPointADiscontinuity(Curve curve, Point3d point, double degree)
-        {
-            List<Point3d> discontinuities = new List<Point3d>();
-            double t;
-            double searchStart = curve.Domain.Min;
-            Vector3d tangentBefore, tangentAfter;
-
-            // 获取所有不连续点
-            while (curve.GetNextDiscontinuity(Continuity.G1_locus_continuous, searchStart, curve.Domain.Max, out t))
-            {
-                // 计算前后切线
-                tangentBefore = curve.TangentAt(t - Rhino.RhinoMath.ZeroTolerance);
-                tangentAfter = curve.TangentAt(t + Rhino.RhinoMath.ZeroTolerance);
-
-                // 计算两切线向量之间的角度
-                double angle = Vector3d.VectorAngle(tangentBefore, tangentAfter) * (180.0 / System.Math.PI); // 角度转换为度
-
-                // 如果角度大于给定的degree，则认为是不连续点
-                if (angle > degree)
-                {
-                    Point3d discontinuityPoint = curve.PointAt(t);
-                    discontinuities.Add(discontinuityPoint);
-                }
-
-                searchStart = t + Rhino.RhinoMath.ZeroTolerance; // 更新搜索的起始区间
-            }
-
-            // 检查点是否在不连续点列表中
-            foreach (Point3d dp in discontinuities)
-            {
-                if (point.DistanceTo(dp) < Rhino.RhinoMath.ZeroTolerance)
-                {
-                    return true; // 点是不连续点
-                }
-            }
-
-            return false; // 点不是不连续点
-        }
+        
 
         public static int DetermineCurveDirection(Curve curve, Point3d point)
         {
@@ -352,12 +333,22 @@ namespace BarkBeetle.Utils
             Interval interval = curve.Domain;
 
             // 计算前后的参数值，确保它们位于曲线的定义域内
-            double tBefore = t - (curve.GetLength() * 0.0001) / curve.Domain.Length;
-            double tAfter = t + (curve.GetLength() * 0.0001) / curve.Domain.Length;
+            double tBefore = t - (curve.GetLength() * 0.000001) / curve.Domain.Length; // The number here makes a difference!!!
+            double tAfter = t + (curve.GetLength() * 0.000001) / curve.Domain.Length;
 
             // 约束tBefore和tAfter在曲线域内
-            tBefore = System.Math.Max(tBefore, interval.Min);
-            tAfter = System.Math.Min(tAfter, interval.Max);
+            if (tBefore < interval.Min)
+            {
+                tBefore = interval.Max - (interval.Min - tBefore);
+            }
+
+            if (tAfter > interval.Max)
+            {
+                tAfter = interval.Min + (tAfter - interval.Max);
+            }
+
+            //tBefore = System.Math.Max(tBefore, interval.Min);
+            //tAfter = System.Math.Min(tAfter, interval.Max);
 
             // 获取前后点的切线向量
             Vector3d tangentBefore = curve.TangentAt(tBefore);

@@ -86,11 +86,16 @@ namespace BarkBeetle.ToolpathStackSetting
             }
 
             /////////// Create pattern curve list/////////
-            
+            bool flipCrv = false;
             for (int i = 0; i < LayerNum; i++)
             {
                 Curve baseCurve = allPatternCurves[i];
                 Curve dupCurve = baseCurve.Duplicate() as Curve;
+
+                if (flipCrv)
+                {
+                    dupCurve.Reverse();
+                }
 
                 double offsetDistance = i * LayerHeight;
                 // Transform along Z-axis
@@ -98,6 +103,8 @@ namespace BarkBeetle.ToolpathStackSetting
                 dupCurve.Transform(translation); // Apply the transformation
 
                 stackCurves.Add(new GH_Curve(dupCurve));
+
+                flipCrv = !flipCrv;
             }
             return stackCurves;
         }

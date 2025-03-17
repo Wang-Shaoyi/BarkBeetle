@@ -73,6 +73,8 @@ namespace BarkBeetle.ToolpathStackSetting
             Interval uDomainBase = baseSrf.Domain(0);
             Interval vDomainBase = baseSrf.Domain(1);
 
+            bool flipCrv = false;
+
             for (int i = 0; i < LayerNum; i++)
             {
                 Curve baseCurve = allPatternCurves[i];
@@ -85,7 +87,11 @@ namespace BarkBeetle.ToolpathStackSetting
                 // Project to srf
                 Curve[] projectedCurves = Curve.ProjectToBrep(baseCurve, srf.ToBrep(), Vector3d.ZAxis, Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance);
 
-                stackCurves.Add(new GH_Curve(projectedCurves[0]));
+                Curve resultCrv = projectedCurves[0];
+                if (flipCrv) resultCrv.Reverse();
+                flipCrv = !flipCrv;
+
+                stackCurves.Add(new GH_Curve(resultCrv));
             }
             return stackCurves;
         }

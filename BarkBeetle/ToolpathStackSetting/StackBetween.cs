@@ -72,6 +72,8 @@ namespace BarkBeetle.ToolpathStackSetting
             Interval uDomainBase = baseSrf.Domain(0);
             Interval vDomainBase = baseSrf.Domain(1);
 
+            bool flipCrv = false;
+
             for (int i = 0; i < LayerNum; i++)
             {
                 Curve baseCurve = allPatternCurves[i];
@@ -111,7 +113,12 @@ namespace BarkBeetle.ToolpathStackSetting
                 }
 
                 Curve[] surfaceCurve = Curve.JoinCurves(surfaceCurves, 0.01); // Join the segments
-                stackCurves.Add(new GH_Curve(surfaceCurve[0]));
+
+                Curve resultCrv = surfaceCurve[0];
+                if (flipCrv) resultCrv.Reverse();
+                flipCrv = !flipCrv;
+
+                stackCurves.Add(new GH_Curve(resultCrv));
             }
             return stackCurves;
         }
