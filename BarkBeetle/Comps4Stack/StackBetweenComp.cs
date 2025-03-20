@@ -80,6 +80,11 @@ namespace BarkBeetle.Comps4Stack
             // Error message.
 
             // Run Function
+            //Surface newTopSrf = topSrf.Duplicate() as Surface;
+            //Vector3d move = new Vector3d(0, 0, -layerH);
+            //bool moveResult = newTopSrf.Translate(move);
+            //Console.WriteLine("移动成功: " + moveResult.ToString());
+
             StackBetween toolpathStack = new StackBetween(stackPatterns, layerH, angleGlobal, topSrf, geometry, angle);
             ToolpathStackGoo stackGoo = new ToolpathStackGoo(toolpathStack);
 

@@ -28,9 +28,6 @@ namespace BarkBeetle.Skeletons
 
             Curve mainCrv = UVNetwork.UVCurves[0][0].Value;
 
-
-            // store if each point was visited
-            //bool[,] visited = new bool[uCnt, vCnt];
             int c = 0;
             int turn = 0;
 

@@ -30,7 +30,7 @@ namespace BarkBeetle.ToolpathStackSetting
             if (Patterns.BottomPattern != null) baseSurface = Patterns.BottomPattern.BaseSrf;
             else baseSurface = Patterns.MainPatterns[0].BaseSrf;
 
-            LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) +1;
+            LayerNum = (int)(BrepUtils.AverageSurfaceDistance(baseSurface, topSrf, 6)/LayerHeight) + 1;
 
             List<GH_Surface> stackSurfaces = BrepUtils.TweenBetweenSurfaces(baseSurface, topSrf, LayerNum);
             
@@ -74,7 +74,7 @@ namespace BarkBeetle.ToolpathStackSetting
 
             bool flipCrv = false;
 
-            for (int i = 0; i < LayerNum; i++)
+            for (int i = 0; i < LayerNum - 1; i++)
             {
                 Curve baseCurve = allPatternCurves[i];
                 List<Point3d> points = CurveUtils.GetExplodedCurveVertices(baseCurve, LayerHeight * 5);
@@ -138,10 +138,8 @@ namespace BarkBeetle.ToolpathStackSetting
                 List<Point3d> toolpathExplodedPts = CurveUtils.GetExplodedCurveVertices(gH_Curves[i].Value, LayerHeight * 5);
                 Surface surface = gH_Surfaces[i].Value.Surfaces[0];
                 Surface nextSurface = null;
-                if (i != gH_Curves.Count - 1)
-                {
-                    nextSurface = gH_Surfaces[i + 1].Value.Surfaces[0];
-                }
+
+                nextSurface = gH_Surfaces[i + 1].Value.Surfaces[0];
 
                 foreach (Point3d pt in toolpathExplodedPts)
                 {
@@ -176,17 +174,25 @@ namespace BarkBeetle.ToolpathStackSetting
                     }
                     planesThis.Add(new GH_Plane(newPlane));
 
-                    // Calculate speed
-                    if (i== gH_Curves.Count - 1) doublesThis.Add(new GH_Number(1));
-                    else
-                    {
-                        // Calculate distance between this point and previous layer
-                        nextSurface.ClosestPoint(pt, out double u, out double v);
-                        Point3d closestPointOnSurface = nextSurface.PointAt(u, v);
-                        double distance = pt.DistanceTo(closestPointOnSurface);
 
-                        doublesThis.Add(new GH_Number(LayerHeight/distance)); // TODO: should be rounded?
-                    }
+                    // Calculate distance between this point and previous layer
+                    nextSurface.ClosestPoint(pt, out double u1, out double v1);
+                    Point3d closestPointOnSurface = nextSurface.PointAt(u1, v1);
+                    double distance = pt.DistanceTo(closestPointOnSurface);
+
+                    doublesThis.Add(new GH_Number(LayerHeight / distance)); // TODO: should be rounded?
+
+                    //// Calculate speed
+                    //if (i== gH_Curves.Count) doublesThis.Add(new GH_Number(1));
+                    //else
+                    //{
+                    //    // Calculate distance between this point and previous layer
+                    //    nextSurface.ClosestPoint(pt, out double u1, out double v1);
+                    //    Point3d closestPointOnSurface = nextSurface.PointAt(u1, v1);
+                    //    double distance = pt.DistanceTo(closestPointOnSurface);
+
+                    //    doublesThis.Add(new GH_Number(LayerHeight/distance)); // TODO: should be rounded?
+                    //}
                 }
 
                 speedFactor.Add(doublesThis);
