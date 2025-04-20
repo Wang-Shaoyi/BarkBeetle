@@ -9,6 +9,7 @@ using BarkBeetle.ToolpathStackSetting;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry.Collections;
 using static System.Net.Mime.MediaTypeNames;
+using System.Security.Cryptography;
 
 namespace BarkBeetle.Utils
 {
@@ -52,7 +53,7 @@ namespace BarkBeetle.Utils
 
             List<Line> subLines = lines.GetRange(0, subCount);
             Mesh loftmesh = LoftMesh(subLines);
-            Mesh extrudedMesh = ExtrudeMesh(loftmesh, d);
+            Mesh extrudedMesh = ExtrudeMesh(toolpathStack, loftmesh, d);
 
             return extrudedMesh;
         }
@@ -95,7 +96,7 @@ namespace BarkBeetle.Utils
         }
 
         #region extrude mesh
-        public static Mesh ExtrudeMesh(Mesh M, double d)
+        public static Mesh ExtrudeMesh(ToolpathStack toolpathStack, Mesh M, double d)
         {
             // Compute normals
             if (M.Normals.Count == 0)
@@ -104,6 +105,8 @@ namespace BarkBeetle.Utils
             MeshVertexList vertices = M.Vertices;
             MeshFaceList faces = M.Faces;
             MeshVertexNormalList normals = M.Normals;
+
+            List<Point3d> stackCrvPts = ConvertPlanesToPoints(toolpathStack.OrientPlanes);
 
             int vertexCount = vertices.Count;
             int controlCount = vertexCount / 2;
@@ -119,10 +122,24 @@ namespace BarkBeetle.Utils
                 double offset = d;
 
                 Point3d vertix = new Point3d(vertices[i].X, vertices[i].Y, vertices[i].Z);
+                bool vertixDiscontinuity = false;
+
+                //// TODO: This is for more precise modeling, will move to another function later
+                //Point3d closestPt = PointDataUtils.FindNearestPoint(vertix, stackCrvPts);
+                //Curve stackCrv = toolpathStack.FinalCurve.Value;
+                //vertixDiscontinuity = CurveUtils.IsPointADiscontinuity(stackCrv, closestPt, 30);
 
                 // update top and buttom vertices
-                topVertices.Add(vertix + normal * offset);
-                bottomVertices.Add(vertix - normal * offset);
+                if (vertixDiscontinuity)
+                {
+                    topVertices.Add(vertix + normal * offset * 1.414);
+                    bottomVertices.Add(vertix - normal * offset * 1.414);
+                }
+                else
+                {
+                    topVertices.Add(vertix + normal * offset);
+                    bottomVertices.Add(vertix - normal * offset);
+                }
             }
 
             // Construct new mesh and add vertices
@@ -176,7 +193,20 @@ namespace BarkBeetle.Utils
         #endregion
 
 
+        public static List<Point3d> ConvertPlanesToPoints(List<List<GH_Plane>> planes)
+        {
+            List<Point3d> points = new List<Point3d>(); // 创建一个新的点列表
 
+            foreach (List<GH_Plane> planeList in planes)
+            {
+                foreach (GH_Plane plane in planeList)
+                {
+                    points.Add(plane.Value.Origin); // 将每个平面的原点添加到点列表中
+                }
+            }
+
+            return points; // 返回包含所有原点的点列表
+        }
 
         #region smooth mesh
         // Smooth a mesh (like weaver bird)

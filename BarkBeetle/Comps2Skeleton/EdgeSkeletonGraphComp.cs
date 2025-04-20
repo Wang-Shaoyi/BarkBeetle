@@ -45,7 +45,7 @@ namespace BarkBeetle.CompsGeoPack
         {
             pManager.AddGenericParameter("Skeleton Graph", "Skeleton", "BarkBeetle SkeletonGraph object", GH_ParamAccess.item);
             pManager.AddPointParameter("Skeleton Points", "Points", "Re-sorted the sequence of points", GH_ParamAccess.list);
-            pManager.AddCurveParameter("Main Curve", "Curve", "Skeleton main curve", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Primary Curve", "Curve", "Skeleton main curve", GH_ParamAccess.item);
             pManager.AddVectorParameter("Vectors", "Vectors", "Vectors for skeleton points. Each point has two perpendicular vectors", GH_ParamAccess.list);
         }
 

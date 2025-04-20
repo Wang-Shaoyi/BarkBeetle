@@ -19,7 +19,7 @@ namespace BarkBeetle.Comps4Stack
         /// Initializes a new instance of the ToolpathStackVertical class.
         /// </summary>
         public StackBetweenComp()
-          : base("Toolpath Stack Between Surfaces (Closest)", "Between Surface Stack (Closest)",
+          : base("Surface-tween Stack", "Surface-tween Stack",
               "Stack toolpath layers between two surfaces. The base surface is the surface in Network.",
               "BarkBeetle", "4-Stack")
         {

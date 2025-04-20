@@ -145,6 +145,23 @@ namespace BarkBeetle.Utils
             return false;
         }
 
+        public static Point3d FindNearestPoint(Point3d targetPoint, List<Point3d> points)
+        {
+            Point3d nearestPoint = points[0]; // 假设第一个点就是最近的点
+            double minDistance = double.MaxValue; // 初始化最小距离为最大值
+
+            foreach (Point3d point in points)
+            {
+                double distance = targetPoint.DistanceTo(point); // 计算到目标点的距离
+                if (distance < minDistance)
+                { // 如果这个距离小于目前记录的最小距离
+                    minDistance = distance; // 更新最小距离
+                    nearestPoint = point; // 更新最近点
+                }
+            }
+            return nearestPoint; // 返回最近点
+        }
+
         #region Not really in use
         // Organize the point tree sequence according to surface uv
         public static GH_Structure<GH_Point> OrganizePtSequence(Surface surface, GH_Structure<GH_Point> pointsTree, GH_Component component)

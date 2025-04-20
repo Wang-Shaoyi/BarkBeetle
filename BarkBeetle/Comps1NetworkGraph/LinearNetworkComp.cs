@@ -53,7 +53,7 @@ namespace BarkBeetle.CompsGeoPack
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("UVNetwork", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Linear Network", "Network", "BarkBeetle UVNetwork object", GH_ParamAccess.item);
             pManager.AddPointParameter("Points", "Points", "Points pulled on the surface", GH_ParamAccess.tree);
             pManager.AddCurveParameter("UVCurves", "UVCurves", "UV curves generated from the point tree", GH_ParamAccess.tree);
             pManager.AddSurfaceParameter("Extended Surface", "Surface", "Extended surface for toolpath generation", GH_ParamAccess.item);

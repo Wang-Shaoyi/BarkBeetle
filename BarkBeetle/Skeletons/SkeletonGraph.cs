@@ -103,7 +103,9 @@ namespace BarkBeetle.Skeletons
             for (int i = 0; i < CountNonNull(BBPointArray); i++)
             {
                 Point3d currentPt = curBBPoint.CurrentPt3d;
-                pts.Add(new GH_Point(currentPt));
+                surface.ClosestPoint(currentPt, out double u1, out double v1);
+                Point3d currentClosestPt = surface.PointAt(u1, v1);
+                pts.Add(new GH_Point(currentClosestPt));
                 vectors.Add(new GH_Vector(curBBPoint.VectorU));
                 vectors.Add(new GH_Vector(curBBPoint.VectorV));
 
@@ -111,7 +113,11 @@ namespace BarkBeetle.Skeletons
                 {
                     // Draw branches
                     Point3d branchPt = BBPoint.FindByIndex(curBBPoint.BranchIndex, BBPointArray).CurrentPt3d;
-                    Curve curveBranch = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentPt, branchPt },0.1);
+
+                    surface.ClosestPoint(branchPt, out double u, out double v);
+                    Point3d branchClosestPt = surface.PointAt(u, v);
+
+                    Curve curveBranch = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentClosestPt, branchClosestPt },0.1);
                     branches.Add(new GH_Curve(curveBranch));
                 }
 
@@ -120,7 +126,9 @@ namespace BarkBeetle.Skeletons
                     BBPoint nextBBPoint = BBPoint.FindByIndex(curBBPoint.NextIndex, BBPointArray);
                     // Draw main curve
                     Point3d nextPt = nextBBPoint.CurrentPt3d;
-                    Curve curve = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentPt, nextPt }, 0.01);
+                    surface.ClosestPoint(nextPt, out double u2, out double v2);
+                    Point3d nextClosestPt = surface.PointAt(u2, v2);
+                    Curve curve = surface.InterpolatedCurveOnSurface(new List<Point3d> { currentClosestPt, nextClosestPt }, 0.01);
                     surfaceCurves.Add(curve);
                     // Get to next point
                     curBBPoint = nextBBPoint;
